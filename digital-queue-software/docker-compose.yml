@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  digital-queue-software:
+    container_name: "digital-queue-software"
+    build: ./docker/webserver
+    image: "digital-queue-software:latest"
+    ports:
+      - "80:3000"
+    command: "npm run deploy"
+    expose:
+      - 3000
+    volumes:
+      - .:/webserver
+  digital-queue-mysql:
+    container_name: "digital-queue-mysql"
+    image: mysql:5.7.30
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345678
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306

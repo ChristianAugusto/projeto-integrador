@@ -1,0 +1,19 @@
+{
+    "presets": ["@babel/preset-env", "minify"],
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": ["."],
+                "alias": {
+                    "@Constants": "./src/constants",
+                    "@Endpoints": "./src/endpoints",
+                    "@Modules": "./src/modules",
+                    "@Services": "./src/services",
+                    "@Utils": "./src/utils",
+                    "@Routes": "./src/routes.js"
+                }
+            }
+        ]
+    ]
+}
