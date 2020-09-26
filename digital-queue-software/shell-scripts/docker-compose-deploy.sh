@@ -1,3 +1,4 @@
 rm -rf node_modules
 npm install
-npm run deploy
+npm run build
+npm run start

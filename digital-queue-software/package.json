@@ -9,7 +9,6 @@
   "scripts": {
     "build": "npx babel ./src -d ./build",
     "start": "node ./build/index.js",
-    "deploy": "npm run build && npm run start",
     "dev": "nodemon --exec npx babel-node src/index.js"
   },
   "authors": [
