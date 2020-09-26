@@ -1,7 +1,8 @@
 // import bodyParser from 'body-parser';
 
+import { publicPATH } from '@Constants';
 import writeResponse from '@Modules/write-response';
-import home from '@Endpoints/home';
+import test from '@Endpoints/api/test';
 
 
 
@@ -9,11 +10,15 @@ import home from '@Endpoints/home';
 
 
 
-export default function(app) {
-    /* API(s) */
+export default function (app) {
+    /* Pages */
+    app.get('/', async function (req, res) {
+        res.sendFile(`${publicPATH()}/templates/home.html`);
+    });
 
-    /* Api route */
-    app.get('/', async function(req, res) {
-        writeResponse(await home(), res);
+
+    /* API(s) */
+    app.get('/api', async function (req, res) {
+        writeResponse(await test(), res);
     });
 }

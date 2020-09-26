@@ -1,7 +1,7 @@
 import 'regenerator-runtime';
 import express from 'express';
 
-import { serverPORT } from '@Constants';
+import { serverPORT, staticPATH } from '@Constants';
 import logger from '@Utils/logger';
 import routes from '@Routes';
 
@@ -9,6 +9,8 @@ import routes from '@Routes';
 
 const app = express();
 const PORT = serverPORT();
+
+app.use(express.static(staticPATH()));
 
 routes(app);
 

@@ -1,37 +1,56 @@
 {
-  "name": "digital-queue-software",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "scripts": {
-    "build": "npx babel ./src -d ./build",
-    "start": "node ./build/index.js",
-    "dev": "nodemon --exec npx babel-node src/index.js"
-  },
-  "authors": [
-    "115149 - Amanda Magari do Nascimento",
-    "117723 - Anderson Duarte Machado",
-    "12084  - Christian Augusto Martins dos Santos Barros",
-    "117398 - Davi Castro Silva"
-  ],
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "7.11.6",
-    "@babel/core": "7.11.6",
-    "@babel/node": "7.10.5",
-    "@babel/preset-env": "7.11.5",
-    "babel-plugin-module-resolver": "4.0.0",
-    "babel-preset-minify": "0.5.1",
-    "eslint": "7.9.0"
-  },
-  "dependencies": {
-    "body-parser": "1.19.0",
-    "express": "4.17.1",
-    "moment": "2.27.0",
-    "node-jsencrypt": "1.0.0",
-    "regenerator-runtime": "0.13.7"
-  }
+    "name": "digital-queue-software",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "build-website": "npx eslint src/** && npx gulp build",
+        "build-server": "npx eslint src/** && npx babel ./src -d ./build",
+        "dev-server": "nodemon --exec npx babel-node src/index.js",
+        "dev-website": "npx gulp watch",
+        "start": "node ./build/index.js"
+    },
+    "authors": [
+        "115149 - Amanda Magari do Nascimento",
+        "117723 - Anderson Duarte Machado",
+        "12084  - Christian Augusto Martins dos Santos Barros",
+        "117398 - Davi Castro Silva"
+    ],
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/cli": "7.11.6",
+        "@babel/core": "7.11.6",
+        "@babel/node": "7.10.5",
+        "@babel/preset-env": "7.11.5",
+        "@babel/register": "7.11.5",
+        "babel-plugin-module-resolver": "4.0.0",
+        "babel-preset-minify": "0.5.1",
+        "babelify": "10.0.0",
+        "browser-sync": "2.26.12",
+        "browserify": "16.5.2",
+        "es6-promise": "4.2.8",
+        "eslint": "7.9.0",
+        "fetch-polyfill": "0.8.2",
+        "gulp": "4.0.2",
+        "gulp-clean": "0.4.0",
+        "gulp-cli": "2.3.0",
+        "gulp-notify": "3.2.0",
+        "gulp-sass": "4.1.0",
+        "gulp-size": "3.0.0",
+        "gulp-uglify": "3.0.2",
+        "imask": "6.0.5",
+        "intersection-observer": "0.11.0",
+        "vinyl-buffer": "1.0.1",
+        "vinyl-source-stream": "2.0.0"
+    },
+    "dependencies": {
+        "body-parser": "1.19.0",
+        "express": "4.17.1",
+        "moment": "2.27.0",
+        "node-jsencrypt": "1.0.0",
+        "regenerator-runtime": "0.13.7"
+    }
 }
