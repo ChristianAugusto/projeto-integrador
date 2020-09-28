@@ -6,3 +6,4 @@ npm run build-server
 rm -rf node_modules
 npm install --only-prod
 npm run start
+ls -al

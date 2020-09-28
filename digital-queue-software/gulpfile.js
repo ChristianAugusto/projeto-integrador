@@ -12,7 +12,7 @@ const browserSync = require('browser-sync').create();
 
 
 /* CONFIGS */
-const src = './website/src';
+const src = './website';
 const dist = './public';
 const publicFolder = `${dist}/files`;
 const templatesBuildFolder = `${dist}/templates`;
