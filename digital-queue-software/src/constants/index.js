@@ -37,3 +37,7 @@ export function MYSQL_DATABASE() {
 export function SERVER_TIMEZONE() {
     return 'America/Sao_Paulo';
 }
+
+export function DATETIME_FORMAT_MYSQL() {
+    return 'YYYY-MM-DD HH:mm:ss';
+}

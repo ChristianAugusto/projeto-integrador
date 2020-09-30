@@ -21,4 +21,8 @@ export default function (app) {
     app.post('/api/users', jsonParser, async function (req, res) {
         writeResponse(await users.post(req), res);
     });
+
+    app.put('/api/users', jsonParser, async function (req, res) {
+        writeResponse(await users.put(req), res);
+    });
 }
