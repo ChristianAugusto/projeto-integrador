@@ -6,12 +6,13 @@
             {
                 "root": ["."],
                 "alias": {
-                    "@Constants": "./src/constants",
-                    "@Endpoints": "./src/endpoints",
-                    "@Modules": "./src/modules",
-                    "@Services": "./src/services",
-                    "@Utils": "./src/utils",
-                    "@Routes": "./src/routes.js"
+                    "@ServerConstants": "./src/constants",
+                    "@ServerEndpoints": "./src/endpoints",
+                    "@ServerHandlers": "./src/handlers",
+                    "@ServerModules": "./src/modules",
+                    "@ServerServices": "./src/services",
+                    "@ServerUtils": "./src/utils",
+                    "@ServerRoutes": "./src/routes.js"
                 }
             }
         ]

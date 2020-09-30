@@ -1,9 +1,9 @@
 import 'regenerator-runtime';
 import express from 'express';
 
-import { serverPORT, staticPATH } from '@Constants';
-import logger from '@Utils/logger';
-import routes from '@Routes';
+import { serverPORT, staticPATH } from '@ServerConstants';
+import logger from '@ServerUtils/logger';
+import routes from '@ServerRoutes';
 
 
 

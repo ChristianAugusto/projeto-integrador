@@ -1,12 +1,12 @@
-// import bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 
-import { publicPATH } from '@Constants';
-import writeResponse from '@Modules/write-response';
-import test from '@Endpoints/api/test';
+import { publicPATH } from '@ServerConstants';
+import writeResponse from '@ServerModules/write-response';
+import users from '@ServerEndpoints/api/users';
 
 
 
-// const jsonParser = bodyParser.json();
+const jsonParser = bodyParser.json();
 
 
 
@@ -18,7 +18,7 @@ export default function (app) {
 
 
     /* API(s) */
-    app.get('/api', async function (req, res) {
-        writeResponse(await test(), res);
+    app.post('/api/users', jsonParser, async function (req, res) {
+        writeResponse(await users.post(req), res);
     });
 }
