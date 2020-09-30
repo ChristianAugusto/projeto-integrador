@@ -23,7 +23,7 @@ const sizesOptions = {
     showTotal: true
 };
 
-const scssFiles = ['common', 'home']
+const scssFiles = ['global', 'home']
     .map(file => `${src}/scss/${file}.scss`);
 
 const jsFiles = ['home']
