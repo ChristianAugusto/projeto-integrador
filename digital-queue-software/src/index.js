@@ -1,5 +1,6 @@
 import 'regenerator-runtime';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 
 import { serverPORT, staticPATH } from '@ServerConstants';
 import logger from '@ServerUtils/logger';
@@ -11,6 +12,7 @@ const app = express();
 const PORT = serverPORT();
 
 app.use(express.static(staticPATH()));
+app.use(cookieParser());
 
 routes(app);
 

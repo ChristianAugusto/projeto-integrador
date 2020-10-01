@@ -8,11 +8,14 @@
                 "alias": {
                     "@ServerConstants": "./src/constants",
                     "@ServerEndpoints": "./src/endpoints",
+                    "@ServerGlobals": "./src/globals",
                     "@ServerHandlers": "./src/handlers",
                     "@ServerModules": "./src/modules",
                     "@ServerServices": "./src/services",
                     "@ServerUtils": "./src/utils",
-                    "@ServerRoutes": "./src/routes.js"
+                    "@ServerRoutes": "./src/routes.js",
+                    "@WebsiteConstants": "./website/js/constants",
+                    "@WebsiteUtils": "./website/js/utils"
                 }
             }
         ]

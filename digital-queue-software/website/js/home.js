@@ -1,1 +1,5 @@
-console.log('hello world');
+import Home from './modules/home';
+
+
+
+document.addEventListener('DOMContentLoaded', Home.init);

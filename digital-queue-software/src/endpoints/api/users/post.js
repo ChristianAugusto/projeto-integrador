@@ -1,8 +1,8 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
-import {
-    filterUserByEmail
-} from './queries';
+
+import { filterUserByEmail } from './queries';
+
 
 
 export default async function(req) {
@@ -12,47 +12,37 @@ export default async function(req) {
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
 
-        if (reqBody.email && typeof(reqBody.email) == 'string') {
-            try {
-                return {
-                    status: 200,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        data: await mysql(`${filterUserByEmail} = '${reqBody.email}'`),
-                        message: 'Success'
-                    })
-                };
-            }
-            catch (error) {
-                return {
-                    status: 500,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        data: null,
-                        message: 'Error in get user(s)'
-                    })
-                };
-            }
+        if (!reqBody || !reqBody.email || typeof(reqBody.email) != 'string') {
+            logger.info('Incorrect API use');
+
+            return {
+                status: 400,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: null,
+                    message: 'Incorrect API use'
+                })
+            };
         }
 
 
+        logger.info('Success');
+
         return {
-            status: 400,
+            status: 200,
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data: null,
-                message: 'Incorrect API use'
+                data: await mysql(`${filterUserByEmail} = '${reqBody.email}'`),
+                message: 'Success'
             })
         };
     }
     catch (error) {
-        logger.error('Error in (POST)/api/users');
+        logger.error('Error in (POST)/login');
         logger.info(error);
 
         return {

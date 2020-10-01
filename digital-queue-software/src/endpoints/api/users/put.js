@@ -3,6 +3,7 @@ import moment from 'moment-timezone';
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import { insertUserQuery } from './queries';
+import generateHash from '@ServerUtils/generate-hash';
 import {
     SERVER_TIMEZONE, 
     DATETIME_FORMAT_MYSQL
@@ -24,6 +25,8 @@ export default async function(req) {
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
         if (!validateReqBodyFields(reqBody)) {
+            logger.info('Error in body fields, please check again');
+
             return {
                 status: 400,
                 headers: {
@@ -46,31 +49,18 @@ export default async function(req) {
         const query = `
             ${insertUserQuery}
             VALUES (
-                '${reqBody.name}', '${reqBody.email}', '${reqBody.password}',
+                '${reqBody.name}', '${reqBody.email}', '${generateHash(reqBody.password)}',
                 '${reqBody.telephone}', '${reqBody.document}', '${reqBody.documentType}',
                 '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL())}',
                 '${reqBody.roleType}'
             )
         `;
 
-        try {
-            await mysql(query);
-        }
-        catch (error) {
-            logger.info(error);
 
-            return {
-                status: 500,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data: null,
-                    message: 'Error in send new user'
-                })
-            };
-        }
+        await mysql(query);
 
+
+        logger.info('Success');
 
         return {
             status: 200,

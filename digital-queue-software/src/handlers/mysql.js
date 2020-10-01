@@ -36,8 +36,8 @@ export default (_query) => new Promise((resolve, reject) => {
         logger.warning(`Executing query: ${_query}`);
 
 
-        connection.query(_query, (error, results) => {
-            if (error) {
+        connection.query(_query, (err, results) => {
+            if (err) {
                 logger.error(err);
                 connection.end();
                 reject(err);
