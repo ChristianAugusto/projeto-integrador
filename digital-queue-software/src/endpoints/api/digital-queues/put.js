@@ -52,6 +52,10 @@ export default async function(req) {
         }
 
 
+        /*
+            TODO: Validate id format (like slug)
+        */
+
         const query = `
             ${insertDigitalQueueQuery}
             VALUES (
