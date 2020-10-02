@@ -14,7 +14,6 @@
 }
 
 .app__main {
-    width: 100%;
     max-width: 400px;
     min-height: 410px;
     position: absolute;
@@ -24,10 +23,19 @@
     box-sizing: border-box;
     padding: 30px;
     border: 2px solid #000;
-    border-radius: 0;
+    border-radius: 3px;
     @include display-column();
     justify-content: space-between;
     align-items: flex-start;
+
+    @include mqmax(405px) {
+        width: 90%;
+    }
+
+    @include mqmin(406px) {
+        width: 100%;
+    }
+
 
     section {
         width: 100%;

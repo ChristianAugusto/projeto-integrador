@@ -19,13 +19,13 @@ export default function (app) {
             res.sendFile(`${publicPATH()}/templates/home.html`);
         }
         else {
-            res.redirect('/login');
+            res.redirect('/admin/login');
         }
     });
 
-    app.get('/login', async function (req, res) {
+    app.get('/admin/login', async function (req, res) {
         if (validateSession(req.cookies[SESSION_COOKIE_NAME()])) {
-            res.redirect('/');
+            res.redirect('/admin');
         }
         else {
             res.sendFile(`${publicPATH()}/templates/login.html`);
@@ -39,7 +39,7 @@ export default function (app) {
             writeResponse(await users.post(req), res);
         }
         else {
-            res.redirect('/login');
+            res.redirect('/admin/login');
         }
     });
 
@@ -48,11 +48,11 @@ export default function (app) {
             writeResponse(await users.put(req), res);
         }
         else {
-            res.redirect('/login');
+            res.redirect('/admin/login');
         }
     });
 
-    app.post('/login', jsonParser, async function (req, res) {
+    app.post('/admin/login', jsonParser, async function (req, res) {
         writeResponse(await login(req), res);
     });
 }

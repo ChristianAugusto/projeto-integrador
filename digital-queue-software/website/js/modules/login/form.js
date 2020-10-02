@@ -1,5 +1,8 @@
 import Cookies from 'js-cookie';
-import { SESSION_COOKIE_NAME, SESSION_SECONDS_LIMIT } from '@WebsiteConstants';
+import {
+    SESSION_COOKIE_NAME, SESSION_SECONDS_LIMIT,
+    SERVER_ERROR_MESSAGE, LOGIN_ROUTE, HOME_ROUTE
+} from '@WebsiteConstants';
 import { buildHeaders } from '@WebsiteUtils/api-call';
 
 
@@ -14,7 +17,7 @@ function sendForm() {
     document.querySelector('.js--login-form').onsubmit = async function(ev) {
         ev.preventDefault();
 
-        const response = await fetch('/login', {
+        const response = await fetch(LOGIN_ROUTE, {
             method: 'POST',
             headers: buildHeaders({
                 'Content-Type': 'application/json'
@@ -30,7 +33,10 @@ function sendForm() {
         Cookies.set(SESSION_COOKIE_NAME, JSON.stringify(responseObj.data), { expires: getCookieTime() });
 
         if (response.status == 200) {
-            window.location.pathname = '/';
+            window.location.pathname = HOME_ROUTE;
+        }
+        else {
+            alert(SERVER_ERROR_MESSAGE);
         }
     };
 }
