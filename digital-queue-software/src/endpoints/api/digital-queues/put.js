@@ -55,7 +55,7 @@ export default async function(req) {
         const query = `
             ${insertDigitalQueueQuery}
             VALUES (
-                '${reqBody.name}', '${reqBody.slug}',
+                '${reqBody.id}', '${reqBody.name}',
                 '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL())}',
                 ${reqBody.isActive ? 1 : 0}, '${reqBody.start}', '${reqBody.end}',
                 ${reqBody.personTimeMinutes}
