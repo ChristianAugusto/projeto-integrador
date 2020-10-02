@@ -22,17 +22,15 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`users` (
 );
 
 CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues` (
-    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` VARCHAR(100) NOT NULL,
     `name` VARCHAR(100) NOT NULL,
-    `slug` VARCHAR(100) NOT NULL,
     `creation` DATETIME NOT NULL,
     `isActive` TINYINT(1) UNSIGNED NOT NULL,
     `start` DATETIME NOT NULL,
     `end` DATETIME NOT NULL,
     `personTimeMinutes` INT UNSIGNED NOT NULL,
 
-    PRIMARY KEY (`id`),
-    UNIQUE KEY (`slug`)
+    PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `digital-queue-software`.`transports` (
@@ -44,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`transports` (
 );
 
 CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues_users` (
-    `digitalQueueId` BIGINT UNSIGNED NOT NULL,
+    `digitalQueueId` VARCHAR(100) NOT NULL,
     `document` VARCHAR(50) NOT NULL,
     `name` VARCHAR(100) NOT NULL,
     `email` VARCHAR(100) NOT NULL,
@@ -64,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues_users` (
 
 CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues_transports` (
     `id` TINYINT(1) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `digitalQueueId` BIGINT UNSIGNED NOT NULL,
+    `digitalQueueId` VARCHAR(100) NOT NULL,
     `transportId` TINYINT(1) UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`),

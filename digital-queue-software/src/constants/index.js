@@ -47,6 +47,13 @@ export function SESSION_SECONDS_LIMIT() {
     return 60 * 60 * 2; // 2 hours
 }
 
+export function API_KEY() {
+    return 'mey9ht1t5wklvt9pyresetbfwy1nc7cj';
+}
+
+export function DIGITAL_QUEUE_LIMIT() {
+    return 20;
+}
 
 
 

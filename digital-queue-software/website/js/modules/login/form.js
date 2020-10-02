@@ -17,6 +17,10 @@ function sendForm() {
     document.querySelector('.js--login-form').onsubmit = async function(ev) {
         ev.preventDefault();
 
+        /*
+            TODO: Aplicar função trim() nos valores do form
+        */
+
         const response = await fetch(LOGIN_ROUTE, {
             method: 'POST',
             headers: buildHeaders({

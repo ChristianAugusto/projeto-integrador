@@ -1,7 +1,9 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
+import { DIGITAL_QUEUE_LIMIT } from '@ServerConstants';
+import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
 
-import { filterUserByEmail } from './queries';
+import { selectDigitalQueueQuery } from './queries';
 
 
 
@@ -12,19 +14,18 @@ export default async function(req) {
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
 
-        if (!reqBody || !reqBody.email || typeof(reqBody.email) != 'string') {
-            logger.info('Incorrect API use');
+        let startIndex = 0;
+        if (validateMysqlInteger(reqBody.startIndex)) {
+            startIndex = Number(reqBody.startIndex);
+        }
 
-            return {
-                status: 400,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data: null,
-                    message: 'Incorrect API use'
-                })
-            };
+
+        let endIndex = startIndex + DIGITAL_QUEUE_LIMIT();
+        if (
+            validateMysqlInteger(reqBody.endIndex) &&
+            Number(reqBody.endIndex) - startIndex <= DIGITAL_QUEUE_LIMIT()
+        ) {
+            endIndex = Number(reqBody.endIndex);
         }
 
 
@@ -36,13 +37,13 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data: await mysql(`${filterUserByEmail} = '${reqBody.email}'`),
+                data: await mysql(`${selectDigitalQueueQuery} ${startIndex},${endIndex}`),
                 message: 'Success'
             })
         };
     }
     catch (error) {
-        logger.error('Error in (POST)/api/users');
+        logger.error('Error in (POST)/api/digital-queues');
         logger.info(error);
 
         return {

@@ -1,6 +1,6 @@
 import logger from '@ServerUtils/logger';
 import {
-    SESSION_SECONDS_LIMIT
+    SESSION_SECONDS_LIMIT, API_KEY
 } from '@ServerConstants';
 
 
@@ -39,6 +39,19 @@ function validateSessionTime(startTime) {
     logger.info(`sessionTimeSeconds = ${sessionTimeSeconds}`);
 
     return sessionTimeSeconds <= SESSION_SECONDS_LIMIT();
+}
+
+export function validateApiKey(headerApiKeyValue) {
+    try {
+        logger.info(headerApiKeyValue);
+
+        return API_KEY() == headerApiKeyValue;
+    }
+    catch (error) {
+        logger.info(error);
+
+        return false;
+    }
 }
 
 /*
