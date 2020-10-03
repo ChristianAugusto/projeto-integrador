@@ -3,7 +3,7 @@ import logger from '@ServerUtils/logger';
 import { DIGITAL_QUEUE_LIMIT } from '@ServerConstants';
 import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
 
-import { selectDigitalQueueQuery } from './queries';
+import { selectDigitalQueuesQuery } from './queries';
 
 
 
@@ -37,7 +37,7 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data: await mysql(`${selectDigitalQueueQuery} ${startIndex},${endIndex}`),
+                data: await mysql(`${selectDigitalQueuesQuery} ${startIndex},${endIndex}`),
                 message: 'Success'
             })
         };

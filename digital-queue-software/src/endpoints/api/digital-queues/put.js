@@ -6,7 +6,8 @@ import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
 import { insertDigitalQueueQuery } from './queries';
 import {
     SERVER_TIMEZONE, 
-    DATETIME_FORMAT_MYSQL
+    DATETIME_FORMAT_MYSQL,
+    DIGITAL_QUEUE_ID_REGEX
 } from '@ServerConstants';
 
 
@@ -51,10 +52,20 @@ export default async function(req) {
             };
         }
 
+        if (!validateReqId(reqBody.id)) {
+            return {
+                status: 400,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: null,
+                    message: 'Invalid id format'
+                })
+            };
+        }
 
-        /*
-            TODO: Validate id format (like slug)
-        */
+
 
         const query = `
             ${insertDigitalQueueQuery}
@@ -110,4 +121,21 @@ function validateReqBodyFields(reqBody) {
     }
 
     return true;
+}
+
+function validateReqId(value) {
+    try {
+        for (let i = 0; i < value.length; i++) {
+            if (!value[i].match(DIGITAL_QUEUE_ID_REGEX())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    catch (error) {
+        logger.info(error);
+
+        return false;
+    }
 }

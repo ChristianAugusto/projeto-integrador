@@ -55,6 +55,11 @@ export function DIGITAL_QUEUE_LIMIT() {
     return 20;
 }
 
+export function DIGITAL_QUEUE_ID_REGEX() {
+    return /[a-z0-9-]/;
+}
+
+
 
 
 /*
