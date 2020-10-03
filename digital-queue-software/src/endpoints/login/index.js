@@ -4,10 +4,10 @@ import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import sessions from '@ServerGlobals/sessions';
 import generateHash from '@ServerUtils/generate-hash';
-import { filterUserByEmail } from './queries';
 import {
     SERVER_TIMEZONE, 
-    DATETIME_FORMAT_MYSQL
+    DATETIME_FORMAT_MYSQL,
+    FILTER_USER_BY_EMAIL
 } from '@ServerConstants';
 
 
@@ -38,7 +38,7 @@ export default async function(req) {
         }
 
 
-        const usersObtained = await mysql(`${filterUserByEmail} = '${reqBody.email}'`);
+        const usersObtained = await mysql(`${FILTER_USER_BY_EMAIL} = '${reqBody.email}'`);
 
         if (!Array.isArray(usersObtained) || usersObtained.length == 0) {
             logger.info('Usuário não existente');
@@ -80,7 +80,7 @@ export default async function(req) {
             };
         }
 
-        const actualMoment = moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL());
+        const actualMoment = moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL);
 
 
         const sessionToken = generateHash(`${user.id}|${actualMoment}`);

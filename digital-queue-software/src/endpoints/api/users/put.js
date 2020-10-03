@@ -3,11 +3,11 @@ import moment from 'moment-timezone';
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import validateReqBodyFields from '@ServerUtils/validate-required-fields';
-import { insertUserQuery } from './queries';
 import generateHash from '@ServerUtils/generate-hash';
 import {
     SERVER_TIMEZONE, 
-    DATETIME_FORMAT_MYSQL
+    DATETIME_FORMAT_MYSQL,
+    INSERT_USER_QUERY
 } from '@ServerConstants';
 
 
@@ -48,11 +48,11 @@ export default async function(req) {
 
 
         const query = `
-            ${insertUserQuery}
+            ${INSERT_USER_QUERY}
             VALUES (
                 '${reqBody.name}', '${reqBody.email}', '${generateHash(reqBody.password)}',
                 '${reqBody.telephone}', '${reqBody.document}', '${reqBody.documentType}',
-                '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL())}',
+                '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL)}',
                 '${reqBody.roleType}'
             )
         `;

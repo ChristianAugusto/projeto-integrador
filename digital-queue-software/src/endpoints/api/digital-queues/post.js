@@ -1,9 +1,10 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
-import { DIGITAL_QUEUE_LIMIT } from '@ServerConstants';
+import {
+    DIGITAL_QUEUE_LIMIT,
+    SELECT_DIGITAL_QUEUES_QUERY
+} from '@ServerConstants';
 import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
-
-import { selectDigitalQueuesQuery } from './queries';
 
 
 
@@ -20,10 +21,10 @@ export default async function(req) {
         }
 
 
-        let endIndex = startIndex + DIGITAL_QUEUE_LIMIT();
+        let endIndex = startIndex + DIGITAL_QUEUE_LIMIT;
         if (
             validateMysqlInteger(reqBody.endIndex) &&
-            Number(reqBody.endIndex) - startIndex <= DIGITAL_QUEUE_LIMIT()
+            Number(reqBody.endIndex) - startIndex <= DIGITAL_QUEUE_LIMIT
         ) {
             endIndex = Number(reqBody.endIndex);
         }
@@ -37,7 +38,7 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data: await mysql(`${selectDigitalQueuesQuery} ${startIndex},${endIndex}`),
+                data: await mysql(`${SELECT_DIGITAL_QUEUES_QUERY} ${startIndex},${endIndex}`),
                 message: 'Success'
             })
         };

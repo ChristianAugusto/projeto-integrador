@@ -38,14 +38,14 @@ function validateSessionTime(startTime) {
 
     logger.info(`sessionTimeSeconds = ${sessionTimeSeconds}`);
 
-    return sessionTimeSeconds <= SESSION_SECONDS_LIMIT();
+    return sessionTimeSeconds <= SESSION_COOKIE_NAME;
 }
 
 export function validateApiKey(headerApiKeyValue) {
     try {
         logger.info(headerApiKeyValue);
 
-        return API_KEY() == headerApiKeyValue;
+        return API_KEY == headerApiKeyValue;
     }
     catch (error) {
         logger.info(error);

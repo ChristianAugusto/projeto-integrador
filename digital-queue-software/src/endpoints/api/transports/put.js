@@ -1,7 +1,9 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import validateReqBodyFields from '@ServerUtils/validate-required-fields';
-import { insertTransportQuery } from './queries';
+import {
+    INSERT_TRANSPORT_QUERY
+} from '@ServerConstants';
 
 
 
@@ -33,7 +35,7 @@ export default async function(req) {
 
 
         const query = `
-            ${insertTransportQuery}
+            ${INSERT_TRANSPORT_QUERY}
             VALUES (
                 '${reqBody.name}'
             )

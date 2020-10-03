@@ -9,9 +9,16 @@ export default function(requiredFields, obj) {
         for (let i = 0; i < requiredFields.length; i++) {
             const value = obj[requiredFields[i]];
 
-            if (
-                fields.indexOf(requiredFields[i]) == -1 || value == '' || value == null
-            ) {
+            if (fields.indexOf(requiredFields[i]) === -1) {
+                return false;
+            }
+            if (typeof(value) == 'string' && value === '') {
+                return false;
+            }
+            if (typeof(value) == 'object' && value === null) {
+                return false;
+            }
+            if (Array.isArray(value) && value.length == 0) {
                 return false;
             }
         }

@@ -1,67 +1,76 @@
 import path from 'path';
 
 
+export const SERVER_PORT = 3000;
 
-export function serverPORT() {
-    return 3000;
-}
+export const PUBLIC_PATH = path.resolve(__dirname, '..', '..', 'public');
 
-export function publicPATH() {
-    return path.resolve(__dirname, '..', '..', 'public');
-}
-
-export function staticPATH() {
-    return path.resolve(__dirname, '..', '..', 'public/files');
-}
+export const STATIC_PATH = path.resolve(__dirname, '..', '..', 'public/files');
 
 export function MYSQL_HOST() {
-    return 'localhost'; // TODO: Ajustar host em prod
+    if (process.env.environment && process.env.environment == 'prod') {
+        return 'digital-queue-mysql'; // docker-compose host
+    }
+    else {
+        return 'localhost'; // dev environment host
+    }
 }
 
 export function MYSQL_PORT() {
-    return 3306;
+    if (process.env.environment && process.env.environment == 'prod') {
+        return 3306; // docker-compose mysql port
+    }
+    else {
+        return 3306; // dev environment mysql port
+    }
 }
 
-export function MYSQL_USER() {
-    return 'root';
-}
+export const MYSQL_USER = 'root';
 
-export function MYSQL_DATABASE() {
-    return 'digital-queue-software';
-}
+export const MYSQL_DATABASE = 'digital-queue-software';
 
 export function MYSQL_PASSWORD() {
-    return '12345678';
+    if (process.env.environment && process.env.environment == 'prod') {
+        return 'y437qpkq8wyle88m'; // docker-compose mysql root password
+    }
+    else {
+        return '12345678'; // dev environment mysql root password
+    }
 }
 
-export function DATETIME_FORMAT_MYSQL() {
-    return 'YYYY-MM-DD HH:mm:ss';
-}
+export const DATETIME_FORMAT_MYSQL = 'YYYY-MM-DD HH:mm:ss';
 
-export function SESSION_COOKIE_NAME() {
-    return 'digital-queue-software';
-}
+export const SESSION_COOKIE_NAME = 'digital-queue-software';
 
-export function SESSION_SECONDS_LIMIT() {
-    // return 10; // 10 seconds
-    return 60 * 60 * 2; // 2 hours
-}
+// export const SESSION_SECONDS_LIMIT = 10;
+export const SESSION_SECONDS_LIMIT = 60 * 60 * 2; // 2 hours
 
-export function API_KEY() {
-    return 'mey9ht1t5wklvt9pyresetbfwy1nc7cj';
-}
+export const API_KEY = 'mey9ht1t5wklvt9pyresetbfwy1nc7cj';
 
-export function DIGITAL_QUEUE_LIMIT() {
-    return 20;
-}
+export const DIGITAL_QUEUE_LIMIT = 20;
 
-export function DIGITAL_QUEUE_ID_REGEX() {
-    return /[a-z0-9-]/;
-}
+export const DIGITAL_QUEUE_ID_REGEX = /[a-z0-9-]/;
 
-export function TRANSPORTS_LIMIT() {
-    return 20;
-}
+export const TRANSPORTS_LIMIT = 20;
+
+export const SELECT_DIGITAL_QUEUES_QUERY = 'SELECT * FROM `digital_queues` LIMIT';
+
+export const INSERT_DIGITAL_QUEUE_QUERY = 'INSERT INTO `digital_queues` (`id`, `name`, `creation`, `isActive`, `start`, `end`, `personTimeMinutes`)';
+
+export const INSERT_DIGITAL_QUEUE_TRANSPORTS_QUERY = 'INSERT INTO `digital_queues_transports` (`digitalQueueId`, `transportId`)';
+
+export const SELECT_TRANSPORT_QUERY = 'SELECT * FROM `transports` LIMIT';
+
+export const INSERT_TRANSPORT_QUERY = 'INSERT INTO `transports` (`name`)';
+
+export const SELECT_USERS_QUERY = 'SELECT * FROM `users` LIMIT';
+
+export const FILTER_USER_BY_ID = 'SELECT * FROM `transports` WHERE `id`';
+
+export const FILTER_USER_BY_EMAIL = 'SELECT * FROM `users` WHERE `email`';
+
+export const INSERT_USER_QUERY = 'INSERT INTO `users` (`name`, `email`, `password`, `telephone`, `document`, `documentType`, `nationality`, `register`, `roleType`)';
+
 
 
 /*

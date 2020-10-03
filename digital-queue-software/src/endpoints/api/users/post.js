@@ -1,14 +1,13 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import validateReqBodyFields from '@ServerUtils/validate-required-fields';
-import { TRANSPORTS_LIMIT } from '@ServerConstants';
-import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
-
 import {
-    selectUsersQuery,
-    filterUserById,
-    filterUserByEmail
-} from './queries';
+    TRANSPORTS_LIMIT,
+    SELECT_USERS_QUERY,
+    FILTER_USER_BY_ID,
+    FILTER_USER_BY_EMAIL
+} from '@ServerConstants';
+import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
 
 
 
@@ -26,7 +25,7 @@ export default async function(req) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    data: await mysql(`${filterUserById} = ${Number(reqBody.id)}`),
+                    data: await mysql(`${FILTER_USER_BY_ID} = ${Number(reqBody.id)}`),
                     message: 'Success'
                 })
             };
@@ -39,7 +38,7 @@ export default async function(req) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    data: await mysql(`${filterUserByEmail} = '${reqBody.email}'`),
+                    data: await mysql(`${FILTER_USER_BY_EMAIL} = '${reqBody.email}'`),
                     message: 'Success'
                 })
             };
@@ -52,10 +51,10 @@ export default async function(req) {
         }
 
 
-        let endIndex = startIndex + TRANSPORTS_LIMIT();
+        let endIndex = startIndex + TRANSPORTS_LIMIT;
         if (
             validateMysqlInteger(reqBody.endIndex) &&
-            Number(reqBody.endIndex) - startIndex <= TRANSPORTS_LIMIT()
+            Number(reqBody.endIndex) - startIndex <= TRANSPORTS_LIMIT
         ) {
             endIndex = Number(reqBody.endIndex);
         }
@@ -69,7 +68,7 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data: await mysql(`${selectUsersQuery} ${startIndex},${endIndex}`),
+                data: await mysql(`${SELECT_USERS_QUERY} ${startIndex},${endIndex}`),
                 message: 'Success'
             })
         };

@@ -15,9 +15,9 @@ export default (_query) => new Promise((resolve, reject) => {
     const connection = mysql.createConnection({
         host: MYSQL_HOST(),
         port: MYSQL_PORT(),
-        user: MYSQL_USER(),
+        user: MYSQL_USER,
         password: MYSQL_PASSWORD(),
-        database: MYSQL_DATABASE()
+        database: MYSQL_DATABASE
     });
 
     connection.connect((err) => {

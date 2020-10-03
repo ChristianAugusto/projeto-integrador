@@ -1,9 +1,10 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
-import { TRANSPORTS_LIMIT } from '@ServerConstants';
+import {
+    TRANSPORTS_LIMIT,
+    SELECT_TRANSPORT_QUERY
+} from '@ServerConstants';
 import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
-
-import { selectTransportQuery } from './queries';
 
 
 
@@ -20,10 +21,10 @@ export default async function(req) {
         }
 
 
-        let endIndex = startIndex + TRANSPORTS_LIMIT();
+        let endIndex = startIndex + TRANSPORTS_LIMIT;
         if (
             validateMysqlInteger(reqBody.endIndex) &&
-            Number(reqBody.endIndex) - startIndex <= TRANSPORTS_LIMIT()
+            Number(reqBody.endIndex) - startIndex <= TRANSPORTS_LIMIT
         ) {
             endIndex = Number(reqBody.endIndex);
         }
@@ -37,7 +38,7 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data: await mysql(`${selectTransportQuery} ${startIndex},${endIndex}`),
+                data: await mysql(`${SELECT_TRANSPORT_QUERY} ${startIndex},${endIndex}`),
                 message: 'Success'
             })
         };
