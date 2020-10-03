@@ -1,21 +1,12 @@
-import moment from 'moment-timezone';
-
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import validateReqBodyFields from '@ServerUtils/validate-required-fields';
-import { insertUserQuery } from './queries';
-import generateHash from '@ServerUtils/generate-hash';
-import {
-    SERVER_TIMEZONE, 
-    DATETIME_FORMAT_MYSQL
-} from '@ServerConstants';
+import { insertTransportQuery } from './queries';
 
 
 
 const requiredFields = [
-    'name', 'email', 'password', 'telephone',
-    'document', 'documentType', 'nationality',
-    'register'
+    'name'
 ];
 
 
@@ -40,20 +31,11 @@ export default async function(req) {
             };
         }
 
-        /*
-            TODO: Pegar roleType da seção e validar. Se for master, pode criar admin ou master,
-            se for admin não pode criar.
-        */
-        reqBody.roleType = 'admin';
-
 
         const query = `
-            ${insertUserQuery}
+            ${insertTransportQuery}
             VALUES (
-                '${reqBody.name}', '${reqBody.email}', '${generateHash(reqBody.password)}',
-                '${reqBody.telephone}', '${reqBody.document}', '${reqBody.documentType}',
-                '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL())}',
-                '${reqBody.roleType}'
+                '${reqBody.name}'
             )
         `;
 
@@ -75,7 +57,7 @@ export default async function(req) {
         };
     }
     catch (error) {
-        logger.error('Error in (PUT)/api/users');
+        logger.error('Error in (PUT)/api/transports');
         logger.info(error);
 
         return {

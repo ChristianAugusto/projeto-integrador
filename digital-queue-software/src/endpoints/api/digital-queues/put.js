@@ -2,6 +2,7 @@ import moment from 'moment-timezone';
 
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
+import validateReqBodyFields from '@ServerUtils/validate-required-fields';
 import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
 import { insertDigitalQueueQuery } from './queries';
 import {
@@ -24,7 +25,7 @@ export default async function(req) {
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
-        if (!validateReqBodyFields(reqBody)) {
+        if (!validateReqBodyFields(requiredFields, reqBody)) {
             logger.info('Error in body fields, please check again');
 
             return {
@@ -111,17 +112,6 @@ export default async function(req) {
     }
 }
 
-function validateReqBodyFields(reqBody) {
-    const reqBodyFields = Object.keys(reqBody);
-
-    for (let i = 0; i < requiredFields.length; i++) {
-        if (reqBodyFields.indexOf(requiredFields[i]) == -1) {
-            return false;
-        }
-    }
-
-    return true;
-}
 
 function validateReqId(value) {
     try {

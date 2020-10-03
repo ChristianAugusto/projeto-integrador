@@ -5,6 +5,7 @@ import writeResponse from '@ServerModules/write-response';
 import { validateApiKey, validateSession } from '@ServerGlobals/sessions';
 import users from '@ServerEndpoints/api/users';
 import digitalQueues from '@ServerEndpoints/api/digital-queues';
+import transports from '@ServerEndpoints/api/transports';
 import login from '@ServerEndpoints/login';
 
 
@@ -65,6 +66,24 @@ export default function(app) {
     app.post('/api/digital-queues', jsonParser, async function(req, res) {
         if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME()])) {
             writeResponse(await digitalQueues.post(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
+    app.put('/api/transports', jsonParser, async function(req, res) {
+        if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME()])) {
+            writeResponse(await transports.put(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
+    app.post('/api/transports', jsonParser, async function(req, res) {
+        if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME()])) {
+            writeResponse(await transports.post(req), res);
         }
         else {
             res.redirect('/admin/login');

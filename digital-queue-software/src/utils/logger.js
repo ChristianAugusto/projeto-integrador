@@ -1,5 +1,5 @@
 function info(message) {
-    console.log(`INFO - ${message}`);
+    console.log(`INFO    - ${message}`);
 }
 
 
@@ -9,7 +9,7 @@ function warning(message) {
 
 
 function error(message) {
-    console.log(`ERROR - ${message}`);
+    console.log(`ERROR   - ${message}`);
 }
 
 

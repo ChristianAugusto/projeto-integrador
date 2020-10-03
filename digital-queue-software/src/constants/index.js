@@ -59,7 +59,9 @@ export function DIGITAL_QUEUE_ID_REGEX() {
     return /[a-z0-9-]/;
 }
 
-
+export function TRANSPORTS_LIMIT() {
+    return 20;
+}
 
 
 /*
