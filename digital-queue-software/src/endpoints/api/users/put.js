@@ -7,7 +7,7 @@ import generateHash from '@ServerUtils/generate-hash';
 import {
     SERVER_TIMEZONE, 
     DATETIME_FORMAT_MYSQL,
-    INSERT_USER_QUERY
+    INSERT_USER_QUERY_QUERY
 } from '@ServerConstants';
 
 
@@ -48,7 +48,7 @@ export default async function(req) {
 
 
         const query = `
-            ${INSERT_USER_QUERY}
+            ${INSERT_USER_QUERY_QUERY}
             VALUES (
                 '${reqBody.name}', '${reqBody.email}', '${generateHash(reqBody.password)}',
                 '${reqBody.telephone}', '${reqBody.document}', '${reqBody.documentType}',

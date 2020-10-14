@@ -9,7 +9,7 @@ import {
     DATETIME_FORMAT_MYSQL,
     DIGITAL_QUEUE_ID_REGEX,
     INSERT_DIGITAL_QUEUE_QUERY,
-    FILTER_USER_BY_ID,
+    FILTER_USER_BY_ID_QUERY,
     INSERT_DIGITAL_QUEUE_TRANSPORTS_QUERY
 } from '@ServerConstants';
 
@@ -175,7 +175,7 @@ async function validateTransports(transportsIds) {
                 return false;
             }
 
-            const queryResult = await mysql(`${FILTER_USER_BY_ID} = ${transportsIds[i]}`);
+            const queryResult = await mysql(`${FILTER_USER_BY_ID_QUERY} = ${transportsIds[i]}`);
 
             if (queryResult.length == 0) {
                 return false;

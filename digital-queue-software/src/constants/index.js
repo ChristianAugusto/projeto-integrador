@@ -65,11 +65,11 @@ export const INSERT_TRANSPORT_QUERY = 'INSERT INTO `transports` (`name`)';
 
 export const SELECT_USERS_QUERY = 'SELECT * FROM `users` LIMIT';
 
-export const FILTER_USER_BY_ID = 'SELECT * FROM `transports` WHERE `id`';
+export const FILTER_USER_BY_ID_QUERY = 'SELECT * FROM `transports` WHERE `id`';
 
-export const FILTER_USER_BY_EMAIL = 'SELECT * FROM `users` WHERE `email`';
+export const FILTER_USER_BY_EMAIL_QUERY = 'SELECT * FROM `users` WHERE `email`';
 
-export const INSERT_USER_QUERY = 'INSERT INTO `users` (`name`, `email`, `password`, `telephone`, `document`, `documentType`, `nationality`, `register`, `roleType`)';
+export const INSERT_USER_QUERY_QUERY = 'INSERT INTO `users` (`name`, `email`, `password`, `telephone`, `document`, `documentType`, `nationality`, `register`, `roleType`)';
 
 
 

@@ -7,7 +7,7 @@ import generateHash from '@ServerUtils/generate-hash';
 import {
     SERVER_TIMEZONE, 
     DATETIME_FORMAT_MYSQL,
-    FILTER_USER_BY_EMAIL
+    FILTER_USER_BY_EMAIL_QUERY
 } from '@ServerConstants';
 
 
@@ -38,7 +38,7 @@ export default async function(req) {
         }
 
 
-        const usersObtained = await mysql(`${FILTER_USER_BY_EMAIL} = '${reqBody.email}'`);
+        const usersObtained = await mysql(`${FILTER_USER_BY_EMAIL_QUERY} = '${reqBody.email}'`);
 
         if (!Array.isArray(usersObtained) || usersObtained.length == 0) {
             logger.info('Usuário não existente');

@@ -4,8 +4,8 @@ import validateReqBodyFields from '@ServerUtils/validate-required-fields';
 import {
     TRANSPORTS_LIMIT,
     SELECT_USERS_QUERY,
-    FILTER_USER_BY_ID,
-    FILTER_USER_BY_EMAIL
+    FILTER_USER_BY_ID_QUERY,
+    FILTER_USER_BY_EMAIL_QUERY
 } from '@ServerConstants';
 import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
 
@@ -25,7 +25,7 @@ export default async function(req) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    data: await mysql(`${FILTER_USER_BY_ID} = ${Number(reqBody.id)}`),
+                    data: await mysql(`${FILTER_USER_BY_ID_QUERY} = ${Number(reqBody.id)}`),
                     message: 'Success'
                 })
             };
@@ -38,7 +38,7 @@ export default async function(req) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    data: await mysql(`${FILTER_USER_BY_EMAIL} = '${reqBody.email}'`),
+                    data: await mysql(`${FILTER_USER_BY_EMAIL_QUERY} = '${reqBody.email}'`),
                     message: 'Success'
                 })
             };
