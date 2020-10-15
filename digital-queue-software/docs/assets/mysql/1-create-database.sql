@@ -74,4 +74,4 @@ INSERT INTO `digital-queue-software`.`transports`
     (`name`)
 VALUES
     ('A pé'),
-    ('carro');
+    ('Carro');

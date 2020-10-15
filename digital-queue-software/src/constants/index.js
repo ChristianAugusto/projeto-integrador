@@ -34,7 +34,7 @@ export function MYSQL_PASSWORD() {
         return 'y437qpkq8wyle88m'; // docker-compose mysql root password
     }
     else {
-        return '12345678'; // dev environment mysql root password
+        return 'y437qpkq8wyle88m'; // dev environment mysql root password
     }
 }
 
@@ -65,7 +65,7 @@ export const INSERT_TRANSPORT_QUERY = 'INSERT INTO `transports` (`name`)';
 
 export const SELECT_USERS_QUERY = 'SELECT * FROM `users` LIMIT';
 
-export const FILTER_USER_BY_ID_QUERY = 'SELECT * FROM `transports` WHERE `id`';
+export const FILTER_USER_BY_ID_QUERY = 'SELECT * FROM `users` WHERE `id`';
 
 export const FILTER_USER_BY_EMAIL_QUERY = 'SELECT * FROM `users` WHERE `email`';
 
