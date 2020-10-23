@@ -11,7 +11,8 @@
         "build-server": "npx eslint src/** && npx babel ./src -d ./build",
         "dev-server": "nodemon --exec npx babel-node src/index.js",
         "dev-website": "npx gulp watch",
-        "start": "node ./build/index.js"
+        "dev-start": "node ./build/index.js",
+        "start": "environment=prod node ./build/index.js"
     },
     "authors": [
         "115149 - Amanda Magari do Nascimento",
