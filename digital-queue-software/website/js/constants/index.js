@@ -1,6 +1,7 @@
 /* ROUTES */
 export const HOME_ROUTE = '/';
-export const LOGIN_ROUTE = '/admin/login';
+export const ADMIN_ROUTE = '/admin';
+export const ADMIN_LOGIN_ROUTE = '/admin/login';
 
 
 /* SESSION */

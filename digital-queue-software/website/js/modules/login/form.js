@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import {
     SESSION_COOKIE_NAME, SESSION_SECONDS_LIMIT,
-    SERVER_ERROR_MESSAGE, LOGIN_ROUTE, HOME_ROUTE
+    SERVER_ERROR_MESSAGE, ADMIN_LOGIN_ROUTE, ADMIN_ROUTE
 } from '@WebsiteConstants';
 import { buildHeaders } from '@WebsiteUtils/api-call';
 
@@ -21,7 +21,7 @@ function sendForm() {
             TODO: Aplicar função trim() nos valores do form
         */
 
-        const response = await fetch(LOGIN_ROUTE, {
+        const response = await fetch(ADMIN_LOGIN_ROUTE, {
             method: 'POST',
             headers: buildHeaders({
                 'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ function sendForm() {
         Cookies.set(SESSION_COOKIE_NAME, JSON.stringify(responseObj.data), { expires: getCookieTime() });
 
         if (response.status == 200) {
-            window.location.pathname = HOME_ROUTE;
+            window.location.pathname = ADMIN_ROUTE;
         }
         else {
             alert(SERVER_ERROR_MESSAGE);

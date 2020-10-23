@@ -16,9 +16,13 @@ const jsonParser = bodyParser.json();
 
 export default function(app) {
     /* Pages */
-    app.get('/', async function(req, res) {
+    app.get('/', function(req, res) {
+        res.sendFile(`${PUBLIC_PATH}/templates/home.html`);
+    });
+
+    app.get('/admin', async function(req, res) {
         if (validateSession(req.cookies[SESSION_COOKIE_NAME])) {
-            res.sendFile(`${PUBLIC_PATH}/templates/home.html`);
+            res.sendFile(`${PUBLIC_PATH}/templates/admin.html`);
         }
         else {
             res.redirect('/admin/login');

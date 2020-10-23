@@ -23,13 +23,13 @@ const sizesOptions = {
     showTotal: true
 };
 
-const scssFiles = ['global', 'home', 'login']
+const scssFiles = ['global', 'home', 'login', 'admin']
     .map(file => `${src}/scss/${file}.scss`);
 
-const jsFiles = ['global', 'home', 'login']
+const jsFiles = ['global', 'home', 'login', 'admin']
     .map(file => `${src}/js/${file}.js`);
 
-const templates = ['home', 'login']
+const templates = ['home', 'login', 'admin']
     .map(file => `${src}/templates/${file}.html`);
 
 
