@@ -1,0 +1,32 @@
+block vars
+
+
+doctype
+html(lang="pt-br")
+    head
+        meta(charset="UTF-8")/
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")/
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")/
+        meta(name="description", content="Digital queue software")/
+        meta(name="keywords", content="Queue, software")/
+
+
+        block head
+
+
+        block styles
+            link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap")/
+            link(rel="stylesheet", href="/css/global.css")/
+
+    body(class=`${$templateClass}`)
+        div(class="app")
+            div(class="app__global")
+                div(class="placeloader-page is--visible")
+                include ./partials/global/header.pug
+                main(role="main", class="app__main page")
+                    block content
+                include ./partials/global/footer.pug
+
+
+        block scripts
+            script(src="/js/global.js")

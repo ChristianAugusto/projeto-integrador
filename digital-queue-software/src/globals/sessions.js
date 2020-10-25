@@ -1,6 +1,7 @@
+import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import {
-    SESSION_SECONDS_LIMIT, API_KEY
+    SESSION_SECONDS_LIMIT, API_KEY, SELECT_USERS_QUERY_BUILDER
 } from '@ServerConstants';
 
 
@@ -39,6 +40,29 @@ function validateSessionTime(startTime) {
     logger.info(`sessionTimeSeconds = ${sessionTimeSeconds}`);
 
     return sessionTimeSeconds <= SESSION_SECONDS_LIMIT;
+}
+
+export async function validateMasterSession(sessionStr) {
+    try {
+        if (!validateSession(sessionStr)) {
+            return false;
+        }
+
+        const session = JSON.parse(sessionStr);
+
+        const queryResult = await mysql(SELECT_USERS_QUERY_BUILDER('*', `WHERE \`id\` = ${Number(session.id)}`));
+
+        if (queryResult[0].roleType != 'master') {
+            return false;
+        }
+
+        return true;
+    }
+    catch (error) {
+        logger.info(error);
+
+        return false;
+    }
 }
 
 export function validateApiKey(headerApiKeyValue) {

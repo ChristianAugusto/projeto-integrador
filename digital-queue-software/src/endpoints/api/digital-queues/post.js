@@ -21,15 +21,6 @@ export default async function(req) {
         }
 
 
-        let endIndex = startIndex + DIGITAL_QUEUE_LIMIT;
-        if (
-            validateMysqlInteger(reqBody.endIndex) &&
-            Number(reqBody.endIndex) - startIndex <= DIGITAL_QUEUE_LIMIT
-        ) {
-            endIndex = Number(reqBody.endIndex);
-        }
-
-
         logger.info('Success');
 
         return {
@@ -38,7 +29,8 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data: await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('*', '', `LIMIT ${startIndex},${endIndex}`)),
+                results: (await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('COUNT(*)')))[0]['COUNT(*)'],
+                data: await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('*', '', `LIMIT ${startIndex},${DIGITAL_QUEUE_LIMIT}`)),
                 message: 'Success'
             })
         };
@@ -53,6 +45,7 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                results: 0,
                 data: null,
                 message: 'Internal server error'
             })

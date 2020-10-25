@@ -60,6 +60,19 @@
                     font-weight: 400;
                     color: #000;
                 }
+
+                &.is-blurred {
+                    opacity: 0.4;
+                    pointer-events: none;
+                }
+            }
+
+            &__page-display {
+                font-family: $defaultFont;
+                font-size: 14px;
+                text-transform: none;
+                font-weight: 400;
+                color: #000;
             }
         }
     }

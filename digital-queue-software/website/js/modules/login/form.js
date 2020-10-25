@@ -21,25 +21,25 @@ function sendForm() {
             TODO: Aplicar função trim() nos valores do form
         */
 
-        const response = await fetch(ADMIN_LOGIN_ROUTE, {
-            method: 'POST',
-            headers: buildHeaders({
-                'Content-Type': 'application/json'
-            }),
-            body: JSON.stringify({
-                email: document.querySelector('#js--email').value,
-                password: document.querySelector('#js--password').value
-            })
-        });
+        try {
+            const response = await fetch(ADMIN_LOGIN_ROUTE, {
+                method: 'POST',
+                headers: buildHeaders({
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify({
+                    email: document.querySelector('#js--email').value,
+                    password: document.querySelector('#js--password').value
+                })
+            });
 
-        const responseObj = await response.json();
+            const responseObj = await response.json();
 
-        Cookies.set(SESSION_COOKIE_NAME, JSON.stringify(responseObj.data), { expires: getCookieTime() });
+            Cookies.set(SESSION_COOKIE_NAME, JSON.stringify(responseObj.data), { expires: getCookieTime() });
 
-        if (response.status == 200) {
             window.location.pathname = ADMIN_ROUTE;
         }
-        else {
+        catch (error) {
             alert(SERVER_ERROR_MESSAGE);
         }
     };

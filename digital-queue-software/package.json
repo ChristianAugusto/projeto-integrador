@@ -7,7 +7,7 @@
         "doc": "docs"
     },
     "scripts": {
-        "build-website": "npx eslint src/** && npx gulp build",
+        "build-website": "npx eslint website/js/** && npx gulp build",
         "build-server": "npx eslint src/** && npx babel ./src -d ./build",
         "dev-server": "nodemon --exec npx babel-node src/index.js",
         "dev-website": "npx gulp watch",
@@ -39,6 +39,7 @@
         "gulp-clean": "0.4.0",
         "gulp-cli": "2.3.0",
         "gulp-notify": "3.2.0",
+        "gulp-pug": "4.0.1",
         "gulp-sass": "4.1.0",
         "gulp-size": "3.0.0",
         "gulp-uglify": "3.0.2",

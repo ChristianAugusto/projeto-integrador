@@ -2,7 +2,9 @@ import bodyParser from 'body-parser';
 
 import { PUBLIC_PATH, SESSION_COOKIE_NAME } from '@ServerConstants';
 import writeResponse from '@ServerModules/write-response';
-import { validateApiKey, validateSession } from '@ServerGlobals/sessions';
+import {
+    validateApiKey, validateSession, validateMasterSession
+} from '@ServerGlobals/sessions';
 import users from '@ServerEndpoints/api/users';
 import digitalQueues from '@ServerEndpoints/api/digital-queues';
 import digitalQueuesUsers from '@ServerEndpoints/api/digital-queues-users';
@@ -24,6 +26,15 @@ export default function(app) {
     app.get('/admin', async function(req, res) {
         if (validateSession(req.cookies[SESSION_COOKIE_NAME])) {
             res.sendFile(`${PUBLIC_PATH}/templates/admin.html`);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
+    app.get('/admin/register', async function(req, res) {
+        if ((await validateMasterSession(req.cookies[SESSION_COOKIE_NAME]))) {
+            res.sendFile(`${PUBLIC_PATH}/templates/register.html`);
         }
         else {
             res.redirect('/admin/login');

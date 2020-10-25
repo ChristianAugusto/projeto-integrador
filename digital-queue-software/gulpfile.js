@@ -4,6 +4,7 @@ const uglify = require('gulp-uglify');
 const clean = require('gulp-clean');
 const size = require('gulp-size');
 const notify = require('gulp-notify');
+const pug = require('gulp-pug');
 const browserify = require('browserify');
 const babelify = require('babelify');
 const source = require('vinyl-source-stream');
@@ -23,18 +24,19 @@ const sizesOptions = {
     showTotal: true
 };
 
-const scssFiles = ['global', 'home', 'login', 'admin']
+const scssFiles = ['global', 'home', 'login', 'admin', 'register']
     .map(file => `${src}/scss/${file}.scss`);
 
-const jsFiles = ['global', 'home', 'login', 'admin']
+const jsFiles = ['global', 'home', 'login', 'admin', 'register']
     .map(file => `${src}/js/${file}.js`);
 
-const templates = ['home', 'login', 'admin']
-    .map(file => `${src}/templates/${file}.html`);
+const templates = ['home', 'login', 'admin', 'register']
+    .map(file => `${src}/templates/${file}.pug`);
 
 
-gulp.task('copy-html', function() {
+gulp.task('build-html', () => {
     return gulp.src(templates)
+        .pipe(pug({pretty: true}).on('error', (error) => console.log(error)))
         .pipe(gulp.dest(templatesBuildFolder));
 });
 
@@ -123,12 +125,12 @@ gulp.task('watch-files', () => {
         ]
     });
 
-    gulp.watch(`${src}/**/*.html`, gulp.series('copy-html', 'reload-browser'));
+    gulp.watch(`${src}/**/*.pug`, gulp.series('build-html', 'reload-browser'));
     gulp.watch(`${src}/**/*.scss`, gulp.series('build-scss'));
     gulp.watch(`${src}/**/*.js`, gulp.series('build-js', 'reload-browser'));
 });
 
 
-gulp.task('build', gulp.series('clean-public', 'clean-templates', 'build-scss', 'copy-html', 'build-js'));
+gulp.task('build', gulp.series('clean-public', 'clean-templates', 'build-scss', 'build-html', 'build-js'));
 gulp.task('watch', gulp.series('watch-files'));
 gulp.task('development', gulp.series('build', 'watch'));
