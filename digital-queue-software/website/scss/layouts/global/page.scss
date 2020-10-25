@@ -1,0 +1,17 @@
+.page {
+    margin: 20px 0 0;
+
+    &__intro {
+        @include display-column();
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &__title {
+        font-family: $defaultFont;
+        font-size: 24px;
+        text-transform: none;
+        font-weight: 700;
+        color: #000;
+    }
+}

@@ -28,11 +28,11 @@
     justify-content: space-between;
     align-items: flex-start;
 
-    @include mqmax(405px) {
+    @include mqmax($mobileG) {
         width: 90%;
     }
 
-    @include mqmin(406px) {
+    @include mqmin($mobileG) {
         width: 100%;
     }
 

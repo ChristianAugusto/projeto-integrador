@@ -75,7 +75,6 @@ gulp.task('build-js', function(done) {
                     currentFile++;
                     if (currentFile === filesQtd) {
                         done();
-                        browserSync.reload();
                     }
                 }
             }));
@@ -96,6 +95,11 @@ gulp.task('clean-templates', () => {
         .on('error', (error) => {
             console.log(error);
         });
+});
+
+gulp.task('reload-browser', (done) => {
+    browserSync.reload();
+    done(); 
 });
 
 
@@ -119,9 +123,9 @@ gulp.task('watch-files', () => {
         ]
     });
 
-    gulp.watch(`${src}/**/*.html`, gulp.series('copy-html'));
+    gulp.watch(`${src}/**/*.html`, gulp.series('copy-html', 'reload-browser'));
     gulp.watch(`${src}/**/*.scss`, gulp.series('build-scss'));
-    gulp.watch(`${src}/**/*.js`, gulp.series('build-js'));
+    gulp.watch(`${src}/**/*.js`, gulp.series('build-js', 'reload-browser'));
 });
 
 

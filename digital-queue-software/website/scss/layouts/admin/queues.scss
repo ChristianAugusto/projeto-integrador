@@ -1,0 +1,66 @@
+.page {
+    &__actions {
+        width: 100%;
+        height: auto;
+
+        .queues {
+            &__list {
+                width: 90%;
+                height: auto;
+                margin: 0 auto;
+                @include display-column;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                > li {
+                    margin: 20px 0 0;
+                }
+            }
+
+            &__actions {
+                width: 100%;
+                height: auto;
+                @include display-row;
+                justify-content: center;
+                align-items: center;
+                margin: 20px 0 0;
+
+                button {
+                    display: block;
+                    margin: 0 20px;
+                    padding: 0;
+                    border: none;
+                    border-radius: 0;
+                    background: transparent;
+                    cursor: pointer;
+                    font-size: 0;
+                    padding: 3px 14px;
+                }
+            }
+
+            &__previous-page {
+                &::after {
+                    content: "<";
+                }
+            }
+
+            &__next-page {
+                &::after {
+                    content: ">";
+                }
+            }
+
+            &__previous-page,
+            &__next-page {
+                &::after {
+                    display: block;
+                    font-family: $defaultFont;
+                    font-size: 28px;
+                    text-transform: none;
+                    font-weight: 400;
+                    color: #000;
+                }
+            }
+        }
+    }
+}
