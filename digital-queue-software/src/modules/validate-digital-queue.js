@@ -8,7 +8,7 @@ import {
 
 export default async function (digitalQueueId) {
     try {
-        const queryResult = await mysql(`${FILTER_DIGITAL_QUEUE_BY_ID_QUERY} = ${digitalQueueId}`);
+        const queryResult = await mysql(`${FILTER_DIGITAL_QUEUE_BY_ID_QUERY} = '${digitalQueueId}'`);
 
         if (queryResult.length === 0) {
             return false;

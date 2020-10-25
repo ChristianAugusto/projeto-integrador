@@ -19,21 +19,21 @@ export default async function(req) {
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
-        if (!validateReqBodyFields(requiredFields, reqBody)) {
-            logger.info('Error in body fields, please check again');
+        // if (!validateReqBodyFields(requiredFields, reqBody)) {
+        //     logger.info('Error in body fields, please check again');
 
-            return {
-                status: 400,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data: null,
-                    created: false,
-                    message: 'Error in body fields, please check again'
-                })
-            };
-        }
+        //     return {
+        //         status: 400,
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify({
+        //             data: null,
+        //             created: false,
+        //             message: 'Error in body fields, please check again'
+        //         })
+        //     };
+        // }
 
         if (!validateDigitalQueue(reqBody.digitalQueueId)) {
             logger.info('Digital queue does not exist');
@@ -47,6 +47,22 @@ export default async function(req) {
                     data: null,
                     created: false,
                     message: 'Digital queue does not exist'
+                })
+            };
+        }
+
+        if (!(await validateTransports([reqBody.transportId]))) {
+            logger.info('transport does not exist');
+
+            return {
+                status: 400,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: null,
+                    created: false,
+                    message: 'transport does not exist'
                 })
             };
         }

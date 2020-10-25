@@ -21,7 +21,7 @@ export function MYSQL_PORT() {
         return 3306; // docker-compose mysql port
     }
     else {
-        return 3306; // dev environment mysql port
+        return 5500; // dev environment mysql port
     }
 }
 
@@ -76,6 +76,8 @@ export const FILTER_USER_BY_EMAIL_QUERY = 'SELECT `email` FROM `users` WHERE `em
 export const INSERT_USER_QUERY_QUERY = 'INSERT INTO `users` (`name`, `email`, `password`, `telephone`, `document`, `documentType`, `nationality`, `register`, `roleType`)';
 
 export const SELECT_DIGITAL_QUEUES_USERS_QUERY = 'SELECT * FROM `digital_queues_users` LIMIT';
+
+export const SELECT_TRANSPORT_QUERY = 'SELECT * FROM `transports` LIMIT';
 
 
 
