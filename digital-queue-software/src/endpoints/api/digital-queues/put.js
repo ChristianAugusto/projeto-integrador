@@ -16,7 +16,7 @@ import {
 
 
 const requiredFields = [
-    'id', 'name', 'isActive',
+    'id', 'name', 'isActive', 'day',
     'start', 'end', 'userTimeMinutes',
     'transportsIds'
 ];
@@ -103,8 +103,8 @@ export default async function(req) {
             VALUES (
                 '${reqBody.id}', '${reqBody.name}',
                 '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL)}',
-                ${reqBody.isActive ? 1 : 0}, '${reqBody.start}', '${reqBody.end}',
-                ${reqBody.userTimeMinutes}
+                ${reqBody.isActive ? 1 : 0}, '${reqBody.day}', '${reqBody.start}',
+                '${reqBody.end}', ${reqBody.userTimeMinutes}
             )
         `;
 

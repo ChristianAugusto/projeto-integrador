@@ -1,10 +1,10 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
+import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 import {
     DIGITAL_QUEUES_USERS_LIMIT,
-    SELECT_DIGITAL_QUEUES_USERS_QUERY
+    SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER
 } from '@ServerConstants';
-import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 
 
 
@@ -38,7 +38,7 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data: await mysql(`${SELECT_DIGITAL_QUEUES_USERS_QUERY} ${startIndex},${endIndex}`),
+                data: await mysql(SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER('*', '', `LIMIT ${startIndex},${endIndex}`)),
                 message: 'Success'
             })
         };

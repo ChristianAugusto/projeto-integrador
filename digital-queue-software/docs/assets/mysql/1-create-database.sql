@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`users` (
     `document` VARCHAR(50) NOT NULL,
     `documentType` VARCHAR(50) NOT NULL,
     `nationality` VARCHAR(75) NOT NULL,
-    `register` DATETIME NOT NULL,
+    `register` VARCHAR(20) NOT NULL,
     `roleType` ENUM('admin', 'master') NOT NULL,
 
     PRIMARY KEY (`id`),
@@ -24,10 +24,11 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`users` (
 CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues` (
     `id` VARCHAR(100) NOT NULL,
     `name` VARCHAR(100) NOT NULL,
-    `creation` DATETIME NOT NULL,
+    `creation` VARCHAR(20) NOT NULL,
     `isActive` TINYINT(1) UNSIGNED NOT NULL,
-    `start` DATETIME NOT NULL,
-    `end` DATETIME NOT NULL,
+    `day` VARCHAR(10) NOT NULL,
+    `start` TIME NOT NULL,
+    `end` TIME NOT NULL,
     `userTimeMinutes` SMALLINT UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`)
@@ -49,10 +50,10 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues_users` (
     `telephone` VARCHAR(30) NOT NULL,
     `documentType` VARCHAR(50) NOT NULL,
     `nationality` VARCHAR(75) NOT NULL,
-    `register` DATETIME NOT NULL,
+    `register` VARCHAR(20) NOT NULL,
     `transportId` TINYINT(1) UNSIGNED NOT NULL,
-    `appointment` DATETIME NOT NULL,
-    `attended` DATETIME,
+    `appointment` TIME NOT NULL,
+    `attended` VARCHAR(20),
 
     PRIMARY KEY (`digitalQueueId`, `document`),
     FOREIGN KEY (`digitalQueueId`) REFERENCES `digital_queues` (`id`),

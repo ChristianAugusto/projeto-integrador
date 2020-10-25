@@ -2,7 +2,7 @@ import logger from '@ServerUtils/logger';
 import mysql from '@ServerHandlers/mysql';
 import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 import {
-    FILTER_TRANSPORT_BY_ID_QUERY
+    SELECT_TRANSPORTS_QUERY_BUILDER
 } from '@ServerConstants';
 
 
@@ -18,7 +18,7 @@ export default async function(transportsIds) {
                 return false;
             }
 
-            const queryResult = await mysql(`${FILTER_TRANSPORT_BY_ID_QUERY} = ${transportsIds[i]}`);
+            const queryResult = await mysql(SELECT_TRANSPORTS_QUERY_BUILDER('*', `WHERE \`id\` = ${transportsIds[i]}`));
 
             if (queryResult.length === 0) {
                 return false;

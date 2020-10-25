@@ -3,9 +3,7 @@ import logger from '@ServerUtils/logger';
 import validateReqBodyFields from '@ServerModules/validate-required-fields';
 import {
     TRANSPORTS_LIMIT,
-    SELECT_USERS_QUERY,
-    FILTER_USER_BY_ID_QUERY,
-    FILTER_USER_BY_EMAIL_QUERY
+    SELECT_USERS_QUERY_BUILDER
 } from '@ServerConstants';
 import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 
@@ -25,7 +23,7 @@ export default async function(req) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    data: await mysql(`${FILTER_USER_BY_ID_QUERY} = ${Number(reqBody.id)}`),
+                    data: await mysql(SELECT_USERS_QUERY_BUILDER('*', `WHERE \`id\` = ${Number(reqBody.id)}`)),
                     message: 'Success'
                 })
             };
@@ -38,7 +36,7 @@ export default async function(req) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    data: await mysql(`${FILTER_USER_BY_EMAIL_QUERY} = '${reqBody.email}'`),
+                    data: await mysql(SELECT_USERS_QUERY_BUILDER('*', `WHERE \`email\` = '${reqBody.email}'`)),
                     message: 'Success'
                 })
             };
@@ -68,7 +66,7 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data: await mysql(`${SELECT_USERS_QUERY} ${startIndex},${endIndex}`),
+                data: await mysql(SELECT_USERS_QUERY_BUILDER('*', '', `LIMIT ${startIndex},${endIndex}`)),
                 message: 'Success'
             })
         };
