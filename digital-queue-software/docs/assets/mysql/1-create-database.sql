@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues_users` (
     `document` VARCHAR(50) NOT NULL,
     `name` VARCHAR(100) NOT NULL,
     `email` VARCHAR(100) NOT NULL,
-    `password` VARCHAR(128) NOT NULL,
     `telephone` VARCHAR(30) NOT NULL,
     `documentType` VARCHAR(50) NOT NULL,
     `nationality` VARCHAR(75) NOT NULL,

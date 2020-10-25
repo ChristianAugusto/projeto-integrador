@@ -9,9 +9,8 @@ import {
 
 
 const requiredFields = [
-    'digitalQueueId', 'document', 'name', 'email', 'password', 'telephone',
-    'documentType', 'nationality', 'register', 'transportId', 'appointment',
-    'attended'
+    'digitalQueueId', 'document', 'name', 'email', 'telephone', 'documentType',
+    'nationality', 'register', 'transportId', 'appointment', 'attended'
 ];
 
 
