@@ -4,7 +4,7 @@ import {
     DIGITAL_QUEUE_LIMIT,
     SELECT_DIGITAL_QUEUES_QUERY
 } from '@ServerConstants';
-import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
+import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 
 
 

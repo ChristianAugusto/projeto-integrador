@@ -2,14 +2,14 @@ import moment from 'moment-timezone';
 
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
-import validateReqBodyFields from '@ServerUtils/validate-required-fields';
-import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
+import validateReqBodyFields from '@ServerModules/validate-required-fields';
+import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
+import validateTransports from '@ServerModules/validate-transports';
 import {
     SERVER_TIMEZONE, 
     DATETIME_FORMAT_MYSQL,
     DIGITAL_QUEUE_ID_REGEX,
     INSERT_DIGITAL_QUEUE_QUERY,
-    FILTER_TRANSPORT_BY_ID_QUERY,
     INSERT_DIGITAL_QUEUE_TRANSPORTS_QUERY
 } from '@ServerConstants';
 
@@ -161,33 +161,6 @@ function validateReqId(value) {
     try {
         for (let i = 0; i < value.length; i++) {
             if (!value[i].match(DIGITAL_QUEUE_ID_REGEX)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-    catch (error) {
-        logger.info(error);
-
-        return false;
-    }
-}
-
-async function validateTransports(transportsIds) {
-    try {
-        if (!Array.isArray(transportsIds)) {
-            return false;
-        }
-
-        for (let i = 0; i < transportsIds.length; i++) {
-            if (!validateMysqlInteger(transportsIds[i])) {
-                return false;
-            }
-
-            const queryResult = await mysql(`${FILTER_TRANSPORT_BY_ID_QUERY} = ${transportsIds[i]}`);
-
-            if (queryResult.length === 0) {
                 return false;
             }
         }

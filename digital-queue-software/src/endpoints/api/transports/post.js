@@ -4,7 +4,7 @@ import {
     TRANSPORTS_LIMIT,
     SELECT_TRANSPORT_QUERY
 } from '@ServerConstants';
-import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
+import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 
 
 

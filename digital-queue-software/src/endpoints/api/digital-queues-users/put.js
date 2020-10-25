@@ -1,10 +1,9 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
-import validateReqBodyFields from '@ServerUtils/validate-required-fields';
-import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
-import {
-    FILTER_DIGITAL_QUEUE_BY_ID_QUERY
-} from '@ServerConstants';
+import validateReqBodyFields from '@ServerModules/validate-required-fields';
+import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
+import validateDigitalQueue from '@ServerModules/validate-digital-queue';
+import validateTransports from '@ServerModules/validate-transports';
 
 
 
@@ -83,22 +82,5 @@ export default async function(req) {
                 message: 'Internal server error'
             })
         };
-    }
-}
-
-async function validateDigitalQueue(digitalQueueId) {
-    try {
-        const queryResult = await mysql(`${FILTER_DIGITAL_QUEUE_BY_ID_QUERY} = ${digitalQueueId}`);
-
-        if (queryResult.length === 0) {
-            return false;
-        }
-
-        return true;
-    }
-    catch (error) {
-        logger.info(error);
-
-        return false;
     }
 }

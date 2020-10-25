@@ -2,7 +2,7 @@ import moment from 'moment-timezone';
 
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
-import validateReqBodyFields from '@ServerUtils/validate-required-fields';
+import validateReqBodyFields from '@ServerModules/validate-required-fields';
 import generateHash from '@ServerUtils/generate-hash';
 import {
     SERVER_TIMEZONE, 

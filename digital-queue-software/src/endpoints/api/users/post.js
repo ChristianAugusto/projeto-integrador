@@ -1,13 +1,13 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
-import validateReqBodyFields from '@ServerUtils/validate-required-fields';
+import validateReqBodyFields from '@ServerModules/validate-required-fields';
 import {
     TRANSPORTS_LIMIT,
     SELECT_USERS_QUERY,
     FILTER_USER_BY_ID_QUERY,
     FILTER_USER_BY_EMAIL_QUERY
 } from '@ServerConstants';
-import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
+import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 
 
 
