@@ -1,6 +1,7 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
+import validateReqBodyFields from '@ServerModules/validate-required-fields';
 import {
     DIGITAL_QUEUES_USERS_LIMIT,
     SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER
@@ -13,6 +14,20 @@ export default async function(req) {
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
+
+
+        if (validateReqBodyFields(['document'], reqBody)) {
+            return {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: await mysql(SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER('*', `WHERE \`document\` = '${reqBody.document}'`)),
+                    message: 'Success'
+                })
+            };
+        }
 
 
         let startIndex = 0;

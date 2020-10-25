@@ -77,7 +77,7 @@ export default async function(req) {
         }
 
         if (!(await validateAppointment(reqBody))) {
-            logger.info('Invalid appointment choice does not exist');
+            logger.info('Invalid appointment choice');
 
             return {
                 status: 400,
@@ -87,7 +87,7 @@ export default async function(req) {
                 body: JSON.stringify({
                     data: null,
                     created: false,
-                    message: 'Invalid appointment choice does not exist'
+                    message: 'Invalid appointment choice'
                 })
             };
         }
