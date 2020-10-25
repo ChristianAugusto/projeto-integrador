@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues` (
     `isActive` TINYINT(1) UNSIGNED NOT NULL,
     `start` DATETIME NOT NULL,
     `end` DATETIME NOT NULL,
-    `personTimeMinutes` INT UNSIGNED NOT NULL,
+    `userTimeMinutes` SMALLINT UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`)
 );

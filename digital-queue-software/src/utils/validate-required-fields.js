@@ -12,10 +12,10 @@ export default function(requiredFields, obj) {
             if (fields.indexOf(requiredFields[i]) === -1) {
                 return false;
             }
-            if (typeof(value) == 'string' && value === '') {
+            if (value === '') {
                 return false;
             }
-            if (typeof(value) == 'object' && value === null) {
+            if (value === null) {
                 return false;
             }
             if (Array.isArray(value) && value.length == 0) {

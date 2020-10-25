@@ -9,7 +9,7 @@ import {
     DATETIME_FORMAT_MYSQL,
     DIGITAL_QUEUE_ID_REGEX,
     INSERT_DIGITAL_QUEUE_QUERY,
-    FILTER_USER_BY_ID_QUERY,
+    FILTER_TRANSPORT_BY_ID_QUERY,
     INSERT_DIGITAL_QUEUE_TRANSPORTS_QUERY
 } from '@ServerConstants';
 
@@ -17,7 +17,7 @@ import {
 
 const requiredFields = [
     'id', 'name', 'isActive',
-    'start', 'end', 'personTimeMinutes',
+    'start', 'end', 'userTimeMinutes',
     'transportsIds'
 ];
 
@@ -38,13 +38,14 @@ export default async function(req) {
                 },
                 body: JSON.stringify({
                     data: null,
+                    created: false,
                     message: 'Error in body fields, please check again'
                 })
             };
         }
 
-        if (!validateMysqlInteger(reqBody.personTimeMinutes)) {
-            logger.info('Invalid personTimeMinutes type');
+        if (!validateMysqlInteger(reqBody.userTimeMinutes)) {
+            logger.info('Invalid userTimeMinutes type');
 
             return {
                 status: 400,
@@ -53,7 +54,8 @@ export default async function(req) {
                 },
                 body: JSON.stringify({
                     data: null,
-                    message: 'Invalid personTimeMinutes type'
+                    created: false,
+                    message: 'Invalid userTimeMinutes type'
                 })
             };
         }
@@ -68,6 +70,7 @@ export default async function(req) {
                 },
                 body: JSON.stringify({
                     data: null,
+                    created: false,
                     message: 'Invalid id format'
                 })
             };
@@ -83,10 +86,15 @@ export default async function(req) {
                 },
                 body: JSON.stringify({
                     data: null,
+                    created: false,
                     message: '1 or more transports id(s) is invalid'
                 })
             };
         }
+
+        /*
+            TODO (opcional): Validar datas de start e end para estarem no mesmo dia
+        */
 
 
 
@@ -96,7 +104,7 @@ export default async function(req) {
                 '${reqBody.id}', '${reqBody.name}',
                 '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL)}',
                 ${reqBody.isActive ? 1 : 0}, '${reqBody.start}', '${reqBody.end}',
-                ${reqBody.personTimeMinutes}
+                ${reqBody.userTimeMinutes}
             )
         `;
 
@@ -125,6 +133,7 @@ export default async function(req) {
             },
             body: JSON.stringify({
                 data: null,
+                created: true,
                 message: 'Success'
             })
         };
@@ -140,6 +149,7 @@ export default async function(req) {
             },
             body: JSON.stringify({
                 data: null,
+                created: false,
                 message: 'Internal server error'
             })
         };
@@ -175,9 +185,9 @@ async function validateTransports(transportsIds) {
                 return false;
             }
 
-            const queryResult = await mysql(`${FILTER_USER_BY_ID_QUERY} = ${transportsIds[i]}`);
+            const queryResult = await mysql(`${FILTER_TRANSPORT_BY_ID_QUERY} = ${transportsIds[i]}`);
 
-            if (queryResult.length == 0) {
+            if (queryResult.length === 0) {
                 return false;
             }
         }

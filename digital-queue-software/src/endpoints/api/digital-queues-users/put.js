@@ -1,14 +1,17 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import validateReqBodyFields from '@ServerUtils/validate-required-fields';
+import { validateMysqlInteger } from '@ServerUtils/validate-mysql-types';
 import {
-    INSERT_TRANSPORT_QUERY
+    FILTER_DIGITAL_QUEUE_BY_ID_QUERY
 } from '@ServerConstants';
 
 
 
 const requiredFields = [
-    'name'
+    'digitalQueueId', 'document', 'name', 'email', 'password', 'telephone',
+    'documentType', 'nationality', 'register', 'transportId', 'appointment',
+    'attended'
 ];
 
 
@@ -34,16 +37,22 @@ export default async function(req) {
             };
         }
 
+        if (!validateDigitalQueue(reqBody.digitalQueueId)) {
+            logger.info('Digital queue does not exist');
 
-        const query = `
-            ${INSERT_TRANSPORT_QUERY}
-            VALUES (
-                '${reqBody.name}'
-            )
-        `;
+            return {
+                status: 400,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: null,
+                    created: false,
+                    message: 'Digital queue does not exist'
+                })
+            };
+        }
 
-
-        await mysql(query);
 
 
         logger.info('Success');
@@ -61,7 +70,7 @@ export default async function(req) {
         };
     }
     catch (error) {
-        logger.error('Error in (PUT)/api/transports');
+        logger.error('Error in (PUT)/api/digital-queues-users');
         logger.info(error);
 
         return {
@@ -75,5 +84,22 @@ export default async function(req) {
                 message: 'Internal server error'
             })
         };
+    }
+}
+
+async function validateDigitalQueue(digitalQueueId) {
+    try {
+        const queryResult = await mysql(`${FILTER_DIGITAL_QUEUE_BY_ID_QUERY} = ${digitalQueueId}`);
+
+        if (queryResult.length === 0) {
+            return false;
+        }
+
+        return true;
+    }
+    catch (error) {
+        logger.info(error);
+
+        return false;
     }
 }

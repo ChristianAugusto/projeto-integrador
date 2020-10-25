@@ -5,6 +5,7 @@ import writeResponse from '@ServerModules/write-response';
 import { validateApiKey, validateSession } from '@ServerGlobals/sessions';
 import users from '@ServerEndpoints/api/users';
 import digitalQueues from '@ServerEndpoints/api/digital-queues';
+import digitalQueuesUsers from '@ServerEndpoints/api/digital-queues-users';
 import transports from '@ServerEndpoints/api/transports';
 import login from '@ServerEndpoints/login';
 
@@ -70,6 +71,24 @@ export default function(app) {
     app.post('/api/digital-queues', jsonParser, async function(req, res) {
         if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME])) {
             writeResponse(await digitalQueues.post(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
+    app.put('/api/digital-queues-users', jsonParser, async function(req, res) {
+        if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME])) {
+            writeResponse(await digitalQueuesUsers.put(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
+    app.post('/api/digital-queues-users', jsonParser, async function(req, res) {
+        if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME])) {
+            writeResponse(await digitalQueuesUsers.post(req), res);
         }
         else {
             res.redirect('/admin/login');

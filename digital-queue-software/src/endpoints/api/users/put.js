@@ -35,6 +35,7 @@ export default async function(req) {
                 },
                 body: JSON.stringify({
                     data: null,
+                    created: false,
                     message: 'Error in body fields, please check again'
                 })
             };
@@ -70,6 +71,7 @@ export default async function(req) {
             },
             body: JSON.stringify({
                 data: null,
+                created: true,
                 message: 'Success'
             })
         };
@@ -85,6 +87,7 @@ export default async function(req) {
             },
             body: JSON.stringify({
                 data: null,
+                created: false,
                 message: 'Internal server error'
             })
         };

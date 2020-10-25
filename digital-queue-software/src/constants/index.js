@@ -53,23 +53,29 @@ export const DIGITAL_QUEUE_ID_REGEX = /[a-z0-9-]/;
 
 export const TRANSPORTS_LIMIT = 20;
 
+export const DIGITAL_QUEUES_USERS_LIMIT = 20;
+
 export const SELECT_DIGITAL_QUEUES_QUERY = 'SELECT * FROM `digital_queues` LIMIT';
 
-export const INSERT_DIGITAL_QUEUE_QUERY = 'INSERT INTO `digital_queues` (`id`, `name`, `creation`, `isActive`, `start`, `end`, `personTimeMinutes`)';
+export const FILTER_DIGITAL_QUEUE_BY_ID_QUERY = 'SELECT `id` FROM `digital_queues` WHERE `id`';
+
+export const INSERT_DIGITAL_QUEUE_QUERY = 'INSERT INTO `digital_queues` (`id`, `name`, `creation`, `isActive`, `start`, `end`, `userTimeMinutes`)';
 
 export const INSERT_DIGITAL_QUEUE_TRANSPORTS_QUERY = 'INSERT INTO `digital_queues_transports` (`digitalQueueId`, `transportId`)';
 
-export const SELECT_TRANSPORT_QUERY = 'SELECT * FROM `transports` LIMIT';
+export const FILTER_TRANSPORT_BY_ID_QUERY = 'SELECT * FROM `transports` WHERE `id`';
 
 export const INSERT_TRANSPORT_QUERY = 'INSERT INTO `transports` (`name`)';
 
 export const SELECT_USERS_QUERY = 'SELECT * FROM `users` LIMIT';
 
-export const FILTER_USER_BY_ID_QUERY = 'SELECT * FROM `users` WHERE `id`';
+export const FILTER_USER_BY_ID_QUERY = 'SELECT `id` FROM `users` WHERE `id`';
 
-export const FILTER_USER_BY_EMAIL_QUERY = 'SELECT * FROM `users` WHERE `email`';
+export const FILTER_USER_BY_EMAIL_QUERY = 'SELECT `email` FROM `users` WHERE `email`';
 
 export const INSERT_USER_QUERY_QUERY = 'INSERT INTO `users` (`name`, `email`, `password`, `telephone`, `document`, `documentType`, `nationality`, `register`, `roleType`)';
+
+export const SELECT_DIGITAL_QUEUES_USERS_QUERY = 'SELECT * FROM `digital_queues_users` LIMIT';
 
 
 
