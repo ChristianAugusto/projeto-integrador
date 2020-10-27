@@ -15,3 +15,15 @@
         color: #000;
     }
 }
+
+.app__main {
+    > section {
+        width: 100%;
+        height: auto;
+
+        &.section-row-between {
+            @include display-row();
+            justify-content: space-between;
+        }
+    }
+}

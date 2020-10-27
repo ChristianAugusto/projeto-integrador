@@ -1,6 +1,8 @@
 import bodyParser from 'body-parser';
 
-import { PUBLIC_PATH, SESSION_COOKIE_NAME } from '@ServerConstants';
+import {
+    PUBLIC_PATH, SESSION_COOKIE_NAME
+} from '@ServerConstants';
 import writeResponse from '@ServerModules/write-response';
 import {
     validateApiKey, validateSession, validateMasterSession
@@ -10,6 +12,7 @@ import digitalQueues from '@ServerEndpoints/api/digital-queues';
 import digitalQueuesUsers from '@ServerEndpoints/api/digital-queues-users';
 import transports from '@ServerEndpoints/api/transports';
 import login from '@ServerEndpoints/login';
+import queue from '@ServerEndpoints/queue';
 
 
 
@@ -48,6 +51,10 @@ export default function(app) {
         else {
             res.sendFile(`${PUBLIC_PATH}/templates/login.html`);
         }
+    });
+
+    app.get('/filas/:queueId', async function(req, res) {
+        writeResponse(await queue(req), res);
     });
 
 

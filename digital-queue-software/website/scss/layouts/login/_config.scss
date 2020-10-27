@@ -13,7 +13,7 @@
     position: relative;
 }
 
-.app__main {
+.login {
     max-width: 400px;
     min-height: 410px;
     position: absolute;
@@ -34,16 +34,5 @@
 
     @include mqmin($mobileG) {
         width: 100%;
-    }
-
-
-    section {
-        width: 100%;
-        height: auto;
-
-        &.section-row-between {
-            @include display-row();
-            justify-content: space-between;
-        }
     }
 }
