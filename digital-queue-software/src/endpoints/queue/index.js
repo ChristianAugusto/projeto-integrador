@@ -12,17 +12,19 @@ export default async function(req) {
     try {
         logger.error(`Starting (GET)/queue/${queueId}`);
 
-        const queryResult = await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('`name`,`isActive`', `WHERE \`id\` = '${queueId}'`));
+        const queryResult = await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('`name`,`isActive`,`isClosed`', `WHERE \`id\` = '${queueId}'`));
 
         logger.info(`Query result = ${JSON.stringify(queryResult)}`);
+
+
+        if (!queryResult[0].isClosed) {
+            throw new Error('Queue is closed');
+        }
 
         if (!queryResult[0].isActive) {
             throw new Error('Queue is not active');
         }
 
-        /*
-            TODO: Validar fila finalizada
-        */
 
         const template = fs.readFileSync(`${PUBLIC_PATH}/templates/queue.html`, {encoding: 'utf8'})
             .replace(/<server\.queueId ?\/?>/gm, queueId)

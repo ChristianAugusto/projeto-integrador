@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues` (
     `name` VARCHAR(100) NOT NULL,
     `creation` VARCHAR(20) NOT NULL,
     `isActive` TINYINT(1) UNSIGNED NOT NULL,
+    `isClosed` TINYINT(1) UNSIGNED NOT NULL,
     `day` VARCHAR(10) NOT NULL,
     `start` TIME NOT NULL,
     `end` TIME NOT NULL,
