@@ -17,7 +17,7 @@ export default async function(req) {
         logger.info(`Query result = ${JSON.stringify(queryResult)}`);
 
 
-        if (!queryResult[0].isClosed) {
+        if (queryResult[0].isClosed) {
             throw new Error('Queue is closed');
         }
 

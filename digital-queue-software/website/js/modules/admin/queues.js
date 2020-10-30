@@ -13,25 +13,27 @@ const controller = {};
 
 
 async function getDigitalQueues() {
-    const response = await fetch(DIGITAL_QUEUES_API, {
-        method: 'POST',
-        headers: buildHeaders({
-            'Content-Type': 'application/json'
-        }),
-        body: JSON.stringify({
-            startIndex: (controller.page - 1) * DIGITAL_QUEUE_LIMIT
-        })
-    });
+    try {
+        const response = await fetch(DIGITAL_QUEUES_API, {
+            method: 'POST',
+            headers: buildHeaders({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({
+                startIndex: (controller.page - 1) * DIGITAL_QUEUE_LIMIT
+            })
+        });
 
-    const responseObj = await response.json();
+        const responseObj = await response.json();
 
-    if (response.status == 200) {
         return responseObj;
     }
-    else {
-        alert(SERVER_ERROR_MESSAGE);
-        return [];
+    catch (error) {
+        console.error(error);
     }
+
+    alert(SERVER_ERROR_MESSAGE);
+    return [];
 }
 
 async function mountPage() {

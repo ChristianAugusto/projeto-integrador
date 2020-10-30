@@ -1,0 +1,35 @@
+.queue {
+    &__time-slices {
+        @include display-column();
+        &-wrapper {
+            width: 90%;
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+    }
+
+    &__time-slice {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        @include display-row();
+        justify-content: space-between;
+        align-items: center;
+
+        &__art {
+            display: block;
+            width: 80%;
+            height: auto;
+            margin: 0;
+            border: 2px solid #000000;
+            border-radius: 3px;
+            min-height: 50px;
+        }
+
+        &__label {
+            display: block;
+            width: 20%;
+            height: auto;
+        }
+    }
+}

@@ -1,18 +1,52 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
+import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
+import validateReqBodyFields from '@ServerModules/validate-required-fields';
 import {
     DIGITAL_QUEUE_LIMIT,
     SELECT_DIGITAL_QUEUES_QUERY_BUILDER
 } from '@ServerConstants';
-import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 
 
 
-export default async function(req) {
+export default async function(req, userAuthenticated) {
     try {
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
+
+
+        if (validateReqBodyFields(['id'], reqBody)) {
+            let fields = '*';
+
+            if (!userAuthenticated) {
+                fields = '`day`,`start`,`end`,`userTimeMinutes`';
+            }
+
+            return {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER(fields, `WHERE \`id\` = '${reqBody.id}'`)),
+                    message: 'Success'
+                })
+            };
+        }
+
+        if (!userAuthenticated) {
+            return {
+                status: 401,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: null,
+                    message: 'Insufficient permissions'
+                })
+            };
+        }
 
 
         let startIndex = 0;

@@ -87,12 +87,9 @@ export default function(app) {
     });
 
     app.post('/api/digital-queues', jsonParser, async function(req, res) {
-        if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME])) {
-            writeResponse(await digitalQueues.post(req), res);
-        }
-        else {
-            res.redirect('/admin/login');
-        }
+        const userAuthenticated = validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME]);
+
+        writeResponse(await digitalQueues.post(req, userAuthenticated), res);
     });
 
     app.put('/api/digital-queues-users', jsonParser, async function(req, res) {
@@ -105,12 +102,9 @@ export default function(app) {
     });
 
     app.post('/api/digital-queues-users', jsonParser, async function(req, res) {
-        if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME])) {
-            writeResponse(await digitalQueuesUsers.post(req), res);
-        }
-        else {
-            res.redirect('/admin/login');
-        }
+        const userAuthenticated = validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME]);
+
+        writeResponse(await digitalQueuesUsers.post(req, userAuthenticated), res);
     });
 
     app.put('/api/transports', jsonParser, async function(req, res) {

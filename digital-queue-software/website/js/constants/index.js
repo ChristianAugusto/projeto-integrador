@@ -3,6 +3,7 @@ export const HOME_ROUTE = '/';
 export const ADMIN_ROUTE = '/admin';
 export const ADMIN_LOGIN_ROUTE = '/admin/login';
 export const DIGITAL_QUEUES_API = '/api/digital-queues';
+export const DIGITAL_QUEUES_USERS_API = '/api/digital-queues-users';
 
 
 /* SESSION */

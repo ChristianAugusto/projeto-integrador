@@ -9,22 +9,60 @@ import {
 
 
 
-export default async function(req) {
+export default async function(req, userAuthenticated) {
     try {
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
 
-        if (validateReqBodyFields(['document'], reqBody)) {
+        if (validateReqBodyFields(['digitalQueueId'], reqBody)) {
+            let fields = '*';
+
+            if (!userAuthenticated) {
+                fields = '`name`';
+            }
+
             return {
                 status: 200,
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    data: await mysql(SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER('*', `WHERE \`document\` = '${reqBody.document}'`)),
+                    data: await mysql(SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER(fields, `WHERE \`digitalQueueId\` = '${reqBody.digitalQueueId}'`)),
                     message: 'Success'
+                })
+            };
+        }
+
+        if (validateReqBodyFields(['document'], reqBody)) {
+            let fields = '*';
+
+            if (!userAuthenticated) {
+                fields = '`name`';
+            }
+
+            return {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: await mysql(SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER(fields, `WHERE \`document\` = '${reqBody.document}'`)),
+                    message: 'Success'
+                })
+            };
+        }
+
+        if (!userAuthenticated) {
+            return {
+                status: 401,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: null,
+                    message: 'Insufficient permissions'
                 })
             };
         }
