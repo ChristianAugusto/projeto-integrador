@@ -93,7 +93,7 @@ export default async function(req) {
         }
 
         /*
-            TODO (opcional): Validar formato do cpf
+            TODO (opcional): Validar formato do cpf e rg
         */
 
         const insertQuery = `

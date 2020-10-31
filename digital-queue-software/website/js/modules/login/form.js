@@ -7,19 +7,10 @@ import { buildHeaders } from '@WebsiteUtils/api-call';
 
 
 
-export default {
-    init() {
-        sendForm();
-    }
-};
-
-function sendForm() {
+function setSendForm() {
     document.querySelector('.js--login-form').onsubmit = async function(ev) {
         ev.preventDefault();
 
-        /*
-            TODO: Aplicar função trim() nos valores do form
-        */
 
         try {
             const response = await fetch(ADMIN_LOGIN_ROUTE, {
@@ -28,8 +19,8 @@ function sendForm() {
                     'Content-Type': 'application/json'
                 }),
                 body: JSON.stringify({
-                    email: document.querySelector('#js--email').value,
-                    password: document.querySelector('#js--password').value
+                    email: document.querySelector('#js--email').value.trim(),
+                    password: document.querySelector('#js--password').value.trim()
                 })
             });
 
@@ -49,3 +40,11 @@ function getCookieTime() {
     // return new Date(new Date().getTime() + ); // 10 seconds
     return new Date(new Date().getTime() + SESSION_SECONDS_LIMIT);
 }
+
+
+
+export default {
+    init() {
+        setSendForm();
+    }
+};
