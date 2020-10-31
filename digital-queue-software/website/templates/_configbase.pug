@@ -22,6 +22,7 @@ html(lang="pt-br")
         div(class="app")
             div(class="app__global")
                 div(class="placeloader-page is--visible")
+                div(class="overlay")
                 include ./partials/global/header.pug
                 main(role="main", class=`app__main page ${$templateClass}`)
                     block content

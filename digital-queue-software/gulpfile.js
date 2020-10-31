@@ -24,13 +24,13 @@ const sizesOptions = {
     showTotal: true
 };
 
-const scssFiles = ['global', 'home', 'login', 'admin', 'register', 'queue']
+const scssFiles = ['global', 'home', 'login', 'admin', 'register', 'queue', 'admin-queue']
     .map(file => `${src}/scss/${file}.scss`);
 
-const jsFiles = ['global', 'home', 'login', 'admin', 'register', 'queue']
+const jsFiles = ['global', 'home', 'login', 'admin', 'register', 'queue', 'admin-queue']
     .map(file => `${src}/js/${file}.js`);
 
-const templates = ['home', 'login', 'admin', 'register', 'queue']
+const templates = ['home', 'login', 'admin', 'register', 'queue', 'admin-queue']
     .map(file => `${src}/templates/${file}.pug`);
 
 

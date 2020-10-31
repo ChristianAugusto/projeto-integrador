@@ -13,6 +13,7 @@ import digitalQueuesUsers from '@ServerEndpoints/api/digital-queues-users';
 import transports from '@ServerEndpoints/api/transports';
 import login from '@ServerEndpoints/login';
 import queue from '@ServerEndpoints/queue';
+import adminQueue from '@ServerEndpoints/admin-queue';
 
 
 
@@ -50,6 +51,15 @@ export default function(app) {
         }
         else {
             res.sendFile(`${PUBLIC_PATH}/templates/login.html`);
+        }
+    });
+
+    app.get('/admin/filas/:queueId', async function(req, res) {
+        if (validateSession(req.cookies[SESSION_COOKIE_NAME])) {
+            writeResponse(await adminQueue(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
         }
     });
 

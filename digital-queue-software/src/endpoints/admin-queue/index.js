@@ -10,7 +10,7 @@ export default async function(req) {
     const queueId = req.params.queueId;
 
     try {
-        logger.error(`Starting (GET)/filas/${queueId}`);
+        logger.error(`Starting (GET)/admin/filas/${queueId}`);
 
         const queryResult = await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('`name`,`isActive`,`isClosed`', `WHERE \`id\` = '${queueId}'`));
 
@@ -26,11 +26,11 @@ export default async function(req) {
         }
 
 
-        const template = fs.readFileSync(`${PUBLIC_PATH}/templates/queue.html`, {encoding: 'utf8'})
+        const template = fs.readFileSync(`${PUBLIC_PATH}/templates/admin-queue.html`, {encoding: 'utf8'})
             .replace(/<server\.queueId ?\/?>/gm, queueId)
             .replace(/<server\.queueName ?\/?>/gm, queryResult[0].name);
 
-        logger.error(`Ending (GET)/filas/${queueId}`);
+        logger.error(`Ending (GET)/admin/filas/${queueId}`);
 
         return {
             status: 200,
@@ -41,7 +41,7 @@ export default async function(req) {
         };
     }
     catch (error) {
-        logger.error(`Error in (GET)/filas/${queueId}`);
+        logger.error(`Error in (GET)/admin/filas/${queueId}`);
         logger.info(error);
 
         return {

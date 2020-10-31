@@ -4,7 +4,7 @@
         &-wrapper {
             width: 90%;
             max-width: 700px;
-            margin: 20px auto 0;
+            margin: 20px auto 20px;
         }
     }
 
@@ -15,21 +15,64 @@
         @include display-row();
         justify-content: space-between;
         align-items: center;
+        cursor: pointer;
+
+        &.unavailable {
+            pointer-events: none;
+        }
+
+        &.attended {
+            opacity: 0.45;
+        }
 
         &__art {
-            display: block;
+            @include display-column();
+            justify-content: center;
+            align-items: center;
             width: 80%;
             height: auto;
             margin: 0;
             border: 2px solid #000000;
             border-radius: 3px;
             min-height: 50px;
+            box-sizing: border-box;
+            padding: 10px;
         }
 
         &__label {
-            display: block;
+            @include display-column();
+            justify-content: center;
+            align-items: center;
             width: 20%;
             height: auto;
+        }
+
+        &__user-name {
+            font-family: $defaultFont;
+            font-size: 12px;
+            text-transform: none;
+            font-weight: 400;
+            color: #000;
+            text-align: center;
+            line-height: 25px;
+
+            @include mqmin($tabletM) {
+                font-size: 14px;
+            }
+        }
+
+        &__time {
+            font-family: $defaultFont;
+            font-size: 13px;
+            text-transform: none;
+            font-weight: 400;
+            color: #000;
+            text-align: center;
+            line-height: 25px;
+
+            @include mqmin($tabletM) {
+                font-size: 18px;
+            }
         }
     }
 }

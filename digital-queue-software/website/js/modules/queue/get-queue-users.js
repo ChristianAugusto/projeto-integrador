@@ -1,4 +1,4 @@
-import El from './cache-selectors';
+import pageCache from './page-cache';
 import {
     DIGITAL_QUEUES_USERS_API,
     SERVER_ERROR_MESSAGE
@@ -15,7 +15,7 @@ export default async function() {
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify({
-                digitalQueueId: El.digitalQueueId.textContent.trim()
+                digitalQueueId: pageCache.queue.id
             })
         });
 

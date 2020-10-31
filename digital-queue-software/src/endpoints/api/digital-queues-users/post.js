@@ -20,7 +20,7 @@ export default async function(req, userAuthenticated) {
             let fields = '*';
 
             if (!userAuthenticated) {
-                fields = '`name`';
+                fields = '`name`,`appointment`,`attended`';
             }
 
             return {

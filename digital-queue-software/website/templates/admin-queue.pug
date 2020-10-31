@@ -1,0 +1,22 @@
+extends ./_configbase.pug
+
+
+//- Template variables
+block append vars
+    - var $templateName = "admin-queue"
+    - var $templateClass = "admin-queue"
+
+
+//- Page styles
+block append styles
+    link(rel="stylesheet", href=`/css/${$templateName}.css`)/
+
+
+//- Main Content
+block append content
+    include ./partials/admin-queue/intro.pug
+    include ./partials/admin-queue/actions.pug
+
+//- Page scripts
+block append scripts
+    script(src=`/js/${$templateName}.js`)
