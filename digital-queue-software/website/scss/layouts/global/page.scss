@@ -1,3 +1,9 @@
+html {
+    &.is--scroll-blocked {
+        overflow-y: hidden;
+    }
+}
+
 .page {
     margin: 20px 0 0;
 
@@ -17,11 +23,13 @@
 }
 
 .app__main {
-    > section {
-        width: 100%;
-        height: auto;
+    section {
+        &.default {
+            width: 100%;
+            height: auto;
+        }
 
-        &.section-row-between {
+        &.row-between {
             @include display-row();
             justify-content: space-between;
         }

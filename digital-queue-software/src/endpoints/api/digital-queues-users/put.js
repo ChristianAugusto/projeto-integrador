@@ -11,7 +11,8 @@ import {
     DATETIME_FORMAT_MYSQL,
     SELECT_DIGITAL_QUEUES_QUERY_BUILDER,
     SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER,
-    INSERT_DIGITAL_QUEUE_USERS_QUERY
+    INSERT_DIGITAL_QUEUE_USERS_QUERY,
+    DOCUMENT_REGEX
 } from '@ServerConstants';
 
 
@@ -92,14 +93,10 @@ export default async function(req) {
             };
         }
 
-        /*
-            TODO (opcional): Validar formato do cpf e rg
-        */
-
         const insertQuery = `
             ${INSERT_DIGITAL_QUEUE_USERS_QUERY}
             VALUES (
-                '${reqBody.digitalQueueId}', '${reqBody.document}', '${reqBody.name}',
+                '${reqBody.digitalQueueId}', '${reqBody.document.replace(DOCUMENT_REGEX, '')}', '${reqBody.name}',
                 '${reqBody.email}', '${reqBody.telephone}', '${reqBody.documentType}',
                 '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL)}',
                 ${reqBody.transportId}, '${reqBody.appointment}'

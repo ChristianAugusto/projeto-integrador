@@ -63,6 +63,29 @@ export function SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER(fields='*', conditions
     return `SELECT ${fields} FROM \`digital_queues_users\` ${conditions} ${limit}`.trim();
 }
 
+export function SELECT_DIGITAL_QUEUES_TRANSPORTS_QUERY_BUILDER(digitalQueueId) {
+    /*
+        This query get the transports name from a digital queue filtering by digital queue id
+        and the queue needs to be active and not closed.
+    */
+
+    return `
+        SELECT
+            \`trans\`.\`id\`,
+            \`trans\`.\`name\`
+        FROM
+            \`transports\` AS \`trans\`,
+            \`digital_queues_transports\` AS \`dqt\`,
+            \`digital_queues\` AS \`dq\`
+        WHERE
+            \`dqt\`.\`digitalQueueId\` = '${digitalQueueId}'
+                AND \`dq\`.\`id\` = '${digitalQueueId}'
+                AND \`trans\`.\`id\` = \`dqt\`.\`transportId\`
+                AND \`dq\`.\`isActive\` = 1
+                AND \`dq\`.\`isClosed\` = 0;
+    `;
+}
+
 export function SELECT_TRANSPORTS_QUERY_BUILDER(fields='*', conditions='', limit='') {
     return `SELECT ${fields} FROM \`transports\` ${conditions} ${limit}`.trim();
 }
@@ -80,6 +103,8 @@ export const INSERT_DIGITAL_QUEUE_TRANSPORTS_QUERY = 'INSERT INTO `digital_queue
 export const INSERT_TRANSPORT_QUERY = 'INSERT INTO `transports` (`name`)';
 
 export const INSERT_USER_QUERY_QUERY = 'INSERT INTO `users` (`name`, `email`, `password`, `telephone`, `document`, `documentType`, `nationality`, `register`, `roleType`)';
+
+export const DOCUMENT_REGEX = /[^a-zA-Z0-9]/gm;
 
 
 

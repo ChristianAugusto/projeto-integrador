@@ -10,6 +10,7 @@ import {
 import users from '@ServerEndpoints/api/users';
 import digitalQueues from '@ServerEndpoints/api/digital-queues';
 import digitalQueuesUsers from '@ServerEndpoints/api/digital-queues-users';
+import digitalQueuesTransports from '@ServerEndpoints/api/digital-queues-transports';
 import transports from '@ServerEndpoints/api/transports';
 import login from '@ServerEndpoints/login';
 import queue from '@ServerEndpoints/queue';
@@ -103,18 +104,17 @@ export default function(app) {
     });
 
     app.put('/api/digital-queues-users', jsonParser, async function(req, res) {
-        if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME])) {
-            writeResponse(await digitalQueuesUsers.put(req), res);
-        }
-        else {
-            res.redirect('/admin/login');
-        }
+        writeResponse(await digitalQueuesUsers.put(req), res);
     });
 
     app.post('/api/digital-queues-users', jsonParser, async function(req, res) {
         const userAuthenticated = validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME]);
 
         writeResponse(await digitalQueuesUsers.post(req, userAuthenticated), res);
+    });
+
+    app.post('/api/digital-queues-transports', jsonParser, async function(req, res) {
+        writeResponse(await digitalQueuesTransports.post(req), res);
     });
 
     app.put('/api/transports', jsonParser, async function(req, res) {

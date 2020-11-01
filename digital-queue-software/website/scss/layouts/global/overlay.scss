@@ -1,5 +1,5 @@
 .overlay {
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
@@ -8,7 +8,7 @@
     background: rgba($color: #000000, $alpha: 0.3);
     z-index: $overlayZindex;
 
-    &.is--visible {
-        display: block;
+    &:not(.is--visible) {
+        display: none;
     }
 }
