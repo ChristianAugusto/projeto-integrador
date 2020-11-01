@@ -1,11 +1,11 @@
 import mountPage from './mount-page';
-import { loadCache } from './page-cache';
+import { loadCacheFromPage } from './page-cache';
 
 
 
 export default {
     init() {
-        loadCache();
+        loadCacheFromPage();
         mountPage();
     }
 };
