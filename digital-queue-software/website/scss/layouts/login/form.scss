@@ -1,9 +1,14 @@
 .login {
-    .login-form {
+    .login__form {
         width: 100%;
         height: auto;
 
-        &__field {
+        &-wrapper {
+            width: 100%;
+            height: auto;
+        }
+
+        &-field {
             width: 100%;
             height: auto;
 
@@ -11,7 +16,7 @@
                 margin: 20px 0 0;
             }
 
-            &.field-row-center {
+            &.row-center {
                 @include display-row();
                 justify-content: center;
             }
