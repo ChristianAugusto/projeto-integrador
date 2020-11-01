@@ -1,5 +1,142 @@
 .queue {
     &__register-lightbox {
-        
+        width: 100%;
+        height: auto;
+        @include display-column();
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        &-wrapper {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            overflow-y: auto;
+            z-index: $overlayZindex+1;
+            background: #ffffff;
+            width: 90%;
+            height: 90%;
+            max-width: 700px;
+            @include transform(translate(-50%, -50%));
+            @include transition('transform 0.45s ease-in-out, top 0.45s ease-in-out');
+            box-sizing: border-box;
+            padding: 20px;
+            border: none;
+            border-radius: 5px;
+
+            &:not(.is--visible) {
+                @include transform(translate(-50%, -100%));
+                top: 0;
+            }
+        }
+
+        &__header {
+            width: 100%;
+            height: auto;
+        }
+
+        &__close-btn {
+            width: 34px;
+            height: 34px;
+            font-size: 0;
+            background: transparent;
+            border-radius: 0;
+            border: none;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='33.941' height='33.941' viewBox='0 0 33.941 33.941'%3E%3Cpath id='X' d='M38,26a2.5,2.5,0,0,0-2.5,2.5v7h-7a2.5,2.5,0,1,0,0,5h7v7a2.5,2.5,0,0,0,5,0v-7h7a2.5,2.5,0,0,0,0-5h-7v-7A2.5,2.5,0,0,0,38,26Z' transform='translate(16.971 -36.77) rotate(45)' fill='%23c6c6c6'%3E%3C/path%3E%3C/svg%3E");
+            cursor: pointer;
+
+            &-wrapper {
+                width: 100%;
+                height: auto;
+                @include display-column;
+                justify-content: center;
+                align-items: flex-end;
+            }
+        }
+
+        &__form {
+            width: 100%;
+            height: auto;
+            margin: 10px 0 0;
+            @include display-column();
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            &-field {
+                width: 100%;
+                height: auto;
+
+                &:not(:first-child) {
+                    margin: 20px 0 0;
+                }
+
+                &.row-center {
+                    @include display-row();
+                    justify-content: center;
+                }
+
+                &.column-center {
+                    @include display-column();
+                    align-items: center;
+                }
+
+                label {
+                    display: block;
+                    font-family: $defaultFont;
+                    font-size: 14px;
+                    text-transform: none;
+                    font-weight: 700;
+                    color: #000;
+                    line-height: 22px;
+                }
+
+                input[type="text"],
+                input[type="email"] {
+                    width: 100%;
+                    height: 30px;
+                    box-sizing: border-box;
+                    padding: 5px;
+                    margin: 0;
+                    border: 1px solid #000;
+                    border-radius: 3px;
+                    background: #ffffff;
+                }
+
+                select {
+                    width: 100%;
+                    height: 30px;
+                    background: #ffffff;
+                    border: 1px solid #000;
+                    border-radius: 3px;
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+            }
+
+            #register-user-button {
+                font-family: $defaultFont;
+                font-size: 11px;
+                text-transform: uppercase;
+                font-weight: 400;
+                color: #000;
+                background: transparent;
+                border: 1px solid #000000;
+                border-radius: 3px;
+                box-sizing: border-box;
+                padding: 3px 10px;
+                margin: 0;
+                cursor: pointer;
+            }
+        }
+
+
+        &__user-appointment,
+        &__user-appointment-label {
+            pointer-events: none;
+            opacity: 0.6;
+        }
     }
 }

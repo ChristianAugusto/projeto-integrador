@@ -1,7 +1,11 @@
-import pageCache, { setQueueCache, setQueueUsersCache } from './page-cache';
+import pageCache,
+{
+    setQueueCache, setQueueUsersCache, setQueueTransportsCache
+} from './page-cache';
 import {
     DIGITAL_QUEUES_API,
     DIGITAL_QUEUES_USERS_API,
+    DIGITAL_QUEUES_TRANSPORTS_API,
     SERVER_ERROR_MESSAGE
 } from '@WebsiteConstants';
 import { buildHeaders } from '@WebsiteUtils/api-call';
@@ -55,6 +59,29 @@ async function getQueueUsers() {
     }
 }
 
+async function getQueueTransports() {
+    try {
+        const response = await fetch(DIGITAL_QUEUES_TRANSPORTS_API, {
+            method: 'POST',
+            headers: buildHeaders({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({
+                digitalQueueId: pageCache.queue.id
+            })
+        });
+
+        const responseObj = await response.json();
+
+        return responseObj;
+    }
+    catch (error) {
+        console.error(error);
+        alert(SERVER_ERROR_MESSAGE);
+        return null;
+    }
+}
+
 export default async function() {
     const queueResponse = await getQueue();
 
@@ -64,6 +91,11 @@ export default async function() {
 
     const queueUsers = queueUsersResponse.data;
 
+    const queueTransportsResponse = await getQueueTransports();
+
+    const queueTransports = queueTransportsResponse.data;
+
     setQueueCache(queue);
     setQueueUsersCache(queueUsers);
+    setQueueTransportsCache(queueTransports);
 }

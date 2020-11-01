@@ -26,6 +26,8 @@ export default function(timeSliceClickCallback, childElements) {
             userAttended = userInTime[0].attended;
         }
 
+        const timeStringValue = minutesToHourString(curentTime);
+
         const queueTimeSlice = document.createElement('li');
 
         queueTimeSlice.className = `queue__time-slice${userInTime.length === 0 ? '' : ' unavailable'}${userAttended === null ? '' : ' attended'}`;
@@ -34,7 +36,7 @@ export default function(timeSliceClickCallback, childElements) {
                 <p class="queue__time-slice__user-name">${userName || ''}</p>
             </div>
             <div class="queue__time-slice__label">
-                <p class="queue__time-slice__time">${minutesToHourString(curentTime)}</p>
+                <p class="queue__time-slice__time">${timeStringValue}</p>
             </div>
         `;
 
@@ -45,11 +47,11 @@ export default function(timeSliceClickCallback, childElements) {
         }
 
         if (userInTime.length === 0) {
-            queueTimeSlice.onclick = timeSliceClickCallback;
+            queueTimeSlice.onclick = timeSliceClickCallback.bind(null, timeStringValue);
         }
 
 
 
-        El.digitalQueueTimeSlices.appendChild(queueTimeSlice);
+        El.digitalQueue.timeSlices.appendChild(queueTimeSlice);
     }
 }

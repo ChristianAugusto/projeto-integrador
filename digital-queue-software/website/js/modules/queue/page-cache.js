@@ -4,13 +4,15 @@ import El from './cache-selectors';
 
 const pageCache = {
     queue: {},
-    queueUsers: []
+    queueUsers: [],
+    queueTransports: [],
+    form: {}
 };
 
 
 
 export function loadCacheFromPage() {
-    pageCache.queue.id = El.digitalQueueId.textContent.trim();
+    pageCache.queue.id = El.digitalQueue.id.textContent.trim();
 }
 
 export function setQueueCache(obj) {
@@ -25,6 +27,10 @@ export function setQueueCache(obj) {
 
 export function setQueueUsersCache(arr) {
     pageCache.queueUsers = arr;
+}
+
+export function setQueueTransportsCache(arr) {
+    pageCache.queueTransports = arr;
 }
 
 export default pageCache;
