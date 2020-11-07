@@ -6,16 +6,11 @@ import buildTimeSlices from './build-time-slices';
 import overlay from '@WebsiteGlobal/overlay';
 import page from '@WebsiteGlobal/page';
 import pageCache from './page-cache';
+import closeLightbox from './close-lightbox';
+import sendForm from './send-form';
 import {
-    ROUTES,
-    DIGITAL_QUEUES_USER_SUCCESS,
-    SERVER_ERROR_MESSAGE,
-    DOCUMENT_REGEX,
     DIGITAL_QUEUE_USER_FORM_COOKIE_NAME
 } from '@WebsiteConstants';
-import {
-    buildHeaders
-} from '@WebsiteUtils/api-call';
 
 
 
@@ -26,52 +21,6 @@ function timeSliceClickCallback(timeStringValue) {
     overlay.showOverlay();
 
     El.registerLightbox.self.classList.add('is--visible');
-}
-
-function closeLightbox() {
-    page.unblockScroll();
-    overlay.hideOverlay();
-    El.registerLightbox.self.classList.remove('is--visible');
-}
-
-async function sendForm(event) {
-    event.preventDefault();
-
-    try {
-        const body = {
-            digitalQueueId: pageCache.digitalQueue.id,
-            document: El.registerLightbox.form.userDocument.value.replace(DOCUMENT_REGEX, ''),
-            name: El.registerLightbox.form.userName.value,
-            email: El.registerLightbox.form.userEmail.value,
-            telephone: El.registerLightbox.form.userTelephone.value,
-            documentType: El.registerLightbox.form.userDocumentType.value,
-            nationality: El.registerLightbox.form.userNationality.value,
-            transportId: Number(El.registerLightbox.form.userTransport.value),
-            appointment: El.registerLightbox.form.userAppointment.value
-        };
-
-        const response = await fetch(ROUTES.api.pub.digitalQueuesUsers, {
-            method: 'PUT',
-            headers: buildHeaders({
-                'Content-Type': 'application/json'
-            }),
-            body: JSON.stringify(body)
-        });
-
-        const responseObj = await response.json();
-
-        if (responseObj.created) {
-            alert(DIGITAL_QUEUES_USER_SUCCESS(body.appointment));
-
-            closeLightbox();
-        }
-
-    }
-    catch (error) {
-        console.error(error);
-        alert(SERVER_ERROR_MESSAGE);
-        return null;
-    }
 }
 
 function saveFormData() {
@@ -110,10 +59,14 @@ function setEvents() {
     El.registerLightbox.form.userDocumentType.addEventListener('change', function(event) {
         pageCache.form.documentType = event.target.value;
         saveFormData();
+        El.registerLightbox.form.userDocument.classList.remove('in-use');
+        El.registerLightbox.form.userDocumentType.classList.remove('in-use');
     });
     El.registerLightbox.form.userDocument.addEventListener('keyup', function(event) {
         pageCache.form.document = event.target.value;
         saveFormData();
+        El.registerLightbox.form.userDocument.classList.remove('in-use');
+        El.registerLightbox.form.userDocumentType.classList.remove('in-use');
     });
     El.registerLightbox.form.userNationality.addEventListener('keyup', function(event) {
         pageCache.form.nationality = event.target.value;

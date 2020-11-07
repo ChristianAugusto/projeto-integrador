@@ -15,6 +15,10 @@ export default function(app) {
         writeResponse(await digitalQueuePage.post(req), res);
     });
 
+    app.post('/api/pub/digital-queues-users', jsonParser, async function(req, res) {
+        writeResponse(await digitalQueuesUsers.post(req), res);
+    });
+
     app.put('/api/pub/digital-queues-users', jsonParser, async function(req, res) {
         writeResponse(await digitalQueuesUsers.put(req), res);
     });
