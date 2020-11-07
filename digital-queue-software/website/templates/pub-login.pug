@@ -1,0 +1,21 @@
+extends ./_configbase.pug
+
+
+//- Template variables
+block append vars
+    - var $templateName = "pub-login"
+    - var $templateClass = "pub-login"
+
+
+//- Page styles
+block append styles
+    link(rel="stylesheet", href=`/css/${$templateName}.css`)/
+
+
+//- Main Content
+block append content
+    include ./partials/pub/login/form.pug
+
+//- Page scripts
+block append scripts
+    script(src=`/js/${$templateName}.js`)

@@ -13,7 +13,9 @@
                     "@ServerModules": "./src/modules",
                     "@ServerServices": "./src/services",
                     "@ServerUtils": "./src/utils",
-                    "@ServerRoutes": "./src/routes.js",
+                    "@ServerRoutes": "./src/routes",
+
+                    "@WebsiteGlobal": "./website/js/modules/global",
                     "@WebsiteConstants": "./website/js/constants",
                     "@WebsiteUtils": "./website/js/utils"
                 }

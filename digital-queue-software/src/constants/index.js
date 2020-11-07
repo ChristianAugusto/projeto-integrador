@@ -42,6 +42,8 @@ export const DATETIME_FORMAT_MYSQL = 'YYYY-MM-DD HH:mm:ss';
 
 export const SESSION_COOKIE_NAME = 'digital-queue-software';
 
+export const HEADER_API_KEY = 'api-key';
+
 // export const SESSION_SECONDS_LIMIT = 10;
 export const SESSION_SECONDS_LIMIT = 60 * 60 * 2; // 2 hours
 
@@ -94,7 +96,7 @@ export function SELECT_USERS_QUERY_BUILDER(fields='*', conditions='', limit='') 
     return `SELECT ${fields} FROM \`users\` ${conditions} ${limit}`.trim();
 }
 
-export const INSERT_DIGITAL_QUEUE_QUERY = 'INSERT INTO `digital_queues` (`id`, `name`, `creation`, `isActive`, `day`, `start`, `end`, `userTimeMinutes`)';
+export const INSERT_DIGITAL_QUEUE_QUERY = 'INSERT INTO `digital_queues` (`id`, `name`, `creation`, `isActive`, `isClosed`, `day`, `start`, `end`, `userTimeMinutes`)';
 
 export const INSERT_DIGITAL_QUEUE_USERS_QUERY = 'INSERT INTO `digital_queues_users` (`digitalQueueId`, `document`, `name`, `email`, `telephone`, `documentType`, `nationality`, `register`, `transportId`, `appointment`)';
 

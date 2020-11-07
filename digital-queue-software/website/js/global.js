@@ -1,4 +1,4 @@
-import Global from './modules/home';
+import Global from './modules/global';
 
 
 

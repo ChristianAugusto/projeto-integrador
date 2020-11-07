@@ -1,7 +1,7 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import {
-    SESSION_SECONDS_LIMIT, API_KEY, SELECT_USERS_QUERY_BUILDER
+    SESSION_SECONDS_LIMIT, API_KEY, SELECT_USERS_QUERY_BUILDER, SESSION_COOKIE_NAME
 } from '@ServerConstants';
 
 
@@ -10,7 +10,7 @@ const sessions = {};
 
 
 
-export function validateSession(sessionStr) {
+function validateSession(sessionStr) {
     try {
         logger.info(`sessionStr = ${sessionStr}`);
 
@@ -42,8 +42,33 @@ function validateSessionTime(startTime) {
     return sessionTimeSeconds <= SESSION_SECONDS_LIMIT;
 }
 
-export async function validateMasterSession(sessionStr) {
+function validateApiKey(headerApiKeyValue) {
     try {
+        logger.info(headerApiKeyValue);
+
+        return API_KEY == headerApiKeyValue;
+    }
+    catch (error) {
+        logger.info(error);
+
+        return false;
+    }
+}
+
+
+export function validateAdminSession(req) {
+    if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME])) {
+        return true;
+    }
+
+    return false;
+}
+
+
+export async function validateMasterSession(req) {
+    try {
+        const sessionStr = req.cookies[SESSION_COOKIE_NAME];
+
         if (!validateSession(sessionStr)) {
             return false;
         }
@@ -65,22 +90,11 @@ export async function validateMasterSession(sessionStr) {
     }
 }
 
-export function validateApiKey(headerApiKeyValue) {
-    try {
-        logger.info(headerApiKeyValue);
-
-        return API_KEY == headerApiKeyValue;
-    }
-    catch (error) {
-        logger.info(error);
-
-        return false;
-    }
-}
-
 /*
     TODO (opcional): Criar função com processo paralelo
     para limpar dados de seções.
 */
+
+
 
 export default sessions;

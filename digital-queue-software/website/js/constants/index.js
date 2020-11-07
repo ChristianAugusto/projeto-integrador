@@ -1,10 +1,24 @@
-/* ROUTES */
-export const HOME_ROUTE = '/';
-export const ADMIN_ROUTE = '/admin';
-export const ADMIN_LOGIN_ROUTE = '/admin/login';
-export const DIGITAL_QUEUES_API = '/api/digital-queues';
-export const DIGITAL_QUEUES_USERS_API = '/api/digital-queues-users';
-export const DIGITAL_QUEUES_TRANSPORTS_API = '/api/digital-queues-transports';
+export const ROUTES = {
+    pages: {
+        pub: {
+            home: '/',
+            login: '/admin/login'
+        },
+        pvt: {
+            admin: '/admin'
+        }
+    },
+    api: {
+        pub: {
+            digitalQueuesUsers: '/api/pub/digital-queues-users',
+            digitalQueuePage: '/api/pub/digital-queue-page',
+            login: '/api/pub/login'
+        },
+        pvt: {
+            digitalQueues: '/api/pvt/digital-queues'
+        }
+    }
+};
 
 
 /* SESSION */

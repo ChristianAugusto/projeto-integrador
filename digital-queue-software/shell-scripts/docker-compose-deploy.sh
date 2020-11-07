@@ -1,5 +1,5 @@
 rm -rf build/ node_modules/
-npm install --only-dev
+npm install
 npm run build-website
 npm run build-server
 rm -rf node_modules

@@ -1,0 +1,23 @@
+extends ./_configbase.pug
+
+
+//- Template variables
+block append vars
+    - var $templateName = "pub-digital-queue"
+    - var $templateClass = "pub-digital-queue"
+
+
+//- Page styles
+block append styles
+    link(rel="stylesheet", href=`/css/${$templateName}.css`)/
+
+
+//- Main Content
+block append content
+    include ./partials/pub/digital-queue/intro.pug
+    include ./partials/pub/digital-queue/time-slices.pug
+    include ./partials/pub/digital-queue/register-lightbox.pug
+
+//- Page scripts
+block append scripts
+    script(src=`/js/${$templateName}.js`)

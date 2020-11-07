@@ -10,9 +10,9 @@
         "build-website": "npx eslint website/js/** && npx gulp build",
         "build-server": "npx eslint src/** && npx babel ./src -d ./build",
         "dev-server": "nodemon --exec npx babel-node src/index.js",
-        "dev-website": "npx gulp watch",
+        "dev-website": "npm run build-website && npx gulp watch",
         "dev-start": "node ./build/index.js",
-        "start": "environment=prod node ./build/index.js"
+        "start": "environment=dev node ./build/index.js"
     },
     "authors": [
         "115149 - Amanda Magari do Nascimento",
@@ -20,7 +20,7 @@
         "12084  - Christian Augusto Martins dos Santos Barros",
         "117398 - Davi Castro Silva"
     ],
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@babel/cli": "7.11.6",
         "@babel/core": "7.11.6",
@@ -44,6 +44,7 @@
         "gulp-size": "3.0.0",
         "gulp-uglify": "3.0.2",
         "imask": "6.0.5",
+        "js-cookie": "2.2.1",
         "vinyl-buffer": "1.0.1",
         "vinyl-source-stream": "2.0.0"
     },
@@ -52,11 +53,13 @@
         "cookie-parser": "1.4.5",
         "crypto": "1.0.1",
         "express": "4.17.1",
-        "js-cookie": "2.2.1",
         "moment": "2.27.0",
         "moment-timezone": "0.5.31",
         "mysql": "2.18.1",
         "node-jsencrypt": "1.0.0",
         "regenerator-runtime": "0.13.7"
+    },
+    "engines": {
+        "node": "12.18.3"
     }
 }

@@ -17,8 +17,7 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`users` (
     `roleType` ENUM('admin', 'master') NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY (`email`),
-    UNIQUE KEY (`document`)
+    UNIQUE KEY (`email`)
 );
 
 CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues` (
@@ -56,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues_users` (
     `appointment` TIME NOT NULL,
     `attended` VARCHAR(20),
 
-    PRIMARY KEY (`digitalQueueId`, `document`),
+    PRIMARY KEY (`digitalQueueId`, `document`, `documentType`),
     FOREIGN KEY (`digitalQueueId`) REFERENCES `digital_queues` (`id`),
     FOREIGN KEY (`transportId`) REFERENCES `transports` (`id`)
 );
