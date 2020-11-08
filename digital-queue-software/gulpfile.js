@@ -24,13 +24,13 @@ const sizesOptions = {
     showTotal: true
 };
 
-const scssFiles = ['global', 'pub-login', 'pub-digital-queue', 'pvt-admin', 'pvt-register', 'pvt-digital-queue']
+const scssFiles = ['global', 'pub-login', 'pub-digital-queue', 'pvt-admin', 'pvt-register', 'pvt-digital-queue', 'pvt-create-digital-queue']
     .map(file => `${src}/scss/${file}.scss`);
 
-const jsFiles = ['global', 'pub-login', 'pub-digital-queue', 'pvt-admin', 'pvt-register', 'pvt-digital-queue']
+const jsFiles = ['global', 'pub-login', 'pub-digital-queue', 'pvt-admin', 'pvt-register', 'pvt-digital-queue', 'pvt-create-digital-queue']
     .map(file => `${src}/js/${file}.js`);
 
-const templates = ['pub-login', 'pub-digital-queue', 'pvt-admin', 'pvt-register', 'pvt-digital-queue']
+const templates = ['pub-login', 'pub-digital-queue', 'pvt-admin', 'pvt-register', 'pvt-digital-queue', 'pvt-create-digital-queue']
     .map(file => `${src}/templates/${file}.pug`);
 
 

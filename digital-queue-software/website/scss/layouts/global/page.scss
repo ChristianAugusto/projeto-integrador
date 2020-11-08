@@ -22,16 +22,26 @@ html {
     }
 }
 
-.app__main {
-    section {
-        &.default {
-            width: 100%;
-            height: auto;
-        }
+.app {
+    width: 100%;
+    height: 100%;
 
-        &.row-between {
-            @include display-row();
-            justify-content: space-between;
+    &__global {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__main {
+        section {
+            &.default {
+                width: 100%;
+                height: auto;
+            }
+
+            &.row-between {
+                @include display-row();
+                justify-content: space-between;
+            }
         }
     }
 }

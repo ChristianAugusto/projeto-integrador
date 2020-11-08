@@ -1,0 +1,29 @@
+section(class="pvt-create-digital-queue__form-wrapper default")
+    form(class="pvt-create-digital-queue__form", id="js--create-digital-queue-form")
+        div(class="pvt-create-digital-queue__form-field")
+            label(for="js--digital-queue-name") Nome
+            input(type="text", id="js--digital-queue-name", class="reset", required="required", autocomplete="off", maxlength="100")
+        div(class="pvt-create-digital-queue__form-field")
+            label(for="js--digital-queue-id") URL
+            div(class="digital-queue-id-art")
+                p /filas/
+                input(type="text", id="js--digital-queue-id", class="reset digital-queue-id", required="required", autocomplete="off", maxlength="100")
+        div(class="pvt-create-digital-queue__form-field")
+            label(for="js--digital-queue-isActive") Está ativa?
+            input(type="checkbox", id="js--digital-queue-isActive", class="reset", required="required", autocomplete="off")
+        div(class="pvt-create-digital-queue__form-field")
+            label(for="js--digital-queue-day") Dia
+            input(type="date", id="js--digital-queue-day", required="required", autocomplete="off")
+        div(class="pvt-create-digital-queue__form-field")
+            label(for="js--digital-queue-start") Horário início
+            input(type="text", id="js--digital-queue-start", required="required", autocomplete="off", maxlength="5")
+        div(class="pvt-create-digital-queue__form-field")
+            label(for="js--digital-queue-end") Horário término
+            input(type="text", id="js--digital-queue-end", required="required", autocomplete="off", maxlength="5")
+        div(class="pvt-create-digital-queue__form-field")
+            label(for="js--digital-queue-userTimeMinutes") Tempo atendimento (min)
+            input(type="text", id="js--digital-queue-userTimeMinutes", required="required", autocomplete="off")
+        div(class="pvt-create-digital-queue__form-field")
+            label Transports permitidos
+            ul(class="pvt-create-digital-queue__form-transports", id="js--digital-queue-transports-list")
+

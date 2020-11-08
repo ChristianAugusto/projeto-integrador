@@ -4,8 +4,16 @@
         height: auto;
 
         &-wrapper {
-            width: 100%;
+            width: 90%;
             height: auto;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 2px solid #000;
+            border-radius: 5px;
+            @include display-column();
+            justify-content: flex-start;
+            align-items: flex-start;
         }
 
         &-field {
@@ -58,6 +66,10 @@
             padding: 3px 10px;
             margin: 0;
             cursor: pointer;
+        }
+
+        &-footer {
+            margin: 50px 0 0;
         }
     }
 }

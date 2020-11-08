@@ -1,0 +1,22 @@
+extends ./_configbase.pug
+
+
+//- Template variables
+block append vars
+    - var $templateName = "pvt-create-digital-queue"
+    - var $templateClass = "pvt-create-digital-queue"
+
+
+//- Page styles
+block append styles
+    link(rel="stylesheet", href=`/css/${$templateName}.css`)/
+
+
+//- Main Content
+block append content
+    include ./partials/pvt/create-digital-queue/intro.pug
+    include ./partials/pvt/create-digital-queue/form.pug
+
+//- Page scripts
+block append scripts
+    script(src=`/js/${$templateName}.js`)

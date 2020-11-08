@@ -37,3 +37,13 @@ export function DIGITAL_QUEUES_USER_SUCCESS(appointment) {
 export const DIGITAL_QUEUE_LIMIT = 20;
 export const DOCUMENT_REGEX = /[^a-zA-Z0-9]/gm;
 export const DIGITAL_QUEUE_USER_FORM_COOKIE_NAME = 'digital-queue-user-form';
+export const INPUT_DATE_MASK = 'YYYY-MM-DD';
+
+
+/*
+    TODO (opcional): Pegar valor de uma possível configuração do cliente
+*/
+
+export function SERVER_TIMEZONE() {
+    return 'America/Sao_Paulo';
+}

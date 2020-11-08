@@ -16,6 +16,7 @@ section(class="queue__register-lightbox-wrapper js--register-lightbox")
             div(class="queue__register-lightbox__form-field")
                 label(for="js--user-document-type") Tipo de Documento
                 select(id="js--user-document-type", required="required", autocomplete="off")
+                    option(value="") Selecione um tipo de documento
                     option(value="cpf") CPF
                     option(value="rg") RG
                     option(value="birth-document") Certidão de Nascimento
@@ -28,6 +29,7 @@ section(class="queue__register-lightbox-wrapper js--register-lightbox")
             div(class="queue__register-lightbox__form-field")
                 label(for="js--user-transport") Tipo de Transporte
                 select(id="js--user-transport", required="required", autocomplete="off")
+                    option(value="") Selecione um tipo de transporte
             div(class="queue__register-lightbox__form-field")
                 label(for="js--user-appointment", class="queue__register-lightbox__user-appointment-label") Horário Atendimento
                 input(type="text", id="js--user-appointment", class="queue__register-lightbox__user-appointment reset", required="required", autocomplete="off")

@@ -18,6 +18,15 @@ export default function(app) {
         }
     });
 
+    app.get('/admin/criar-fila', async function(req, res) {
+        if (validateAdminSession(req)) {
+            res.sendFile(`${PUBLIC_PATH}/templates/pvt-create-digital-queue.html`);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
     app.get('/admin/filas/:digitalQueueId', async function(req, res) {
         if (validateAdminSession(req)) {
             writeResponse(await digitalQueue(req), res);
