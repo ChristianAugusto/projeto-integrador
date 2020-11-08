@@ -46,7 +46,7 @@ function validateApiKey(headerApiKeyValue) {
     try {
         logger.info(headerApiKeyValue);
 
-        return API_KEY == headerApiKeyValue;
+        return API_KEY === headerApiKeyValue;
     }
     catch (error) {
         logger.info(error);
@@ -67,6 +67,11 @@ export function validateAdminSession(req) {
 
 export async function validateMasterSession(req) {
     try {
+        if (validateApiKey(req.header('API-KEY')) ) {
+            return true;
+        }
+
+
         const sessionStr = req.cookies[SESSION_COOKIE_NAME];
 
         if (!validateSession(sessionStr)) {

@@ -41,8 +41,10 @@ async function mountPage() {
 
     El.queuesList.innerHTML = digitalQueues.data.reduce(function(acc, digitalQueue) {
         return acc + `
-            <li>
-                <a href="/filas/${digitalQueue.id}">${digitalQueue.name}</a>
+            <li class="pvt-admin__queues__item">
+                <p>${digitalQueue.name}</p>
+                <a href="/admin/filas/${digitalQueue.id}">Link Privado</a>
+                <a href="/filas/${digitalQueue.id}">Link Público</a>
             </li>
         `;
     }, '');

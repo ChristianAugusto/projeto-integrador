@@ -1,9 +1,9 @@
-import Queues from './queues';
+import DigitalQueues from './digital-queues';
 
 
 
 export default {
     init() {
-        Queues.init();
+        DigitalQueues.init();
     }
 };

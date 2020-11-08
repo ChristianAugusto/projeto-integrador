@@ -1,76 +1,96 @@
-.admin {
-    &__actions {
-        .queues {
-            &__list {
-                width: 90%;
-                height: auto;
-                margin: 0 auto;
-                @include display-column;
-                justify-content: flex-start;
-                align-items: flex-start;
+.pvt-admin {
+    &__queues {
+        &__list {
+            width: 90%;
+            height: auto;
+            margin: 0 auto;
+            @include display-column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
 
-                > li {
-                    margin: 20px 0 0;
-                }
-            }
+        &__item {
+            @include display-row;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 20px 0 0;
 
-            &__actions {
-                width: 100%;
-                height: auto;
-                @include display-row;
-                justify-content: center;
-                align-items: center;
-                margin: 20px 0 0;
-
-                button {
-                    display: block;
-                    margin: 0 20px;
-                    padding: 0;
-                    border: none;
-                    border-radius: 0;
-                    background: transparent;
-                    cursor: pointer;
-                    font-size: 0;
-                    padding: 3px 14px;
-                }
-            }
-
-            &__previous-page {
-                &::after {
-                    content: "<";
-                }
-            }
-
-            &__next-page {
-                &::after {
-                    content: ">";
-                }
-            }
-
-            &__previous-page,
-            &__next-page {
-                &::after {
-                    display: block;
-                    font-family: $defaultFont;
-                    font-size: 28px;
-                    text-transform: none;
-                    font-weight: 400;
-                    color: #000;
-                }
-
-                &.is-blurred {
-                    opacity: 0.4;
-                    pointer-events: none;
-                }
-            }
-
-            &__page-display {
+            > p {
                 font-family: $defaultFont;
-                font-size: 14px;
+                font-size: 16px;
+                text-transform: none;
+                font-weight: 400;
+                color: #000;
+                margin: 0 5px;
+            }
+
+            > a {
+                font-family: $defaultFont;
+                font-size: 13px;
+                text-decoration: underline;
+                text-transform: none;
+                font-weight: 400;
+                color: #000;
+                margin: 0 5px;
+            }
+        }
+
+        &__actions {
+            width: 100%;
+            height: auto;
+            @include display-row;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 0;
+
+            button {
+                display: block;
+                margin: 0 20px;
+                padding: 0;
+                border: none;
+                border-radius: 0;
+                background: transparent;
+                cursor: pointer;
+                font-size: 0;
+                padding: 3px 14px;
+            }
+        }
+
+        &__previous-page {
+            &::after {
+                content: "<";
+            }
+        }
+
+        &__next-page {
+            &::after {
+                content: ">";
+            }
+        }
+
+        &__previous-page,
+        &__next-page {
+            &::after {
+                display: block;
+                font-family: $defaultFont;
+                font-size: 28px;
                 text-transform: none;
                 font-weight: 400;
                 color: #000;
             }
+
+            &.is-blurred {
+                opacity: 0.4;
+                pointer-events: none;
+            }
+        }
+
+        &__page-display {
+            font-family: $defaultFont;
+            font-size: 14px;
+            text-transform: none;
+            font-weight: 400;
+            color: #000;
         }
     }
 }
