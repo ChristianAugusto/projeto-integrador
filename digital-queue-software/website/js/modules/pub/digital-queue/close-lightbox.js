@@ -6,6 +6,6 @@ import El from './cache-selectors';
 
 export default function() {
     page.unblockScroll();
-    overlay.hideOverlay();
+    overlay.hide();
     El.registerLightbox.self.classList.remove('is--visible');
 }

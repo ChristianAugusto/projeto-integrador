@@ -8,12 +8,14 @@ section(class="pvt-create-digital-queue__form-wrapper default")
             div(class="digital-queue-id-art")
                 p /filas/
                 input(type="text", id="js--digital-queue-id", class="reset digital-queue-id", required="required", autocomplete="off", maxlength="100")
-        div(class="pvt-create-digital-queue__form-field")
+            p(class="pvt-create-digital-queue__form-field-tip") * Use apenas os seguintes caracteres: 0-9,a-z(alfabeto americano),-
+        div(class="pvt-create-digital-queue__form-field row")
             label(for="js--digital-queue-isActive") Está ativa?
-            input(type="checkbox", id="js--digital-queue-isActive", class="reset", required="required", autocomplete="off")
+            input(type="checkbox", id="js--digital-queue-isActive", class="reset digital-queue-isActive", required="required", autocomplete="off")
         div(class="pvt-create-digital-queue__form-field")
             label(for="js--digital-queue-day") Dia
             input(type="date", id="js--digital-queue-day", required="required", autocomplete="off")
+            p(class="pvt-create-digital-queue__form-field-tip") * Dia de referência da fila (apenas presente ou futuro)
         div(class="pvt-create-digital-queue__form-field")
             label(for="js--digital-queue-start") Horário início
             input(type="text", id="js--digital-queue-start", required="required", autocomplete="off", maxlength="5")

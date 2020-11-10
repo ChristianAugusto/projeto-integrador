@@ -6,6 +6,7 @@ import {
     ROUTES
 } from '@WebsiteConstants';
 import { buildHeaders } from '@WebsiteUtils/api-call';
+import pageLoader from '@WebsiteGlobal/page-loader';
 
 
 
@@ -36,10 +37,10 @@ async function getDigitalQueues() {
     return [];
 }
 
-async function mountPage() {
+async function buildDigitalQueuesList() {
     const digitalQueues = await getDigitalQueues();
 
-    El.queuesList.innerHTML = digitalQueues.data.reduce(function(acc, digitalQueue) {
+    El.digitalQueuesList.innerHTML = digitalQueues.data.reduce(function(acc, digitalQueue) {
         return acc + `
             <li class="pvt-admin__queues__item">
                 <p>${digitalQueue.name}</p>
@@ -74,23 +75,22 @@ async function mountPage() {
 function setEvents() {
     El.nextPage.onclick = function() {
         controller.page++;
-        mountPage();
+        buildDigitalQueuesList();
     };
 
     El.previusPage.onclick = function() {
         if (controller.page != 1) {
             controller.page--;
         }
-        mountPage();
+        buildDigitalQueuesList();
     };
 }
 
 
 
-export default {
-    init() {
-        controller.page = getHashParam('page') || 1;
-        mountPage();
-        setEvents();
-    }
-};
+export default async function() {
+    controller.page = getHashParam('page') || 1;
+    await buildDigitalQueuesList();
+    setEvents();
+    pageLoader.hide();
+}

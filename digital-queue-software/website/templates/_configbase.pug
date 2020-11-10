@@ -20,13 +20,12 @@ html(lang="pt-br")
 
     body
         div(class="app")
-            div(class="app__global")
-                div(class="placeloader-page is--visible")
-                div(class="overlay")
-                include ./partials/global/header.pug
-                main(role="main", class=`app__main page ${$templateClass}`)
-                    block content
-                include ./partials/global/footer.pug
+            include ./partials/global/page-loader.pug
+            div(class="overlay", id="js--overlay")
+            include ./partials/global/header.pug
+            main(role="main", class=`app__main page ${$templateClass}`)
+                block content
+            include ./partials/global/footer.pug
 
 
         block scripts

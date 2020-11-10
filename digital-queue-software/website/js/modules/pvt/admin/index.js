@@ -1,9 +1,9 @@
-import DigitalQueues from './digital-queues';
+import mountPage from './mount-page';
 
 
 
 export default {
     init() {
-        DigitalQueues.init();
+        mountPage();
     }
 };

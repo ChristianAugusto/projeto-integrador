@@ -5,6 +5,7 @@ import getDigitalQueueData from './get-digital-queue-data';
 import buildTimeSlices from './build-time-slices';
 import overlay from '@WebsiteGlobal/overlay';
 import page from '@WebsiteGlobal/page';
+import pageLoader from '@WebsiteGlobal/page-loader';
 import pageCache from './page-cache';
 import closeLightbox from './close-lightbox';
 import sendForm from './send-form';
@@ -18,7 +19,7 @@ function timeSliceClickCallback(timeStringValue) {
     El.registerLightbox.form.userAppointment.value = timeStringValue;
 
     page.blockScroll();
-    overlay.showOverlay();
+    overlay.show();
 
     El.registerLightbox.self.classList.add('is--visible');
 }
@@ -139,6 +140,7 @@ export default async function () {
         buildSelectTransports();
         fillFormInputs();
         setEvents();
+        pageLoader.hide();
     }
     catch (error) {
         console.error(error);

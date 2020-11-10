@@ -38,6 +38,7 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                results: (await mysql(SELECT_TRANSPORTS_QUERY_BUILDER('COUNT(*)')))[0]['COUNT(*)'],
                 data: await mysql(SELECT_TRANSPORTS_QUERY_BUILDER('*', '', `LIMIT ${startIndex},${endIndex}`)),
                 message: 'Success'
             })
@@ -53,6 +54,7 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                results: 0,
                 data: null,
                 message: 'Internal server error'
             })

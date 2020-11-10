@@ -61,6 +61,10 @@ select.reset {
     appearance: none;
 }
 
+input[type="checkbox"] {
+    margin: 0;
+}
+
 html,
 body {
     width: 100%;

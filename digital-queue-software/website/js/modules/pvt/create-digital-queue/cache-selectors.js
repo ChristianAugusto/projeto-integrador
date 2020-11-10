@@ -8,6 +8,6 @@ export default {
         start: document.querySelector('#js--digital-queue-start'),
         end: document.querySelector('#js--digital-queue-end'),
         userTimeMinutes: document.querySelector('#js--digital-queue-userTimeMinutes'),
-        transports: document.querySelector('#js--digital-queue-transports'),
+        transportsList: document.querySelector('#js--digital-queue-transports-list'),
     }
 };

@@ -2,18 +2,18 @@ import El from './cache-selectors';
 
 
 
-function showOverlay() {
+function show() {
     El.overlay.self.classList.add('is--visible');
 }
 
-function hideOverlay() {
+function hide() {
     El.overlay.self.classList.remove('is--visible');
 }
 
 
 
 export default {
-    showOverlay,
-    hideOverlay,
+    show,
+    hide,
     el: El.overlay.self
 };

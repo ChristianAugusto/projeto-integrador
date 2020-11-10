@@ -15,7 +15,8 @@ export const ROUTES = {
             login: '/api/pub/login'
         },
         pvt: {
-            digitalQueues: '/api/pvt/digital-queues'
+            digitalQueues: '/api/pvt/digital-queues',
+            transports: '/api/pvt/transports'
         }
     }
 };
@@ -34,6 +35,7 @@ export function DIGITAL_QUEUES_USER_SUCCESS(appointment) {
 }
 
 
+export const TRANSPORTS_LIMIT = 20;
 export const DIGITAL_QUEUE_LIMIT = 20;
 export const DOCUMENT_REGEX = /[^a-zA-Z0-9]/gm;
 export const DIGITAL_QUEUE_USER_FORM_COOKIE_NAME = 'digital-queue-user-form';

@@ -9,7 +9,7 @@ import digitalQueue from '@ServerEndpoints/pages/pvt/digital-queue';
 
 
 export default function(app) {
-    app.get('/admin', async function(req, res) {
+    app.get('/admin/filas', async function(req, res) {
         if (validateAdminSession(req)) {
             res.sendFile(`${PUBLIC_PATH}/templates/pvt-admin.html`);
         }
@@ -18,7 +18,7 @@ export default function(app) {
         }
     });
 
-    app.get('/admin/criar-fila', async function(req, res) {
+    app.get('/admin/criar-fila-digital', async function(req, res) {
         if (validateAdminSession(req)) {
             res.sendFile(`${PUBLIC_PATH}/templates/pvt-create-digital-queue.html`);
         }
