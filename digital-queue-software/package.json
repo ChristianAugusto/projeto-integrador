@@ -10,7 +10,7 @@
         "build-website": "npx eslint website/js/** && npx gulp build",
         "build-server": "npx eslint src/** && npx babel ./src -d ./build",
         "dev-server": "nodemon --exec npx babel-node src/index.js",
-        "dev-website": "npm run build-website && npx gulp watch",
+        "dev-website": "npx eslint website/js/** && npx gulp development",
         "dev-start": "node ./build/index.js",
         "start": "environment=dev node ./build/index.js"
     },
@@ -32,6 +32,7 @@
         "babelify": "10.0.0",
         "browser-sync": "2.26.12",
         "browserify": "16.5.2",
+        "core-js": "2",
         "es6-promise": "4.2.8",
         "eslint": "7.9.0",
         "fetch-polyfill": "0.8.2",

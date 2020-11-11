@@ -21,7 +21,7 @@ html(lang="pt-br")
     body
         div(class="app")
             include ./partials/global/page-loader.pug
-            div(class="overlay", id="js--overlay")
+            include ./partials/global/overlay.pug
             include ./partials/global/header.pug
             main(role="main", class=`app__main page ${$templateClass}`)
                 block content

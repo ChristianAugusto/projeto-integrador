@@ -3,11 +3,11 @@ import El from './cache-selectors';
 
 
 function show() {
-    El.overlay.self.classList.add('is--visible');
+    El.overlay.classList.add('is--visible');
 }
 
 function hide() {
-    El.overlay.self.classList.remove('is--visible');
+    El.overlay.classList.remove('is--visible');
 }
 
 
@@ -15,5 +15,5 @@ function hide() {
 export default {
     show,
     hide,
-    el: El.overlay.self
+    el: El.overlay
 };

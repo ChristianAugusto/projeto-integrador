@@ -10,7 +10,8 @@ import pageCache from './page-cache';
 import closeLightbox from './close-lightbox';
 import sendForm from './send-form';
 import {
-    DIGITAL_QUEUE_USER_FORM_COOKIE_NAME
+    DIGITAL_QUEUE_USER_FORM_COOKIE_NAME,
+    SERVER_ERROR_MESSAGE
 } from '@WebsiteConstants';
 
 
@@ -46,35 +47,35 @@ function setEvents() {
 
     /* Form fields */
     El.registerLightbox.form.userName.addEventListener('keyup', function(event) {
-        pageCache.form.name = event.target.value;
+        pageCache.form.name = event.target.value.trim();
         saveFormData();
     });
     El.registerLightbox.form.userEmail.addEventListener('keyup', function(event) {
-        pageCache.form.email = event.target.value;
+        pageCache.form.email = event.target.value.trim();
         saveFormData();
     });
     El.registerLightbox.form.userTelephone.addEventListener('keyup', function(event) {
-        pageCache.form.telephone = event.target.value;
+        pageCache.form.telephone = event.target.value.trim();
         saveFormData();
     });
     El.registerLightbox.form.userDocumentType.addEventListener('change', function(event) {
-        pageCache.form.documentType = event.target.value;
+        pageCache.form.documentType = event.target.value.trim();
         saveFormData();
         El.registerLightbox.form.userDocument.classList.remove('in-use');
         El.registerLightbox.form.userDocumentType.classList.remove('in-use');
     });
     El.registerLightbox.form.userDocument.addEventListener('keyup', function(event) {
-        pageCache.form.document = event.target.value;
+        pageCache.form.document = event.target.value.trim();
         saveFormData();
         El.registerLightbox.form.userDocument.classList.remove('in-use');
         El.registerLightbox.form.userDocumentType.classList.remove('in-use');
     });
     El.registerLightbox.form.userNationality.addEventListener('keyup', function(event) {
-        pageCache.form.nationality = event.target.value;
+        pageCache.form.nationality = event.target.value.trim();
         saveFormData();
     });
     El.registerLightbox.form.userTransport.addEventListener('change', function(event) {
-        pageCache.form.transportId = event.target.value;
+        pageCache.form.transportId = event.target.value.trim();
         saveFormData();
     });
 }
@@ -115,9 +116,12 @@ function fillFormInputs() {
     }
 
     if (pageCache.form.transportId) {
-        El.registerLightbox.form.userTransport
-            .querySelector(`option[value="${pageCache.form.transportId}"]`)
-            .setAttribute('selected', 'selected');
+        const optionWithValue = El.registerLightbox.form.userTransport
+            .querySelector(`option[value="${pageCache.form.transportId}"]`);
+
+        if (optionWithValue) {
+            optionWithValue.setAttribute('selected', 'selected');
+        }
     }
 }
 
@@ -145,5 +149,7 @@ export default async function () {
     catch (error) {
         console.error(error);
         console.error('Error in mount page');
+        alert(SERVER_ERROR_MESSAGE);
+        pageLoader.hide();
     }
 }

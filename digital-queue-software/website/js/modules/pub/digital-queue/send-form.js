@@ -44,14 +44,14 @@ export default async function(event) {
     try {
         const body = {
             digitalQueueId: pageCache.digitalQueue.id,
-            document: El.registerLightbox.form.userDocument.value.replace(DOCUMENT_REGEX, ''),
-            name: El.registerLightbox.form.userName.value,
-            email: El.registerLightbox.form.userEmail.value,
-            telephone: El.registerLightbox.form.userTelephone.value,
+            document: El.registerLightbox.form.userDocument.value.trim().replace(DOCUMENT_REGEX, ''),
+            name: El.registerLightbox.form.userName.value.trim(),
+            email: El.registerLightbox.form.userEmail.value.trim(),
+            telephone: El.registerLightbox.form.userTelephone.value.trim(),
             documentType: El.registerLightbox.form.userDocumentType.value,
-            nationality: El.registerLightbox.form.userNationality.value,
+            nationality: El.registerLightbox.form.userNationality.value.trim(),
             transportId: Number(El.registerLightbox.form.userTransport.value),
-            appointment: El.registerLightbox.form.userAppointment.value
+            appointment: El.registerLightbox.form.userAppointment.value.trim()
         };
 
 
@@ -62,6 +62,9 @@ export default async function(event) {
         if (!validateDocumentResult) {
             El.registerLightbox.form.userDocument.classList.add('in-use');
             El.registerLightbox.form.userDocumentType.classList.add('in-use');
+
+            alert('Combinação de Tipo de documento + documento já utilizada');
+
             return false;
         }
 

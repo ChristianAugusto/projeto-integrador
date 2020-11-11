@@ -103,7 +103,7 @@
                 width: 100%;
                 height: 30px;
                 background: #ffffff;
-                border: 1px solid #000;
+                border: 2px solid #000;
                 border-radius: 3px;
                 margin: 0;
                 padding: 0;
@@ -124,19 +124,23 @@
             }
 
 
-            .digital-queue-id-art {
-                @include display-row;
-                justify-content: space-between;
-                align-items: center;
+            .digital-queue-id {
+                opacity: 0.4;
 
-                > p {
-                    width: auto;
-                    font-family: $defaultFont;
-                    font-size: 14px;
-                    text-transform: none;
-                    font-weight: 400;
-                    color: #000;
-                    line-height: 22px;
+                &-art {
+                    @include display-row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    > p {
+                        width: auto;
+                        font-family: $defaultFont;
+                        font-size: 14px;
+                        text-transform: none;
+                        font-weight: 400;
+                        color: #000;
+                        line-height: 22px;
+                    }
                 }
             }
 
@@ -169,6 +173,21 @@
                     margin-left: 10px;
                 }
             }
+        }
+
+        #send-form-btn {
+            font-family: $defaultFont;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: #000;
+            background: transparent;
+            border: 1px solid #000000;
+            border-radius: 3px;
+            box-sizing: border-box;
+            padding: 3px 10px;
+            margin: 0;
+            cursor: pointer;
         }
     }
 }

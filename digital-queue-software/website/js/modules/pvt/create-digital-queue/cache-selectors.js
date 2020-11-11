@@ -1,13 +1,13 @@
 export default {
     form: {
-        self: document.querySelector('#js--create-digital-queue-form'),
-        name: document.querySelector('#js--digital-queue-name'),
-        id: document.querySelector('#js--digital-queue-id'),
-        isActive: document.querySelector('#js--digital-queue-isActive'),
-        day: document.querySelector('#js--digital-queue-day'),
-        start: document.querySelector('#js--digital-queue-start'),
-        end: document.querySelector('#js--digital-queue-end'),
-        userTimeMinutes: document.querySelector('#js--digital-queue-userTimeMinutes'),
-        transportsList: document.querySelector('#js--digital-queue-transports-list'),
+        self: document.getElementById('js--create-digital-queue-form'),
+        digitalQueueName: document.getElementById('js--digital-queue-name'),
+        digitalQueueId: document.getElementById('js--digital-queue-id'),
+        digitalQueueIsActive: document.getElementById('js--digital-queue-isActive'),
+        digitalQueueDay: document.getElementById('js--digital-queue-day'),
+        digitalQueueStart: document.getElementById('js--digital-queue-start'),
+        digitalQueueEnd: document.getElementById('js--digital-queue-end'),
+        digitalQueueUserTimeMinutes: document.getElementById('js--digital-queue-userTimeMinutes'),
+        digitalQueueTransportsList: document.getElementById('js--digital-queue-transports-list'),
     }
 };

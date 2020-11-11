@@ -10,7 +10,6 @@ import { buildHeaders } from '@WebsiteUtils/api-call';
 
 
 
-
 async function getDigitalQueueData() {
     try {
         const response = await fetch(ROUTES.api.pub.digitalQueuePage, {

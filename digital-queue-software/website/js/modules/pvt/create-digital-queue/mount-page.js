@@ -11,26 +11,44 @@ import {
 } from '@WebsiteConstants';
 import { buildHeaders } from '@WebsiteUtils/api-call';
 import pageLoader from '@WebsiteGlobal/page-loader';
+import sendForm from './send-form';
 
 
 
 function dayMinValue() {
     const dateNow = moment().tz(SERVER_TIMEZONE()).format(INPUT_DATE_MASK);
 
-    El.form.day.setAttribute('min', dateNow);
+    El.form.digitalQueueDay.setAttribute('min', dateNow);
 }
+
 
 function masks() {
     IMask(
-        El.form.start, {
+        El.form.digitalQueueStart, {
             mask: '00:00'
         });
 
     IMask(
-        El.form.end, {
+        El.form.digitalQueueEnd, {
             mask: '00:00'
         });
 }
+
+
+function setEvents() {
+    El.form.digitalQueueName.onkeyup = function(event) {
+        const newValue = event.target.value.replace(/[^a-zA-Z 0-9_-]/gm, '');
+
+        El.form.digitalQueueName.value = newValue;
+
+        const valueFormatted = newValue.trim().toLowerCase().replace(/[ _]/gmi, '-').replace();
+
+        El.form.digitalQueueId.value = valueFormatted;
+    };
+
+    El.form.self.onsubmit = sendForm;
+}
+
 
 async function getTransports(page) {
     try {
@@ -59,6 +77,7 @@ async function getTransports(page) {
     };
 }
 
+
 async function buildTransportsOptions() {
     let totalPages = 1;
 
@@ -70,10 +89,10 @@ async function buildTransportsOptions() {
         for (let i = 0; i < transports.length; i++) {
             const id = `transport-checkbox-${transports[i].id}`;
 
-            El.form.transportsList.innerHTML += `
+            El.form.digitalQueueTransportsList.innerHTML += `
                 <li>
                     <label for="${id}">${transports[i].name}</label>
-                    <input type="checkbox" value="${transports[i].name}" id="${id}" class="reset" />
+                    <input type="checkbox" value="${transports[i].id}" id="${id}" class="reset" />
                 </li>
             `;
         }
@@ -84,9 +103,11 @@ async function buildTransportsOptions() {
 }
 
 
+
 export default async function () {
     dayMinValue();
     masks();
+    setEvents();
     await buildTransportsOptions();
     pageLoader.hide();
 }

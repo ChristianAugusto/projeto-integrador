@@ -12,6 +12,7 @@ const buffer = require('vinyl-buffer');
 const browserSync = require('browser-sync').create();
 
 
+
 /* CONFIGS */
 const src = './website';
 const dist = './public';
@@ -56,15 +57,13 @@ gulp.task('build-js', function(done) {
     const filesQtd = jsFiles.length;
     let currentFile = 0;
 
-    jsFiles.forEach(file => {
+    jsFiles.forEach(function(file) {
         const newFileNameSplit = file.split('/');
         const newFileName = newFileNameSplit[newFileNameSplit.length - 1];
 
         return browserify(file)
             .transform(babelify)
-            .bundle().on('error', (error) => {
-                console.log(error);
-            })
+            .bundle()
             .pipe(source(newFileName))
             .pipe(buffer())
             .pipe(uglify())
@@ -76,6 +75,7 @@ gulp.task('build-js', function(done) {
 
                     currentFile++;
                     if (currentFile === filesQtd) {
+                        console.log('Ending build-js');
                         done();
                     }
                 }
@@ -132,5 +132,4 @@ gulp.task('watch-files', () => {
 
 
 gulp.task('build', gulp.series('clean-public', 'clean-templates', 'build-scss', 'build-html', 'build-js'));
-gulp.task('watch', gulp.series('watch-files'));
-gulp.task('development', gulp.series('build', 'watch'));
+gulp.task('development', gulp.series('build', 'watch-files'));

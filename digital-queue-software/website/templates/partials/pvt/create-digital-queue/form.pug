@@ -3,12 +3,13 @@ section(class="pvt-create-digital-queue__form-wrapper default")
         div(class="pvt-create-digital-queue__form-field")
             label(for="js--digital-queue-name") Nome
             input(type="text", id="js--digital-queue-name", class="reset", required="required", autocomplete="off", maxlength="100")
+            p(class="pvt-create-digital-queue__form-field-tip") * Apenas os seguintes caracteres são permitidos: 0-9,a-z(alfabeto americano) maiúsculo e minúsculo,-
         div(class="pvt-create-digital-queue__form-field")
             label(for="js--digital-queue-id") URL
             div(class="digital-queue-id-art")
                 p /filas/
                 input(type="text", id="js--digital-queue-id", class="reset digital-queue-id", required="required", autocomplete="off", maxlength="100")
-            p(class="pvt-create-digital-queue__form-field-tip") * Use apenas os seguintes caracteres: 0-9,a-z(alfabeto americano),-
+            p(class="pvt-create-digital-queue__form-field-tip") * Não preencha a url manualmente, escolha apenas o nome!!
         div(class="pvt-create-digital-queue__form-field row")
             label(for="js--digital-queue-isActive") Está ativa?
             input(type="checkbox", id="js--digital-queue-isActive", class="reset digital-queue-isActive", required="required", autocomplete="off")
@@ -28,4 +29,5 @@ section(class="pvt-create-digital-queue__form-wrapper default")
         div(class="pvt-create-digital-queue__form-field")
             label Transports permitidos
             ul(class="pvt-create-digital-queue__form-transports", id="js--digital-queue-transports-list")
-
+        div(class="pvt-create-digital-queue__form-field row-center")
+            button(class="reset", id="send-form-btn") Criar

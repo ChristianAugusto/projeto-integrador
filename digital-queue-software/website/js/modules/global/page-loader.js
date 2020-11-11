@@ -15,5 +15,5 @@ function hide() {
 export default {
     show,
     hide,
-    el: El.pageLoader.self
+    el: El.pageLoader
 };
