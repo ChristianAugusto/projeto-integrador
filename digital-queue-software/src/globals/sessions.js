@@ -9,6 +9,14 @@ import {
 const sessions = {};
 
 
+function validateSessionTime(startTime) {
+    const sessionTimeSeconds = Math.round( (new Date() - startTime) / 1000 );
+
+    logger.info(`sessionTimeSeconds = ${sessionTimeSeconds}`);
+
+    return sessionTimeSeconds <= SESSION_SECONDS_LIMIT;
+}
+
 
 function validateSession(sessionStr) {
     try {
@@ -34,13 +42,6 @@ function validateSession(sessionStr) {
     }
 }
 
-function validateSessionTime(startTime) {
-    const sessionTimeSeconds = Math.round( (new Date() - startTime) / 1000 );
-
-    logger.info(`sessionTimeSeconds = ${sessionTimeSeconds}`);
-
-    return sessionTimeSeconds <= SESSION_SECONDS_LIMIT;
-}
 
 function validateApiKey(headerApiKeyValue) {
     try {
@@ -56,7 +57,16 @@ function validateApiKey(headerApiKeyValue) {
 }
 
 
-export function validateAdminSession(req) {
+export function validateAdminPage(req) {
+    if (validateSession(req.cookies[SESSION_COOKIE_NAME])) {
+        return true;
+    }
+
+    return false;
+}
+
+
+export function validateAdminApi(req) {
     if (validateApiKey(req.header('API-KEY')) || validateSession(req.cookies[SESSION_COOKIE_NAME])) {
         return true;
     }
@@ -65,13 +75,39 @@ export function validateAdminSession(req) {
 }
 
 
-export async function validateMasterSession(req) {
+export async function validateMasterApi(req) {
     try {
-        if (validateApiKey(req.header('API-KEY')) ) {
+        if (validateApiKey(req.header('API-KEY'))) {
             return true;
         }
 
 
+        const sessionStr = req.cookies[SESSION_COOKIE_NAME];
+
+        if (!validateSession(sessionStr)) {
+            return false;
+        }
+
+        const session = JSON.parse(sessionStr);
+
+        const queryResult = await mysql(SELECT_USERS_QUERY_BUILDER('*', `WHERE \`id\` = ${Number(session.id)}`));
+
+        if (queryResult[0].roleType != 'master') {
+            return false;
+        }
+
+        return true;
+    }
+    catch (error) {
+        logger.info(error);
+
+        return false;
+    }
+}
+
+
+export async function validateMasterPage(req) {
+    try {
         const sessionStr = req.cookies[SESSION_COOKIE_NAME];
 
         if (!validateSession(sessionStr)) {

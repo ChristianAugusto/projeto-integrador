@@ -3,8 +3,8 @@ extends ./_configbase.pug
 
 //- Template variables
 block append vars
-    - var $templateName = "pvt-admin"
-    - var $templateClass = "pvt-admin"
+    - var $templateName = "pvt-admin-digital-queues"
+    - var $templateClass = "pvt-admin-digital-queues"
 
 
 //- Page styles
@@ -14,7 +14,8 @@ block append styles
 
 //- Main Content
 block append content
-    include ./partials/pvt/admin/intro.pug
+    include ./partials/pvt/admin-digital-queues/intro.pug
+    include ./partials/pvt/admin-digital-queues/digital-queues.pug
 
 //- Page scripts
 block append scripts

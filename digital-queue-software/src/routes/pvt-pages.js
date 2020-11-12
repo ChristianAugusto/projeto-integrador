@@ -3,14 +3,25 @@ import {
 } from '@ServerConstants';
 import writeResponse from '@ServerModules/write-response';
 import {
-    validateAdminSession, validateMasterSession
+    validateAdminPage, validateMasterPage
 } from '@ServerGlobals/sessions';
 import digitalQueue from '@ServerEndpoints/pages/pvt/digital-queue';
+import admin from '@ServerEndpoints/pages/pvt/admin';
+
 
 
 export default function(app) {
+    app.get('/admin', async function(req, res) {
+        if (validateAdminPage(req)) {
+            writeResponse(await admin(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
     app.get('/admin/filas', async function(req, res) {
-        if (validateAdminSession(req)) {
+        if (validateAdminPage(req)) {
             res.sendFile(`${PUBLIC_PATH}/templates/pvt-admin.html`);
         }
         else {
@@ -19,7 +30,7 @@ export default function(app) {
     });
 
     app.get('/admin/criar-fila-digital', async function(req, res) {
-        if (validateAdminSession(req)) {
+        if (validateAdminPage(req)) {
             res.sendFile(`${PUBLIC_PATH}/templates/pvt-create-digital-queue.html`);
         }
         else {
@@ -28,7 +39,7 @@ export default function(app) {
     });
 
     app.get('/admin/filas/:digitalQueueId', async function(req, res) {
-        if (validateAdminSession(req)) {
+        if (validateAdminPage(req)) {
             writeResponse(await digitalQueue(req), res);
         }
         else {
@@ -37,7 +48,7 @@ export default function(app) {
     });
 
     app.get('/admin/register', async function(req, res) {
-        if (validateMasterSession(req)) {
+        if (validateMasterPage(req)) {
             res.sendFile(`${PUBLIC_PATH}/templates/pvt-register.html`);
         }
         else {
