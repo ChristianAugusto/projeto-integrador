@@ -22,7 +22,7 @@ export default function(app) {
 
     app.get('/admin/filas', async function(req, res) {
         if (validateAdminPage(req)) {
-            res.sendFile(`${PUBLIC_PATH}/templates/pvt-admin.html`);
+            res.sendFile(`${PUBLIC_PATH}/templates/pvt-admin-digital-queues.html`);
         }
         else {
             res.redirect('/admin/login');

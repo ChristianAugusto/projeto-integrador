@@ -53,6 +53,12 @@
             input[type="text"],
             input[type="email"],
             input[type="number"] {
+                font-family: $defaultFont;
+                font-size: 14px;
+                text-transform: none;
+                font-weight: 400;
+                color: #000;
+                line-height: 20px;
                 width: 100%;
                 height: 30px;
                 box-sizing: border-box;
@@ -61,6 +67,10 @@
                 border: 1px solid #000;
                 border-radius: 3px;
                 background: #ffffff;
+
+                @mixin placeholderStyle() {
+                    color: rgba($color: #000000, $alpha: 0.05);
+                }
 
                 &.in-use {
                     border: 1px solid #f00;
@@ -80,6 +90,7 @@
                     &::after,
                     &::before {
                         content: "";
+                        display: block;
                         position: absolute;
                         width: calc(100% * 1.42);
                         height: 1px;
