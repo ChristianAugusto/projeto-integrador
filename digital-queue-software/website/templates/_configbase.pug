@@ -22,10 +22,10 @@ html(lang="pt-br")
         div(class="app")
             include ./partials/global/page-loader.pug
             include ./partials/global/overlay.pug
-            include ./partials/global/header.pug
+            block prePage
             main(role="main", class=`app__main page ${$templateClass}`)
                 block content
-            include ./partials/global/footer.pug
+            block posPage
 
 
         block scripts

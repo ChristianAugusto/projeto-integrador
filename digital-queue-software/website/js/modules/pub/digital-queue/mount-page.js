@@ -46,36 +46,36 @@ function setEvents() {
     El.registerLightbox.form.self.onsubmit = sendForm;
 
     /* Form fields */
-    El.registerLightbox.form.userName.addEventListener('keyup', function(event) {
-        pageCache.form.name = event.target.value.trim();
+    El.registerLightbox.form.userName.addEventListener('keyup', function() {
+        pageCache.form.name = pageCache.form.name.value.trim();
         saveFormData();
     });
-    El.registerLightbox.form.userEmail.addEventListener('keyup', function(event) {
-        pageCache.form.email = event.target.value.trim();
+    El.registerLightbox.form.userEmail.addEventListener('keyup', function() {
+        pageCache.form.email = pageCache.form.email.value.trim();
         saveFormData();
     });
-    El.registerLightbox.form.userTelephone.addEventListener('keyup', function(event) {
-        pageCache.form.telephone = event.target.value.trim();
+    El.registerLightbox.form.userTelephone.addEventListener('keyup', function() {
+        pageCache.form.telephone = pageCache.form.telephone.value.trim();
         saveFormData();
     });
-    El.registerLightbox.form.userDocumentType.addEventListener('change', function(event) {
-        pageCache.form.documentType = event.target.value.trim();
-        saveFormData();
-        El.registerLightbox.form.userDocument.classList.remove('in-use');
-        El.registerLightbox.form.userDocumentType.classList.remove('in-use');
-    });
-    El.registerLightbox.form.userDocument.addEventListener('keyup', function(event) {
-        pageCache.form.document = event.target.value.trim();
+    El.registerLightbox.form.userDocumentType.addEventListener('change', function() {
+        pageCache.form.documentType = pageCache.form.documentType.value.trim();
         saveFormData();
         El.registerLightbox.form.userDocument.classList.remove('in-use');
         El.registerLightbox.form.userDocumentType.classList.remove('in-use');
     });
-    El.registerLightbox.form.userNationality.addEventListener('keyup', function(event) {
-        pageCache.form.nationality = event.target.value.trim();
+    El.registerLightbox.form.userDocument.addEventListener('keyup', function() {
+        pageCache.form.document = pageCache.form.document.value.trim();
+        saveFormData();
+        El.registerLightbox.form.userDocument.classList.remove('in-use');
+        El.registerLightbox.form.userDocumentType.classList.remove('in-use');
+    });
+    El.registerLightbox.form.userNationality.addEventListener('keyup', function() {
+        pageCache.form.nationality = pageCache.form.nationality.value.trim();
         saveFormData();
     });
-    El.registerLightbox.form.userTransport.addEventListener('change', function(event) {
-        pageCache.form.transportId = event.target.value.trim();
+    El.registerLightbox.form.userTransport.addEventListener('change', function() {
+        pageCache.form.transportId = pageCache.form.transportId.value.trim();
         saveFormData();
     });
 }

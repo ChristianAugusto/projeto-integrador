@@ -36,14 +36,28 @@ function masks() {
 
 
 function setEvents() {
-    El.form.digitalQueueName.onkeyup = function(event) {
-        const newValue = event.target.value.replace(/[^a-zA-Z 0-9_-]/gm, '');
+    El.form.digitalQueueName.onkeyup = function() {
+        const newValue = El.form.digitalQueueName.value.replace(/[^a-zA-Z 0-9_-]/gm, '');
 
         El.form.digitalQueueName.value = newValue;
 
         const valueFormatted = newValue.trim().toLowerCase().replace(/[ _]/gmi, '-').replace();
 
         El.form.digitalQueueId.value = valueFormatted;
+
+        El.form.digitalQueueId.classList.remove('in-use');
+    };
+
+    El.form.digitalQueueId.onkeyup = function() {
+        El.form.digitalQueueId.classList.remove('in-use');
+    };
+
+    El.form.digitalQueueUserTimeMinutes.onchange = function() {
+        const curentValue = El.form.digitalQueueUserTimeMinutes.value.trim();
+
+        if (Number(curentValue) < 1) {
+            El.form.digitalQueueUserTimeMinutes.value = 1;
+        }
     };
 
     El.form.self.onsubmit = sendForm;

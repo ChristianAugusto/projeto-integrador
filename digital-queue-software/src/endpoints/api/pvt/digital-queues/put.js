@@ -60,6 +60,22 @@ export default async function(req) {
             };
         }
 
+        if (Number(reqBody.userTimeMinutes) < 1) {
+            logger.info('userTimeMinutes can not be negative');
+
+            return {
+                status: 400,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: null,
+                    created: false,
+                    message: 'userTimeMinutes can not be negative'
+                })
+            };
+        }
+
         if (!validateReqId(reqBody.id)) {
             logger.info('Invalid id format');
 

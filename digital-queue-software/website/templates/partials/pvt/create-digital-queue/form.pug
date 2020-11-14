@@ -12,22 +12,24 @@ section(class="pvt-create-digital-queue__form-wrapper default")
             p(class="pvt-create-digital-queue__form-field-tip") * Não preencha a url manualmente, escolha apenas o nome!!
         div(class="pvt-create-digital-queue__form-field row")
             label(for="js--digital-queue-isActive") Está ativa?
-            input(type="checkbox", id="js--digital-queue-isActive", class="reset digital-queue-isActive", required="required", autocomplete="off")
+            input(type="checkbox", id="js--digital-queue-isActive", class="reset digital-queue-isActive", autocomplete="off")
         div(class="pvt-create-digital-queue__form-field")
             label(for="js--digital-queue-day") Dia
             input(type="date", id="js--digital-queue-day", required="required", autocomplete="off")
             p(class="pvt-create-digital-queue__form-field-tip") * Dia de referência da fila (apenas presente ou futuro)
         div(class="pvt-create-digital-queue__form-field")
             label(for="js--digital-queue-start") Horário início
-            input(type="text", id="js--digital-queue-start", required="required", autocomplete="off", maxlength="5")
+            input(type="text", id="js--digital-queue-start", class="reset", required="required", autocomplete="off", maxlength="5")
+            p(class="pvt-create-digital-queue__form-field-tip") * Dê preferência para valores exatos. Ex: 09:00, 09:05, 18:30
         div(class="pvt-create-digital-queue__form-field")
             label(for="js--digital-queue-end") Horário término
-            input(type="text", id="js--digital-queue-end", required="required", autocomplete="off", maxlength="5")
+            input(type="text", id="js--digital-queue-end", class="reset", required="required", autocomplete="off", maxlength="5")
+            p(class="pvt-create-digital-queue__form-field-tip") * Dê preferência para valores exatos. Ex: 17:00, 18:30, 19:05
         div(class="pvt-create-digital-queue__form-field")
             label(for="js--digital-queue-userTimeMinutes") Tempo atendimento (min)
-            input(type="text", id="js--digital-queue-userTimeMinutes", required="required", autocomplete="off")
+            input(type="number", id="js--digital-queue-userTimeMinutes", class="reset", required="required", autocomplete="off", min="1")
         div(class="pvt-create-digital-queue__form-field")
             label Transports permitidos
             ul(class="pvt-create-digital-queue__form-transports", id="js--digital-queue-transports-list")
         div(class="pvt-create-digital-queue__form-field row-center")
-            button(class="reset", id="send-form-btn") Criar
+            button(type="submit", class="reset", id="send-form-btn") Criar

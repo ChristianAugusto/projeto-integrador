@@ -11,6 +11,15 @@ export default async function(event) {
     try {
         event.preventDefault();
 
+
+        const userTimeMinutes = Number(El.form.digitalQueueUserTimeMinutes.value.trim());
+
+        if (userTimeMinutes < 1) {
+            alert('O tempo de atendimento precisa ser no mínimo 1!!');
+            return false;
+        }
+
+
         const transportsItems = El.form.digitalQueueTransportsList.querySelectorAll('input:checked');
         const transportsIds = [];
 
@@ -23,18 +32,39 @@ export default async function(event) {
             return false;
         }
 
+        const digitalQueueId = El.form.digitalQueueId.value.trim();
+
+        const getDigitalQueueResponse = await fetch(ROUTES.api.pvt.digitalQueues, {
+            method: 'POST',
+            headers: buildHeaders({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({
+                id: digitalQueueId
+            })
+        });
+
+        const getDigitalQueueResponseObj = await getDigitalQueueResponse.json();
+
+        if (getDigitalQueueResponseObj.data.length > 0) {
+            El.form.digitalQueueId.classList.add('in-use');
+            alert('O id da fila digital já está sendo utilizado');
+            return false;
+        }
+
+
         const data = {
-            id: El.form.digitalQueueId.value.trim(),
+            id: digitalQueueId,
             name: El.form.digitalQueueName.value.trim(),
             isActive: El.form.digitalQueueIsActive.checked ? 1 : 0,
             day: El.form.digitalQueueDay.value,
             start: El.form.digitalQueueStart.value.trim(),
             end: El.form.digitalQueueEnd.value.trim(),
-            userTimeMinutes: El.form.digitalQueueUserTimeMinutes.value.trim(),
+            userTimeMinutes: userTimeMinutes,
             transportsIds
         };
 
-        const response = await fetch(ROUTES.api.pvt.digitalQueues, {
+        const sendFormResponse = await fetch(ROUTES.api.pvt.digitalQueues, {
             method: 'PUT',
             headers: buildHeaders({
                 'Content-Type': 'application/json'
@@ -42,9 +72,9 @@ export default async function(event) {
             body: JSON.stringify(data)
         });
 
-        const responseObj = await response.json();
+        const sendFormResponseObj = await sendFormResponse.json();
 
-        if (responseObj.created) {
+        if (sendFormResponseObj.created) {
             alert('Sucesso');
             window.location.reload();
         }
