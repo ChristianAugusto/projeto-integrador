@@ -3,8 +3,8 @@ extends ./_pvt-config-base.pug
 
 //- Template variables
 block append vars
-    - var $templateName = "pvt-register"
-    - var $templateClass = "pvt-register"
+    - var $templateName = "pvt-register-user"
+    - var $templateClass = "pvt-register-user"
 
 
 //- Page styles
@@ -14,7 +14,9 @@ block append styles
 
 //- Main Content
 block append content
-    include ./partials/pvt/register/form.pug
+    include ./partials/pvt/register-user/intro.pug
+    include ./partials/pvt/register-user/form.pug
+
 
 //- Page scripts
 block append scripts

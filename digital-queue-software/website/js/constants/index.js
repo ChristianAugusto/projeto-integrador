@@ -16,7 +16,8 @@ export const ROUTES = {
         },
         pvt: {
             digitalQueues: '/api/pvt/digital-queues',
-            transports: '/api/pvt/transports'
+            transports: '/api/pvt/transports',
+            users: '/api/pvt/users'
         }
     }
 };

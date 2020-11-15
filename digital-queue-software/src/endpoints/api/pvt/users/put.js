@@ -17,8 +17,7 @@ import {
 
 const requiredFields = [
     'name', 'email', 'password', 'telephone',
-    'document', 'documentType', 'nationality',
-    'register'
+    'document', 'documentType', 'nationality'
 ];
 
 

@@ -1,0 +1,35 @@
+section(class="pvt-register-user__form-wrapper default")
+    form(class="pvt-register-user__form", id="js--register-user-form")
+        div(class="pvt-register-user__form-field")
+            label(for="js--user-name") Nome
+            input(type="text", id="js--user-name", class="reset", required="required", autocomplete="off", maxlength="100")
+        div(class="pvt-register-user__form-field")
+            label(for="js--user-email") Email
+            input(type="email", id="js--user-email", class="reset", required="required", autocomplete="off", maxlength="100")
+        div(class="pvt-register-user__form-field")
+            label(for="js--user-password") Senha
+            input(type="password", id="js--user-password", class="reset", required="required", autocomplete="off", maxlength="100")
+        div(class="pvt-register-user__form-field")
+            label(for="js--user-telephone") Telefone
+            input(type="text", id="js--user-telephone", class="reset", required="required", autocomplete="off", maxlength="30")
+        div(class="pvt-register-user__form-field")
+            label(for="js--user-documentType") Tipo de Documento
+            select(id="js--user-documentType", required="required", autocomplete="off")
+                option(value="") Selecione um tipo de documento
+                option(value="cpf") CPF
+                option(value="rg") RG
+                option(value="birth-document") Certidão de Nascimento
+        div(class="pvt-register-user__form-field")
+            label(for="js--user-document") Documento
+            input(type="text", id="js--user-document", class="reset", required="required", autocomplete="off", maxlength="50")
+        div(class="pvt-register-user__form-field")
+            label(for="js--user-nationality") Nacionalidade
+            input(type="text", id="js--user-nationality", class="reset", required="required", autocomplete="off", maxlength="75")
+        div(class="pvt-register-user__form-field")
+            label(for="js--user-roleType") Tipo de Usuário
+            select(id="js--user-roleType", required="required", autocomplete="off")
+                option(value="") Selecione um tipo de usuário
+                option(value="admin") Admin
+                option(value="master") Master
+        div(class="pvt-register-user__form-field row-center")
+            button(type="submit", class="reset", id="send-form-btn") Registrar

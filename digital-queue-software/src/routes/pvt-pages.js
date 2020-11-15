@@ -49,7 +49,7 @@ export default function(app) {
 
     app.get('/admin/register', async function(req, res) {
         if (validateMasterPage(req)) {
-            res.sendFile(`${PUBLIC_PATH}/templates/pvt-register.html`);
+            res.sendFile(`${PUBLIC_PATH}/templates/pvt-register-user.html`);
         }
         else {
             res.redirect('/admin/login');
