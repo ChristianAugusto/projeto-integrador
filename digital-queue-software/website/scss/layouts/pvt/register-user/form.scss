@@ -76,6 +76,10 @@
                 &.in-use {
                     border: 1px solid #f00;
                 }
+
+                &.not-equal {
+                    border: 1px solid #f00;
+                }
             }
 
             input[type="checkbox"] {

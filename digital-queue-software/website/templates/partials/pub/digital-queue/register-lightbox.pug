@@ -14,12 +14,12 @@ section(id="js--register-lightbox", class="queue__register-lightbox-wrapper")
                 label(for="js--user-telephone") Telefone
                 input(type="text", id="js--user-telephone", class="reset", required="required", autocomplete="off", maxlength="30")
             div(class="queue__register-lightbox__form-field")
-                label(for="js--user-document-type") Tipo de Documento
-                select(id="js--user-document-type", required="required", autocomplete="off")
-                    option(value="") Selecione um tipo de documento
-                    option(value="cpf") CPF
-                    option(value="rg") RG
-                    option(value="birth-document") Certidão de Nascimento
+                label(for="js--user-documentType") Tipo de Documento
+                select(id="js--user-documentType", required="required", autocomplete="off")
+                    option(value="", data-mask="", data-replace-regex="\\D") Selecione um tipo de documento
+                    option(value="cpf", data-mask="000.000.000-00", data-replace-regex="\\D") CPF
+                    option(value="rg", data-mask="00.000.000-0", data-replace-regex="\\D") RG
+                    option(value="birth-document", data-mask="", data-replace-regex="\\D") Certidão de Nascimento
             div(class="queue__register-lightbox__form-field")
                 label(for="js--user-document") Documento
                 input(type="text", id="js--user-document", class="reset", required="required", autocomplete="off", maxlength="50")

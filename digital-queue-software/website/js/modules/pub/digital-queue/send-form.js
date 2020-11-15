@@ -3,9 +3,7 @@ import pageCache from './page-cache';
 import closeLightbox from './close-lightbox';
 import {
     ROUTES,
-    DIGITAL_QUEUES_USER_SUCCESS,
-    SERVER_ERROR_MESSAGE,
-    DOCUMENT_REGEX
+    SERVER_ERROR_MESSAGE
 } from '@WebsiteConstants';
 import {
     buildHeaders
@@ -41,29 +39,33 @@ async function validateDocument(digitalQueueId, document, documentType) {
 export default async function(event) {
     event.preventDefault();
 
+
     try {
-        const body = {
+        const newDigitalQueueUser = {
             digitalQueueId: pageCache.digitalQueue.id,
-            document: El.registerLightbox.form.userDocument.value.trim().replace(DOCUMENT_REGEX, ''),
-            name: El.registerLightbox.form.userName.value.trim(),
-            email: El.registerLightbox.form.userEmail.value.trim(),
-            telephone: El.registerLightbox.form.userTelephone.value.trim(),
-            documentType: El.registerLightbox.form.userDocumentType.value,
-            nationality: El.registerLightbox.form.userNationality.value.trim(),
-            transportId: Number(El.registerLightbox.form.userTransport.value),
-            appointment: El.registerLightbox.form.userAppointment.value.trim()
+            document: El.registerLightbox.form.digitalQueueUserDocument.value.trim().replace(
+                new RegExp(El.registerLightbox.form.digitalQueueUserDocument.getAttribute('data-replace-regex'), 'gmi'),
+                ''
+            ),
+            name: El.registerLightbox.form.digitalQueueUserName.value.trim(),
+            email: El.registerLightbox.form.digitalQueueUserEmail.value.trim(),
+            telephone: El.registerLightbox.form.digitalQueueUserTelephone.value.trim(),
+            documentType: El.registerLightbox.form.digitalQueueUserDocumentType.value,
+            nationality: El.registerLightbox.form.digitalQueueUserNationality.value.trim(),
+            transportId: Number(El.registerLightbox.form.digitalQueueUserTransport.value),
+            appointment: El.registerLightbox.form.digitalQueueUserAppointment.value.trim()
         };
 
 
         const validateDocumentResult = await validateDocument(
-            body.digitalQueueId, body.document, body.documentType
+            newDigitalQueueUser.digitalQueueId, newDigitalQueueUser.document, newDigitalQueueUser.documentType
         );
 
         if (!validateDocumentResult) {
-            El.registerLightbox.form.userDocument.classList.add('in-use');
-            El.registerLightbox.form.userDocumentType.classList.add('in-use');
+            El.registerLightbox.form.digitalQueueUserDocument.classList.add('in-use');
+            El.registerLightbox.form.digitalQueueUserDocumentType.classList.add('in-use');
 
-            alert('Combinação de Tipo de documento + documento já utilizada');
+            alert('Combinação de Tipo de documento e documento já utilizada');
 
             return false;
         }
@@ -74,15 +76,15 @@ export default async function(event) {
             headers: buildHeaders({
                 'Content-Type': 'application/json'
             }),
-            body: JSON.stringify(body)
+            body: JSON.stringify(newDigitalQueueUser)
         });
 
         const responseObj = await response.json();
 
         if (responseObj.created) {
-            alert(DIGITAL_QUEUES_USER_SUCCESS(body.appointment));
-
+            alert(`Seu registro foi inserido com sucesso, seu atendimento será às ${newDigitalQueueUser.appointment}`);
             closeLightbox();
+            window.location.reload();
         }
 
         return true;

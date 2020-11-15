@@ -8,7 +8,7 @@ import {
     SERVER_TIMEZONE, 
     DATETIME_FORMAT_MYSQL,
     INSERT_USER_QUERY_QUERY,
-    DOCUMENT_REGEX,
+    DOCUMENTS_OPTIONS,
     PASSWORD_MIN_SIZE,
     PASSWORD_MAX_SIZE
 } from '@ServerConstants';
@@ -65,7 +65,9 @@ export default async function(req) {
             ${INSERT_USER_QUERY_QUERY}
             VALUES (
                 '${reqBody.name}', '${reqBody.email}', '${generateHash(reqBody.password)}',
-                '${reqBody.telephone}', '${reqBody.document.replace(DOCUMENT_REGEX, '')}', '${reqBody.documentType}',
+                '${reqBody.telephone}',
+                '${reqBody.document.replace(new RegExp(DOCUMENTS_OPTIONS[reqBody.documentType] || ''), '')}',
+                '${reqBody.documentType}',
                 '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL)}',
                 '${reqBody.roleType}'
             )

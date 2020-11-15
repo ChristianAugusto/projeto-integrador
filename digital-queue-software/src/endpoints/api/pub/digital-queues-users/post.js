@@ -2,7 +2,6 @@ import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import validateReqBodyFields from '@ServerModules/validate-required-fields';
 import {
-    DOCUMENT_REGEX,
     SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER
 } from '@ServerConstants';
 
@@ -22,7 +21,7 @@ export default async function(req) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    data: await mysql(SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER('`name`', `WHERE \`document\` = '${reqBody.document.replace(DOCUMENT_REGEX, '')}' AND \`documentType\` = '${reqBody.documentType}' AND \`digitalQueueId\` = '${reqBody.digitalQueueId}'`)),
+                    data: await mysql(SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER('`name`', `WHERE \`document\` = '${reqBody.document}' AND \`documentType\` = '${reqBody.documentType}' AND \`digitalQueueId\` = '${reqBody.digitalQueueId}'`)),
                     message: 'Success'
                 })
             };

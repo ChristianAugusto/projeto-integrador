@@ -5,6 +5,7 @@ export default {
         userEmail: document.getElementById('js--user-email'),
         userTelephone: document.getElementById('js--user-telephone'),
         userPassword: document.getElementById('js--user-password'),
+        userConfirmPassword: document.getElementById('js--user-confirmPassword'),
         userDocumentType: document.getElementById('js--user-documentType'),
         userDocument: document.getElementById('js--user-document'),
         userNationality: document.getElementById('js--user-nationality'),

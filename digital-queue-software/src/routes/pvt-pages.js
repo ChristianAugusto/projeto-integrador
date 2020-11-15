@@ -48,7 +48,7 @@ export default function(app) {
     });
 
     app.get('/admin/register', async function(req, res) {
-        if (validateMasterPage(req)) {
+        if ( (await validateMasterPage(req)) ) {
             res.sendFile(`${PUBLIC_PATH}/templates/pvt-register-user.html`);
         }
         else {

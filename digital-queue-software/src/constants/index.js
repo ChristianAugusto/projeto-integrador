@@ -106,11 +106,28 @@ export const INSERT_TRANSPORT_QUERY = 'INSERT INTO `transports` (`name`)';
 
 export const INSERT_USER_QUERY_QUERY = 'INSERT INTO `users` (`name`, `email`, `password`, `telephone`, `document`, `documentType`, `nationality`, `register`, `roleType`)';
 
-export const DOCUMENT_REGEX = /[^a-zA-Z0-9]/gm;
-
 export const PASSWORD_MIN_SIZE = 8;
 
 export const PASSWORD_MAX_SIZE = 16;
+
+export const DOCUMENTS_OPTIONS = {
+    '': {
+        mask:'',
+        replaceRegex: '\\D'
+    },
+    'cpf': {
+        mask:'000.000.000-00',
+        replaceRegex: '\\D'
+    },
+    'rg': {
+        mask:'00.000.000-0',
+        replaceRegex: '\\D'
+    },
+    'birth-document': {
+        mask:'',
+        replaceRegex: '\\D'
+    }
+};
 
 
 

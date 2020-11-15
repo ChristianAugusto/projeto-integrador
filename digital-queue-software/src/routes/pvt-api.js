@@ -17,7 +17,7 @@ const jsonParser = bodyParser.json();
 
 export default function(app) {
     app.post('/api/pvt/users', jsonParser, async function(req, res) {
-        if (validateMasterApi(req)) {
+        if ( (await validateMasterApi(req)) ) {
             writeResponse(await users.post(req), res);
         }
         else {

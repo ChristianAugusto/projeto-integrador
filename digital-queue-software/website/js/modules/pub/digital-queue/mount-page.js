@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import IMask from 'imask';
 
 import El from './cache-selectors';
 import getDigitalQueueData from './get-digital-queue-data';
@@ -9,21 +10,25 @@ import pageLoader from '@WebsiteGlobal/page-loader';
 import pageCache from './page-cache';
 import closeLightbox from './close-lightbox';
 import sendForm from './send-form';
+import documentMaskChange from '@WebsiteUtils/document-mask-change';
 import {
-    DIGITAL_QUEUE_USER_FORM_COOKIE_NAME,
     SERVER_ERROR_MESSAGE
 } from '@WebsiteConstants';
 
 
 
+const DIGITAL_QUEUE_USER_FORM_COOKIE_NAME = 'digital-queue-user-form';
+
+
 function timeSliceClickCallback(timeStringValue) {
-    El.registerLightbox.form.userAppointment.value = timeStringValue;
+    El.registerLightbox.form.digitalQueueUserAppointment.value = timeStringValue;
 
     page.blockScroll();
     overlay.show();
 
     El.registerLightbox.self.classList.add('is--visible');
 }
+
 
 function saveFormData() {
     Cookies.set(
@@ -34,9 +39,24 @@ function saveFormData() {
     );
 }
 
+
+function setMasks() {
+    IMask(El.registerLightbox.form.digitalQueueUserTelephone, {
+        mask: '+00 (00) 00000-0000'
+    });
+
+    documentMaskChange(
+        El.registerLightbox.form.digitalQueueUserDocumentType,
+        El.registerLightbox.form.digitalQueueUserDocument
+    );
+}
+
+
 function setEvents() {
     El.registerLightbox.closeLightbox.onclick = closeLightbox;
+
     overlay.el.addEventListener('click', closeLightbox);
+
     document.addEventListener('keydown', function (event) {
         switch (event.key) {
         case 'Escape':
@@ -46,39 +66,51 @@ function setEvents() {
     El.registerLightbox.form.self.onsubmit = sendForm;
 
     /* Form fields */
-    El.registerLightbox.form.userName.addEventListener('keyup', function() {
-        pageCache.form.name = pageCache.form.name.value.trim();
+    El.registerLightbox.form.digitalQueueUserName.onkeyup = function() {
+        pageCache.form.digitalQueueUserName = El.registerLightbox.form.digitalQueueUserName.value.trim();
         saveFormData();
-    });
-    El.registerLightbox.form.userEmail.addEventListener('keyup', function() {
-        pageCache.form.email = pageCache.form.email.value.trim();
+    };
+
+    El.registerLightbox.form.digitalQueueUserEmail.onkeyup = function() {
+        pageCache.form.digitalQueueUserEmail = El.registerLightbox.form.digitalQueueUserEmail.value.trim();
         saveFormData();
-    });
-    El.registerLightbox.form.userTelephone.addEventListener('keyup', function() {
-        pageCache.form.telephone = pageCache.form.telephone.value.trim();
+    };
+
+    El.registerLightbox.form.digitalQueueUserTelephone.onkeyup = function() {
+        pageCache.form.digitalQueueUserTelephone = 
+            El.registerLightbox.form.digitalQueueUserTelephone.value.trim();
         saveFormData();
-    });
-    El.registerLightbox.form.userDocumentType.addEventListener('change', function() {
-        pageCache.form.documentType = pageCache.form.documentType.value.trim();
+    };
+
+    El.registerLightbox.form.digitalQueueUserDocumentType.onchange = function() {
+        pageCache.form.digitalQueueUserDocumentType = 
+            El.registerLightbox.form.digitalQueueUserDocumentType.value.trim();
         saveFormData();
-        El.registerLightbox.form.userDocument.classList.remove('in-use');
-        El.registerLightbox.form.userDocumentType.classList.remove('in-use');
-    });
-    El.registerLightbox.form.userDocument.addEventListener('keyup', function() {
-        pageCache.form.document = pageCache.form.document.value.trim();
+        El.registerLightbox.form.digitalQueueUserDocument.classList.remove('in-use');
+        El.registerLightbox.form.digitalQueueUserDocumentType.classList.remove('in-use');
+    };
+
+    El.registerLightbox.form.digitalQueueUserDocument.onkeyup = function() {
+        pageCache.form.digitalQueueUserDocument = 
+            El.registerLightbox.form.digitalQueueUserDocument.value.trim();
         saveFormData();
-        El.registerLightbox.form.userDocument.classList.remove('in-use');
-        El.registerLightbox.form.userDocumentType.classList.remove('in-use');
-    });
-    El.registerLightbox.form.userNationality.addEventListener('keyup', function() {
-        pageCache.form.nationality = pageCache.form.nationality.value.trim();
+        El.registerLightbox.form.digitalQueueUserDocument.classList.remove('in-use');
+        El.registerLightbox.form.digitalQueueUserDocumentType.classList.remove('in-use');
+    };
+
+    El.registerLightbox.form.digitalQueueUserNationality.onkeyup = function() {
+        pageCache.form.digitalQueueUserNationality = 
+            El.registerLightbox.form.digitalQueueUserNationality.value.trim();
         saveFormData();
-    });
-    El.registerLightbox.form.userTransport.addEventListener('change', function() {
-        pageCache.form.transportId = pageCache.form.transportId.value.trim();
+    };
+
+    El.registerLightbox.form.digitalQueueUserTransport.onchange = function() {
+        pageCache.form.digitalQueueUserTransportId = 
+            El.registerLightbox.form.digitalQueueUserTransport.value.trim();
         saveFormData();
-    });
+    };
 }
+
 
 function fillFormInputs() {
     const cookieValue = Cookies.get(DIGITAL_QUEUE_USER_FORM_COOKIE_NAME);
@@ -89,45 +121,47 @@ function fillFormInputs() {
 
     pageCache.form = JSON.parse(cookieValue);
 
-    if (pageCache.form.name) {
-        El.registerLightbox.form.userName.value = pageCache.form.name;
+    if (pageCache.form.digitalQueueUserName) {
+        El.registerLightbox.form.digitalQueueUserName.value = pageCache.form.digitalQueueUserName;
     }
 
-    if (pageCache.form.email) {
-        El.registerLightbox.form.userEmail.value = pageCache.form.email;
+    if (pageCache.form.digitalQueueUserEmail) {
+        El.registerLightbox.form.digitalQueueUserEmail.value = pageCache.form.digitalQueueUserEmail;
     }
 
-    if (pageCache.form.telephone) {
-        El.registerLightbox.form.userTelephone.value = pageCache.form.telephone;
+    if (pageCache.form.digitalQueueUserTelephone) {
+        El.registerLightbox.form.digitalQueueUserTelephone.value = pageCache.form.digitalQueueUserTelephone;
     }
 
-    if (pageCache.form.documentType) {
-        El.registerLightbox.form.userDocumentType
-            .querySelector(`option[value="${pageCache.form.documentType}"]`)
-            .setAttribute('selected', 'selected');
+    if (pageCache.form.digitalQueueUserDocumentType) {
+        El.registerLightbox.form.digitalQueueUserDocumentType.value = 
+            pageCache.form.digitalQueueUserDocumentType;
+
+        El.registerLightbox.form.digitalQueueUserDocumentType.dmc_triggerChange();
     }
 
-    if (pageCache.form.document) {
-        El.registerLightbox.form.userDocument.value = pageCache.form.document;
+    if (pageCache.form.digitalQueueUserDocument) {
+        El.registerLightbox.form.digitalQueueUserDocument.value = 
+            pageCache.form.digitalQueueUserDocument;
+
+        El.registerLightbox.form.digitalQueueUserDocument.dmc_updateValue();
     }
 
-    if (pageCache.form.nationality) {
-        El.registerLightbox.form.userNationality.value = pageCache.form.nationality;
+    if (pageCache.form.digitalQueueUserNationality) {
+        El.registerLightbox.form.digitalQueueUserNationality.value =
+            pageCache.form.digitalQueueUserNationality;
     }
 
-    if (pageCache.form.transportId) {
-        const optionWithValue = El.registerLightbox.form.userTransport
-            .querySelector(`option[value="${pageCache.form.transportId}"]`);
-
-        if (optionWithValue) {
-            optionWithValue.setAttribute('selected', 'selected');
-        }
+    if (pageCache.form.digitalQueueUserTransportId) {
+        El.registerLightbox.form.digitalQueueUserTransport.value = 
+            pageCache.form.digitalQueueUserTransportId;
     }
 }
 
+
 function buildSelectTransports() {
     for (let i = 0; i < pageCache.digitalQueue.transports.length; i++) {
-        El.registerLightbox.form.userTransport.innerHTML += `
+        El.registerLightbox.form.digitalQueueUserTransport.innerHTML += `
             <option value="${pageCache.digitalQueue.transports[i].id}">
                 ${pageCache.digitalQueue.transports[i].name}
             </option/
@@ -142,6 +176,7 @@ export default async function () {
         await getDigitalQueueData();
         buildTimeSlices(timeSliceClickCallback);
         buildSelectTransports();
+        setMasks();
         fillFormInputs();
         setEvents();
         pageLoader.hide();

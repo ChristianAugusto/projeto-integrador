@@ -17,6 +17,8 @@ export default async function(req) {
 
 
         if (validateReqBodyFields(['id'], reqBody) && validateMysqlInteger(reqBody.id)) {
+            logger.info('Success');
+
             return {
                 status: 200,
                 headers: {
@@ -30,6 +32,8 @@ export default async function(req) {
         }
 
         if (validateReqBodyFields(['email'], reqBody)) {
+            logger.info('Success');
+
             return {
                 status: 200,
                 headers: {

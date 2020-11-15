@@ -12,7 +12,7 @@ import {
     SELECT_DIGITAL_QUEUES_QUERY_BUILDER,
     SELECT_DIGITAL_QUEUES_USERS_QUERY_BUILDER,
     INSERT_DIGITAL_QUEUE_USERS_QUERY,
-    DOCUMENT_REGEX
+    DOCUMENTS_OPTIONS
 } from '@ServerConstants';
 
 
@@ -96,8 +96,9 @@ export default async function(req) {
         const insertQuery = `
             ${INSERT_DIGITAL_QUEUE_USERS_QUERY}
             VALUES (
-                '${reqBody.digitalQueueId}', '${reqBody.document.replace(DOCUMENT_REGEX, '')}', '${reqBody.name}',
-                '${reqBody.email}', '${reqBody.telephone}', '${reqBody.documentType}',
+                '${reqBody.digitalQueueId}',
+                '${reqBody.document.replace(new RegExp(DOCUMENTS_OPTIONS[reqBody.documentType] || ''), '')}',
+                '${reqBody.name}', '${reqBody.email}', '${reqBody.telephone}', '${reqBody.documentType}',
                 '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL)}',
                 ${reqBody.transportId}, '${reqBody.appointment}'
             )
