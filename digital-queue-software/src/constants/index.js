@@ -108,6 +108,10 @@ export const INSERT_USER_QUERY_QUERY = 'INSERT INTO `users` (`name`, `email`, `p
 
 export const DOCUMENT_REGEX = /[^a-zA-Z0-9]/gm;
 
+export const PASSWORD_MIN_SIZE = 8;
+
+export const PASSWORD_MAX_SIZE = 16;
+
 
 
 /*

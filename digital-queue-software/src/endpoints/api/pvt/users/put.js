@@ -8,7 +8,9 @@ import {
     SERVER_TIMEZONE, 
     DATETIME_FORMAT_MYSQL,
     INSERT_USER_QUERY_QUERY,
-    DOCUMENT_REGEX
+    DOCUMENT_REGEX,
+    PASSWORD_MIN_SIZE,
+    PASSWORD_MAX_SIZE
 } from '@ServerConstants';
 
 
@@ -43,7 +45,21 @@ export default async function(req) {
         }
 
 
-        reqBody.roleType = 'admin';
+        if (reqBody.password.length < PASSWORD_MIN_SIZE || reqBody.password.length > PASSWORD_MAX_SIZE) {
+            logger.info(`Password size needs to be beetween ${PASSWORD_MIN_SIZE} and ${PASSWORD_MAX_SIZE}`);
+
+            return {
+                status: 400,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: null,
+                    created: false,
+                    message: `Password size needs to be beetween ${PASSWORD_MIN_SIZE} and ${PASSWORD_MAX_SIZE}`
+                })
+            };
+        }
 
 
         const query = `

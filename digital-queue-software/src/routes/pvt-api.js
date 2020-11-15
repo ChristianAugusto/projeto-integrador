@@ -17,7 +17,7 @@ const jsonParser = bodyParser.json();
 
 export default function(app) {
     app.post('/api/pvt/users', jsonParser, async function(req, res) {
-        if (validateAdminApi(req)) {
+        if (validateMasterApi(req)) {
             writeResponse(await users.post(req), res);
         }
         else {
@@ -46,7 +46,7 @@ export default function(app) {
     });
 
     app.put('/api/pvt/transports', jsonParser, async function(req, res) {
-        if ( (await validateMasterApi(req)) ) {
+        if ( (await validateAdminApi(req)) ) {
             writeResponse(await transports.put(req), res);
         }
         else {
