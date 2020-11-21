@@ -8,6 +8,11 @@ import {
 } from '@WebsiteUtils/api-call';
 
 
+
+const PASSWORD_MIN_SIZE = 8;
+const PASSWORD_MAX_SIZE = 16;
+
+
 /**
     * @param {string} email
 */
@@ -46,18 +51,25 @@ export default async function(event) {
         const validateEmailResponse = await validateEmail(userEmail);
 
         if (!validateEmailResponse) {
-            El.form.userEmail.classList.add('in-use');
+            El.form.userEmail.classList.add('has--errors');
 
             alert('O email informado já foi cadastrado');
 
             return false;
         }
 
-        if (userPassword != userConfirmPassword) {
-            El.form.userPassword.classList.add('not-equal');
-            El.form.userConfirmPassword.classList.add('not-equal');
+        if (userPassword.length < PASSWORD_MIN_SIZE || userPassword.length > PASSWORD_MAX_SIZE) {
+            El.form.userPassword.classList.add('has--errors');
+            alert(`A senha escolhida precisa ter no mínimo ${PASSWORD_MIN_SIZE} caracteres e no máximo ${PASSWORD_MAX_SIZE} caracteres`);
 
-            alert('As senhas não coincidem');
+            return false;
+        }
+
+        if (userPassword != userConfirmPassword) {
+            El.form.userPassword.classList.add('has--errors');
+            El.form.userConfirmPassword.classList.add('has--errors');
+
+            alert('Os campos de senhas não coincidem');
 
             return false;
         }

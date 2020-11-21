@@ -32,9 +32,12 @@ export default async function(event) {
 
         const responseObj = await response.json();
 
-        Cookies.set(SESSION_COOKIE_NAME, JSON.stringify(responseObj.data), { expires: getCookieTime() });
+        alert(responseObj.message);
 
-        window.location.pathname = ROUTES.pages.pvt.admin;
+        if (responseObj.data) {
+            Cookies.set(SESSION_COOKIE_NAME, JSON.stringify(responseObj.data), { expires: getCookieTime() });
+            window.location.pathname = ROUTES.pages.pvt.admin;
+        }
     }
     catch (error) {
         alert(SERVER_ERROR_MESSAGE);

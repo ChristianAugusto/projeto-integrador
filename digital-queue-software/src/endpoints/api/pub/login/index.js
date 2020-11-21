@@ -45,7 +45,7 @@ export default async function(req) {
             logger.info('Usuário não existente');
 
             return {
-                status: 400,
+                status: 200,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -70,7 +70,7 @@ export default async function(req) {
             logger.info('Senha errada');
 
             return {
-                status: 400,
+                status: 200,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -107,7 +107,7 @@ export default async function(req) {
                     id: `${user.id}`,
                     token: sessionToken
                 },
-                message: 'Success'
+                message: 'Sucesso'
             })
         };
     }

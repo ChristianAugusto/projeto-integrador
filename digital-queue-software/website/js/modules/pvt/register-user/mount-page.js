@@ -1,3 +1,5 @@
+import IMask from 'imask';
+
 import pageLoader from '@WebsiteGlobal/page-loader';
 import El from './cache-selectors';
 import sendForm from './send-form';
@@ -21,10 +23,19 @@ function setEvents() {
     El.form.self.onsubmit = sendForm;
 
     El.form.userEmail.onkeyup = function() {
-        El.form.userEmail.classList.remove('in-use');
+        El.form.userEmail.classList.remove('has--errors');
+    };
+
+    El.form.userPassword.onkeyup = function() {
+        El.form.userPassword.classList.remove('has--errors');
+        El.form.userConfirmPassword.classList.remove('has--errors');
+    };
+
+    El.form.userConfirmPassword.onkeyup = function() {
+        El.form.userPassword.classList.remove('has--errors');
+        El.form.userConfirmPassword.classList.remove('has--errors');
     };
 }
-
 
 
 
