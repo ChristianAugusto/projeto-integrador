@@ -56,13 +56,13 @@ function closeDigitalQueueItemPanel(digitalQueueItem) {
 
 async function deleteDigitalQueue(digitalQueueId) {
     try {
-        pageLoader.show();
-
         const confirmDelete = confirm(`Deseja deletar a fila ${digitalQueueId} ?`);
 
         if (!confirmDelete) {
             return false;
         }
+
+        pageLoader.show();
 
         const sendFormResponse = await fetch(ROUTES.api.pvt.digitalQueues, {
             method: 'DELETE',
@@ -95,20 +95,19 @@ async function deleteDigitalQueue(digitalQueueId) {
     }
 }
 
-async function bindActiveDigitalQueue(digitalQueueId, event) {
+async function bindActiveDigitalQueue(digitalQueueId) {
     try {
-        console.log(digitalQueueId, event, this);
-
-        event.preventDefault();
-
-        pageLoader.show();
+        const isActive = this.getAttribute('checked') ? true : false;
 
 
-        const confirmDelete = confirm(`Deseja  a fila ${digitalQueueId} ?`);
+        const confirmUpdate = confirm(`Deseja ${isActive ? 'desativar' : 'ativar'} a fila ${digitalQueueId} ?`);
 
-        if (!confirmDelete) {
+        if (!confirmUpdate) {
             return false;
         }
+
+
+        pageLoader.show();
 
         const sendFormResponse = await fetch(ROUTES.api.pvt.digitalQueues, {
             method: 'PATCH',
@@ -116,14 +115,15 @@ async function bindActiveDigitalQueue(digitalQueueId, event) {
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify({
-                id: digitalQueueId
+                id: digitalQueueId,
+                isActive: !isActive
             })
         });
 
         const sendFormResponseObj = await sendFormResponse.json();
 
-        if (sendFormResponseObj.deleted) {
-            alert(`Fila digital (${digitalQueueId}) foi `);
+        if (sendFormResponseObj.updated) {
+            alert(`Fila digital (${digitalQueueId}) foi atualizada`);
             window.location.reload();
         }
         else {
@@ -179,13 +179,15 @@ async function buildDigitalQueuesList() {
         deleteDigitalQueueButton.textContent = 'Deletar fila digital';
 
 
-        const activeDigitalQueue = document.createElement('input');
-        activeDigitalQueue.setAttribute('type', 'checkbox');
+        const activeDigitalQueue = document.createElement('button');
+        activeDigitalQueue.setAttribute('type', 'button');
         activeDigitalQueue.classList.add('reset');
         activeDigitalQueue.classList.add('pvt-admin-digital-queues__item-active');
         activeDigitalQueue.setAttribute('id', `js--active-digital-queue-${index}`);
-        activeDigitalQueue.checked = digitalQueue.isActive;
-        activeDigitalQueue.onchange = bindActiveDigitalQueue.bind(null, digitalQueue.id);
+        if (digitalQueue.isActive) {
+            activeDigitalQueue.setAttribute('checked', 'checked');
+        }
+        activeDigitalQueue.onclick = bindActiveDigitalQueue.bind(activeDigitalQueue, digitalQueue.id);
 
         const activeDigitalQueueWrapper = document.createElement('div');
         activeDigitalQueueWrapper.classList.add('pvt-admin-digital-queues__item-active-wrapper');
