@@ -106,6 +106,22 @@ export const INSERT_TRANSPORT_QUERY = 'INSERT INTO `transports` (`name`)';
 
 export const INSERT_USER_QUERY_QUERY = 'INSERT INTO `users` (`name`, `email`, `password`, `telephone`, `document`, `documentType`, `nationality`, `register`, `roleType`)';
 
+export function UPDATE_DIGITAL_QUEUE_QUERY_BUILDER(sets, conditions) {
+    return `UPDATE \`digital_queues\` ${sets} WHERE ${conditions}`;
+}
+
+export function DELETE_DIGITAL_QUEUE_QUERY(conditions) {
+    return `DELETE FROM \`digital_queues\` WHERE ${conditions}`;
+}
+
+export function DELETE_DIGITAL_QUEUE_TRANSPORTS(conditions) {
+    return `DELETE FROM \`digital_queues_transports\` WHERE ${conditions}`;
+}
+
+export function DELETE_DIGITAL_QUEUE_USERS(conditions) {
+    return `DELETE FROM \`digital_queues_users\` WHERE ${conditions}`;
+}
+
 export const PASSWORD_MIN_SIZE = 8;
 
 export const PASSWORD_MAX_SIZE = 16;

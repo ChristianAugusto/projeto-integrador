@@ -54,25 +54,103 @@ function closeDigitalQueueItemPanel(digitalQueueItem) {
 }
 
 
-function editDigitalQueue() {
-    console.log('Editar fila');
+async function deleteDigitalQueue(digitalQueueId) {
+    try {
+        pageLoader.show();
+
+        const confirmDelete = confirm(`Deseja deletar a fila ${digitalQueueId} ?`);
+
+        if (!confirmDelete) {
+            return false;
+        }
+
+        const sendFormResponse = await fetch(ROUTES.api.pvt.digitalQueues, {
+            method: 'DELETE',
+            headers: buildHeaders({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({
+                id: digitalQueueId
+            })
+        });
+
+        const sendFormResponseObj = await sendFormResponse.json();
+
+        if (sendFormResponseObj.deleted) {
+            alert(`Fila digital (${digitalQueueId}) foi deletada com sucesso`);
+            window.location.reload();
+        }
+        else {
+            alert(SERVER_ERROR_MESSAGE);
+        }
+
+        return true;
+    }
+    catch (error) {
+        alert(SERVER_ERROR_MESSAGE);
+        return false;
+    }
+    finally {
+        pageLoader.hide();
+    }
 }
 
+async function bindActiveDigitalQueue(digitalQueueId, event) {
+    try {
+        console.log(digitalQueueId, event, this);
 
-function deleteDigitalQueue() {
-    console.log('Deletar fila');
+        event.preventDefault();
+
+        pageLoader.show();
+
+
+        const confirmDelete = confirm(`Deseja  a fila ${digitalQueueId} ?`);
+
+        if (!confirmDelete) {
+            return false;
+        }
+
+        const sendFormResponse = await fetch(ROUTES.api.pvt.digitalQueues, {
+            method: 'PATCH',
+            headers: buildHeaders({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({
+                id: digitalQueueId
+            })
+        });
+
+        const sendFormResponseObj = await sendFormResponse.json();
+
+        if (sendFormResponseObj.deleted) {
+            alert(`Fila digital (${digitalQueueId}) foi `);
+            window.location.reload();
+        }
+        else {
+            alert(SERVER_ERROR_MESSAGE);
+        }
+
+        return true;
+    }
+    catch (error) {
+        alert(SERVER_ERROR_MESSAGE);
+        return false;
+    }
+    finally {
+        pageLoader.hide();
+    }
 }
 
 
 async function buildDigitalQueuesList() {
     const digitalQueues = await getDigitalQueues();
 
-    digitalQueues.data.forEach(function(digitalQueue) {
+    digitalQueues.data.forEach(function(digitalQueue, index) {
         const digitalQueueItem = document.createElement('li');
-        digitalQueueItem.classList.add('pvt-admin__digital-queues__item');
+        digitalQueueItem.classList.add('pvt-admin-digital-queues__item');
 
         const digitalQueueItemVisor = document.createElement('div');
-        digitalQueueItemVisor.classList.add('pvt-admin__digital-queues__item-visor');
+        digitalQueueItemVisor.classList.add('pvt-admin-digital-queues__item-visor');
         digitalQueueItemVisor.innerHTML = `
             <p>${digitalQueue.name}</p>
             <a href="/admin/filas/${digitalQueue.id}">Link Privado</a>
@@ -82,39 +160,51 @@ async function buildDigitalQueuesList() {
         const openPanelButton = document.createElement('button');
         openPanelButton.setAttribute('type', 'button');
         openPanelButton.classList.add('reset');
-        openPanelButton.classList.add('pvt-admin__digital-queues__item-open-panel-button');
+        openPanelButton.classList.add('pvt-admin-digital-queues__item-open-panel-button');
         openPanelButton.onclick = openDigitalQueueItemPanel.bind(null, digitalQueueItem);
         openPanelButton.textContent = 'Abrir painel';
 
         const closePanelButton = document.createElement('button');
         closePanelButton.setAttribute('type', 'button');
         closePanelButton.classList.add('reset');
-        closePanelButton.classList.add('pvt-admin__digital-queues__item-close-panel-button');
+        closePanelButton.classList.add('pvt-admin-digital-queues__item-close-panel-button');
         closePanelButton.onclick = closeDigitalQueueItemPanel.bind(null, digitalQueueItem);
         closePanelButton.textContent = 'Fechar painel';
-
-        const digitalQueueItemPanel = document.createElement('div');
-        digitalQueueItemPanel.classList.add('pvt-admin__digital-queues__item-panel');
-
-        const digitalQueueItemPanelActions = document.createElement('div');
-        digitalQueueItemPanelActions.classList.add('pvt-admin__digital-queues__item-panel-actions');
-
-        const editDigitalQueueButton = document.createElement('button');
-        editDigitalQueueButton.setAttribute('type', 'button');
-        editDigitalQueueButton.classList.add('reset');
-        editDigitalQueueButton.classList.add('pvt-admin__digital-queues__item-edit-digital-queue-button');
-        editDigitalQueueButton.onclick = editDigitalQueue;
-        editDigitalQueueButton.textContent = 'Editar fila digital';
 
         const deleteDigitalQueueButton = document.createElement('button');
         deleteDigitalQueueButton.setAttribute('type', 'button');
         deleteDigitalQueueButton.classList.add('reset');
-        deleteDigitalQueueButton.classList.add('pvt-admin__digital-queues__item-delete-digital-queue-button');
-        deleteDigitalQueueButton.onclick = deleteDigitalQueue;
+        deleteDigitalQueueButton.classList.add('pvt-admin-digital-queues__item-delete-button');
+        deleteDigitalQueueButton.onclick = deleteDigitalQueue.bind(null, digitalQueue.id);
         deleteDigitalQueueButton.textContent = 'Deletar fila digital';
 
+
+        const activeDigitalQueue = document.createElement('input');
+        activeDigitalQueue.setAttribute('type', 'checkbox');
+        activeDigitalQueue.classList.add('reset');
+        activeDigitalQueue.classList.add('pvt-admin-digital-queues__item-active');
+        activeDigitalQueue.setAttribute('id', `js--active-digital-queue-${index}`);
+        activeDigitalQueue.checked = digitalQueue.isActive;
+        activeDigitalQueue.onchange = bindActiveDigitalQueue.bind(null, digitalQueue.id);
+
+        const activeDigitalQueueWrapper = document.createElement('div');
+        activeDigitalQueueWrapper.classList.add('pvt-admin-digital-queues__item-active-wrapper');
+        activeDigitalQueueWrapper.innerHTML = `
+            <label for="js--active-digital-queue-${index}">
+                Ativar/Desativar fila digital
+            </label>
+        `;
+        activeDigitalQueueWrapper.appendChild(activeDigitalQueue);
+
+
+        const digitalQueueItemPanel = document.createElement('div');
+        digitalQueueItemPanel.classList.add('pvt-admin-digital-queues__item-panel');
+
+        const digitalQueueItemPanelActions = document.createElement('div');
+        digitalQueueItemPanelActions.classList.add('pvt-admin-digital-queues__item-panel-actions');
+
         digitalQueueItemPanelActions.appendChild(closePanelButton);
-        digitalQueueItemPanelActions.appendChild(editDigitalQueueButton);
+        digitalQueueItemPanelActions.appendChild(activeDigitalQueueWrapper);
         digitalQueueItemPanelActions.appendChild(deleteDigitalQueueButton);
 
         digitalQueueItemPanel.appendChild(openPanelButton);

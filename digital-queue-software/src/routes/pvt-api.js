@@ -74,6 +74,24 @@ export default function(app) {
         }
     });
 
+    app.patch('/api/pvt/digital-queues', jsonParser, async function(req, res) {
+        if (validateAdminApi(req)) {
+            writeResponse(await digitalQueues.patch(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
+    app.delete('/api/pvt/digital-queues', jsonParser, async function(req, res) {
+        if (validateAdminApi(req)) {
+            writeResponse(await digitalQueues.$delete(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
 
 
     app.post('/api/pvt/digital-queues-users', jsonParser, async function(req, res) {

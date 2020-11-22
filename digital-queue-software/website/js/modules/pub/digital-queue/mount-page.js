@@ -5,10 +5,10 @@ import El from './cache-selectors';
 import getDigitalQueueData from './get-digital-queue-data';
 import buildTimeSlices from './build-time-slices';
 import overlay from '@WebsiteGlobal/overlay';
-import page from '@WebsiteGlobal/page';
 import pageLoader from '@WebsiteGlobal/page-loader';
 import pageCache from './page-cache';
 import closeLightbox from './close-lightbox';
+import openLightbox from './open-lightbox';
 import sendForm from './send-form';
 import documentMaskChange from '@WebsiteUtils/document-mask-change';
 import {
@@ -22,11 +22,7 @@ const DIGITAL_QUEUE_USER_FORM_COOKIE_NAME = 'digital-queue-user-form';
 
 function timeSliceClickCallback(timeStringValue) {
     El.registerLightbox.form.digitalQueueUserAppointment.value = timeStringValue;
-
-    page.blockScroll();
-    overlay.show();
-
-    El.registerLightbox.self.classList.add('is--visible');
+    openLightbox();
 }
 
 
