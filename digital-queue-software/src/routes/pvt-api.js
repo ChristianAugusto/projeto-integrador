@@ -102,4 +102,13 @@ export default function(app) {
             res.redirect('/admin/login');
         }
     });
+
+    app.delete('/api/pvt/digital-queues-users', jsonParser, async function(req, res) {
+        if (validateAdminApi(req)) {
+            writeResponse(await digitalQueuesUsers.$delete(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
 }

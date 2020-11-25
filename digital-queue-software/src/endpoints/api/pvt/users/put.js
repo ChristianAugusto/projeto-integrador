@@ -66,7 +66,7 @@ export default async function(req) {
             VALUES (
                 '${reqBody.name}', '${reqBody.email}', '${generateHash(reqBody.password)}',
                 '${reqBody.telephone}',
-                '${reqBody.document.replace(new RegExp(DOCUMENTS_OPTIONS[reqBody.documentType] || ''), '')}',
+                '${reqBody.document.replace(DOCUMENTS_OPTIONS[reqBody.documentType].replaceRegex, '')}',
                 '${reqBody.documentType}',
                 '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL)}',
                 '${reqBody.roleType}'

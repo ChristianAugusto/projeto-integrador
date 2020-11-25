@@ -97,7 +97,7 @@ export default async function(req) {
             ${INSERT_DIGITAL_QUEUE_USERS_QUERY}
             VALUES (
                 '${reqBody.digitalQueueId}',
-                '${reqBody.document.replace(new RegExp(DOCUMENTS_OPTIONS[reqBody.documentType] || ''), '')}',
+                '${reqBody.document.replace(DOCUMENTS_OPTIONS[reqBody.documentType].replaceRegex, '')}',
                 '${reqBody.name}', '${reqBody.email}', '${reqBody.telephone}', '${reqBody.documentType}',
                 '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL)}',
                 ${reqBody.transportId}, '${reqBody.appointment}'

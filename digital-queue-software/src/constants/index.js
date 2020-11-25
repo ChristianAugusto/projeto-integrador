@@ -128,20 +128,20 @@ export const PASSWORD_MAX_SIZE = 16;
 
 export const DOCUMENTS_OPTIONS = {
     '': {
-        mask:'',
-        replaceRegex: '\\D'
+        mask: '',
+        replaceRegex: ''
     },
     'cpf': {
-        mask:'000.000.000-00',
-        replaceRegex: '\\D'
+        mask: '000.000.000-00',
+        replaceRegex: /\D/gmi
     },
     'rg': {
         mask:'00.000.000-0',
-        replaceRegex: '\\D'
+        replaceRegex: /\D/gmi
     },
     'birth-document': {
-        mask:'',
-        replaceRegex: '\\D'
+        mask: '',
+        replaceRegex: /\D/gmi
     }
 };
 

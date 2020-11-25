@@ -30,7 +30,7 @@ function saveFormData() {
     Cookies.set(
         DIGITAL_QUEUE_USER_FORM_COOKIE_NAME, JSON.stringify(pageCache.form),
         {
-            expires: new Date(new Date().getTime() + 60*60*24*365*20) // 20 years
+            expires: new Date(new Date().getTime() + 60*60*5) // 5 min
         }
     );
 }

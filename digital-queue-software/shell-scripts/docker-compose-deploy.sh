@@ -1,8 +1,8 @@
 rm -rf build/ node_modules/
 npm install
-yarn build-website
-yarn build-server
+npm run build-website
+npm run build-server
 rm -rf node_modules
 npm install --only-prod
-yarn start
+npm start
 ls -al

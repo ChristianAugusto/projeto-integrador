@@ -1,21 +1,21 @@
 export default {
     digitalQueue: {
-        id: document.getElementById('js--queue-id'),
-        timeSlices: document.getElementById('js--queue-time-slices'),
+        id: document.getElementById('js--digital-queue-id'),
+        timeSlices: document.getElementById('js--digital-queue-time-slices'),
     },
     registerLightbox: {
-        self: document.getElementById('js--register-lightbox'),
-        closeLightbox: document.getElementById('js--close-register-lightbox'),
+        self: document.getElementById('js--register-digital-queue-user-lightbox'),
+        closeLightbox: document.getElementById('js--close-register-digital-queue-user-lightbox'),
         form: {
-            self: document.getElementById('js--queue-register-form'),
-            digitalQueueUserName: document.getElementById('js--user-name'),
-            digitalQueueUserEmail: document.getElementById('js--user-email'),
-            digitalQueueUserTelephone: document.getElementById('js--user-telephone'),
-            digitalQueueUserDocumentType: document.getElementById('js--user-documentType'),
-            digitalQueueUserDocument: document.getElementById('js--user-document'),
-            digitalQueueUserNationality: document.getElementById('js--user-nationality'),
-            digitalQueueUserTransport: document.getElementById('js--user-transport'),
-            digitalQueueUserAppointment: document.getElementById('js--user-appointment')
+            self: document.getElementById('js--digital-queue-register-form'),
+            digitalQueueUserName: document.getElementById('js--digital-queue-user-name'),
+            digitalQueueUserEmail: document.getElementById('js--digital-queue-user-email'),
+            digitalQueueUserTelephone: document.getElementById('js--digital-queue-user-telephone'),
+            digitalQueueUserDocumentType: document.getElementById('js--digital-queue-user-documentType'),
+            digitalQueueUserDocument: document.getElementById('js--digital-queue-user-document'),
+            digitalQueueUserNationality: document.getElementById('js--digital-queue-user-nationality'),
+            digitalQueueUserTransport: document.getElementById('js--digital-queue-user-transport'),
+            digitalQueueUserAppointment: document.getElementById('js--digital-queue-user-appointment')
         }
     }
 };

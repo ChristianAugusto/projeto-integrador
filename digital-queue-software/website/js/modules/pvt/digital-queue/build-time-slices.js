@@ -32,13 +32,13 @@ export default function(timeSliceClickCallback) {
 
         const digitalQueueTimeSlice = document.createElement('li');
 
-        digitalQueueTimeSlice.className = `pub-digital-queue__time-slice${userInTime.length === 0 ? '' : ' unavailable'}${userAttended === null ? '' : ' attended'}`;
+        digitalQueueTimeSlice.className = `pvt-digital-queue__time-slice${userInTime.length === 0 ? '' : ' unavailable'}${userAttended === null ? '' : ' attended'}`;
         digitalQueueTimeSlice.innerHTML = `
-            <div class="pub-digital-queue__time-slice__art">
-                <p class="pub-digital-queue__time-slice__user-name">${userName || ''}</p>
+            <div class="pvt-digital-queue__time-slice__art">
+                <p class="pvt-digital-queue__time-slice__user-name">${userName || ''}</p>
             </div>
-            <div class="pub-digital-queue__time-slice__label">
-                <p class="pub-digital-queue__time-slice__time">${timeStringValue}</p>
+            <div class="pvt-digital-queue__time-slice__label">
+                <p class="pvt-digital-queue__time-slice__time">${timeStringValue}</p>
             </div>
         `;
 
