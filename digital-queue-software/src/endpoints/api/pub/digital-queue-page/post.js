@@ -11,6 +11,9 @@ import {
 
 export default async function(req) {
     try {
+        logger.info('Starting (POST)/api/pub/digital-queue-page');
+
+
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
@@ -52,7 +55,7 @@ export default async function(req) {
         };
 
 
-        logger.info('Success');
+        logger.info('Success (POST)/api/pub/digital-queue-page');
 
         return {
             status: 200,

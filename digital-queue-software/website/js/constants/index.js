@@ -15,6 +15,8 @@ export const ROUTES = {
             login: '/api/pub/login'
         },
         pvt: {
+            digitalQueuesUsersAttend: '/api/pvt/digital-queues-users/attend',
+            digitalQueuesUsers: '/api/pvt/digital-queues-users',
             digitalQueues: '/api/pvt/digital-queues',
             transports: '/api/pvt/transports',
             users: '/api/pvt/users'

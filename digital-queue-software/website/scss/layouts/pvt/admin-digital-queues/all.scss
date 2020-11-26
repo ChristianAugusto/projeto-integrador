@@ -151,37 +151,46 @@
         }
 
         &-active {
-            width: 20px;
-            height: 20px;
-            border: 1px solid #000;
-            padding: 0;
-            box-sizing: 0;
+            display: block;
+            font-size: 0;
+            width: 65px;
+            height: 35px;
             margin: 0;
-            border-radius: 0;
-            background: #ffffff;
-            position: relative;
+            padding: 3px 5px;
+            background: rgba($color: #717274, $alpha: 0.9);
+            box-sizing: border-box;
+            border: 1px solid #000;
+            border-radius: 50px;
+            @include display-row;
+            justify-content: space-between;
+            align-items: center;
+
+
+            &::before {
+                content: "";
+                width: 25px;
+                height: 25px;
+                display: block;
+                background: #ffffff;
+                border: none;
+                border-radius: 50%;
+            }
+
+            &::after {
+                content: "OFF";
+                font-family: $defaultFont;
+                font-size: 13px;
+                text-transform: none;
+                font-weight: 700;
+                color: #3a3b3d;
+            }
 
             &[checked="checked"] {
-                &::after,
-                &::before {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    width: calc(100% * 1.42);
-                    height: 1px;
-                    background: #000;
-                }
-
-                &::before {
-                    top: 50%;
-                    left: 50%;
-                    @include transform(translate(-50%, -50%) rotate(-45deg));
-                }
-
+                @include display-row-reverse();
+                background: #0c9a46;
+                
                 &::after {
-                    top: 50%;
-                    left: 50%;
-                    @include transform(translate(-50%, -50%) rotate(45deg));
+                    content: "ON";
                 }
             }
 

@@ -9,7 +9,8 @@ import minutesToHourString from '@WebsiteUtils/minutes-to-hour-string';
     * @param {Function} timeSliceClickCallback
 */
 export default function(timeSliceClickCallback) {
-    const { start, end, userTimeMinutes, users } = pageCache.digitalQueue;
+    const { start, end, userTimeMinutes, users }
+        = pageCache.digitalQueue;
 
 
     for (
@@ -17,7 +18,7 @@ export default function(timeSliceClickCallback) {
         curentTime < limit; curentTime += userTimeMinutes
     ) {
         const userInTime = users.filter(
-            queueUser => hourStringToMinutes(queueUser.appointment) === curentTime
+            digitalQueueUser => hourStringToMinutes(digitalQueueUser.appointment) === curentTime
         );
 
         let userName = null;
@@ -32,20 +33,26 @@ export default function(timeSliceClickCallback) {
 
         const digitalQueueTimeSlice = document.createElement('li');
 
-        digitalQueueTimeSlice.className = `pub-digital-queue__time-slice${userInTime.length === 0 ? '' : ' unavailable'}${userAttended === null ? '' : ' attended'}`;
-        digitalQueueTimeSlice.innerHTML = `
-            <div class="pub-digital-queue__time-slice__art">
-                <p class="pub-digital-queue__time-slice__user-name">${userName || ''}</p>
-            </div>
-            <div class="pub-digital-queue__time-slice__label">
-                <p class="pub-digital-queue__time-slice__time">${timeStringValue}</p>
-            </div>
-        `;
+
+        let digitalQueueTimeSlicePanel = '';
 
         if (userInTime.length === 0) {
             digitalQueueTimeSlice.onclick = timeSliceClickCallback.bind(null, timeStringValue);
         }
 
+        digitalQueueTimeSlice.setAttribute(
+            'class',
+            `pub-digital-queue__time-slice${userInTime.length === 0 ? '' : ' unavailable'}${userAttended ? ' attended' : ''}`
+        );
+        digitalQueueTimeSlice.innerHTML = `
+            <div class="pub-digital-queue__time-slice__art">
+                <p class="pub-digital-queue__time-slice__user-name">${userName || ''}</p>
+                ${digitalQueueTimeSlicePanel}
+            </div>
+            <div class="pub-digital-queue__time-slice__label">
+                <p class="pub-digital-queue__time-slice__time">${timeStringValue}</p>
+            </div>
+        `;
 
 
         El.digitalQueue.timeSlices.appendChild(digitalQueueTimeSlice);

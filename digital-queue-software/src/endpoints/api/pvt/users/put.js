@@ -23,6 +23,9 @@ const requiredFields = [
 
 export default async function(req) {
     try {
+        logger.info('Starting in (PUT)/api/pvt/users');
+
+
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
@@ -77,7 +80,7 @@ export default async function(req) {
         await mysql(query);
 
 
-        logger.info('Success');
+        logger.error('Success in (PUT)/api/pvt/users');
 
         return {
             status: 200,

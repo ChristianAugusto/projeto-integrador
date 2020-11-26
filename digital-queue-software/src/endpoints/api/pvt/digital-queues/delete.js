@@ -16,6 +16,9 @@ const requiredFields = [
 
 export default async function(req) {
     try {
+        logger.info('Starting (DELETE)/api/pvt/digital-queues');
+
+
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
@@ -62,7 +65,7 @@ export default async function(req) {
 
 
 
-        logger.info('Success');
+        logger.info('Success (DELETE)/api/pvt/digital-queues');
 
         return {
             status: 200,
@@ -77,7 +80,7 @@ export default async function(req) {
         };
     }
     catch (error) {
-        logger.error('Error in (DELETE)/api/digital-queues');
+        logger.error('Error in (DELETE)/api/pvt/digital-queues');
         logger.info(error);
 
         return {

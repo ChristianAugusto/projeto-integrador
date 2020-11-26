@@ -11,13 +11,16 @@ import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 
 export default async function(req) {
     try {
+        logger.info('Starting (POST)/api/pvt/users');
+
+
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
 
         if (validateReqBodyFields(['id'], reqBody) && validateMysqlInteger(reqBody.id)) {
-            logger.info('Success');
+            logger.info('Success (POST)/api/pvt/users');
 
             return {
                 status: 200,
@@ -32,7 +35,7 @@ export default async function(req) {
         }
 
         if (validateReqBodyFields(['email'], reqBody)) {
-            logger.info('Success');
+            logger.info('Success (POST)/api/pvt/users');
 
             return {
                 status: 200,
@@ -62,7 +65,7 @@ export default async function(req) {
         }
 
 
-        logger.info('Success');
+        logger.info('Success (POST)/api/pvt/users');
 
         return {
             status: 200,
@@ -76,7 +79,7 @@ export default async function(req) {
         };
     }
     catch (error) {
-        logger.error('Error in (POST)/api/users');
+        logger.error('Error in (POST)/api/pvt/users');
         logger.info(error);
 
         return {

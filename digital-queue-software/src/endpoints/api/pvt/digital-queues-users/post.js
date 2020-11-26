@@ -9,12 +9,17 @@ import {
 
 export default async function(req) {
     try {
+        logger.info('Starting (POST)/api/pvt/digital-queues-users');
+
+
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
 
         if (validateReqBodyFields(['digitalQueueId', 'document', 'documentType'], reqBody)) {
+            logger.info('Success (POST)/api/pvt/digital-queues-users');
+
             return {
                 status: 200,
                 headers: {
@@ -28,6 +33,8 @@ export default async function(req) {
         }
 
         if (validateReqBodyFields(['digitalQueueId'], reqBody)) {
+            logger.info('Success (POST)/api/pvt/digital-queues-users');
+
             return {
                 status: 200,
                 headers: {
@@ -41,7 +48,7 @@ export default async function(req) {
         }
 
 
-        logger.info('No actions');
+        logger.info('No actions (POST)/api/pvt/digital-queues-users');
 
         return {
             status: 200,
@@ -55,7 +62,7 @@ export default async function(req) {
         };
     }
     catch (error) {
-        logger.error('Error in (POST)/api/pub/digital-queues-users');
+        logger.error('Error in (POST)/api/pvt/digital-queues-users');
         logger.info(error);
 
         return {

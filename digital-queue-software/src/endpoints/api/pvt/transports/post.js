@@ -10,6 +10,9 @@ import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 
 export default async function(req) {
     try {
+        logger.info('Starting (POST)/api/pvt/transports');
+
+
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
@@ -30,7 +33,7 @@ export default async function(req) {
         }
 
 
-        logger.info('Success');
+        logger.info('Success (POST)/api/pvt/transports');
 
         return {
             status: 200,

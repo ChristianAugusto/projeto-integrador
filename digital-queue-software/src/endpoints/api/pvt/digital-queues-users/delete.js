@@ -2,24 +2,25 @@ import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import validateReqBodyFields from '@ServerModules/validate-required-fields';
 import {
-    DELETE_DIGITAL_QUEUE_USERS,
-    DOCUMENTS_OPTIONS
+    DELETE_DIGITAL_QUEUE_USERS
 } from '@ServerConstants';
 
 
 
 export default async function(req) {
     try {
+        logger.info('Starting (DELETE)/api/pvt/digital-queues-users');
+
+
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
 
-        if (validateReqBodyFields(['digitalQueueId', 'document', 'documentType'], reqBody)) {
+        if (validateReqBodyFields(['digitalQueueId', 'appointment'], reqBody)) {
             const deleteDigitalQueueUserQuery = DELETE_DIGITAL_QUEUE_USERS(
                 `\`digitalQueueId\` = '${reqBody.digitalQueueId}' 
-                    AND \`document\` = '${reqBody.document.replace(DOCUMENTS_OPTIONS[reqBody.documentType].replaceRegex, '')}'
-                    AND \`documentType\` = '${reqBody.documentType}'`
+                    AND \`appointment\` = '${reqBody.appointment}'`
             );
 
             logger.info(`deleteDigitalQueueUserQuery = ${deleteDigitalQueueUserQuery}`);
@@ -27,7 +28,7 @@ export default async function(req) {
             await mysql(deleteDigitalQueueUserQuery);
 
 
-            logger.info('Success');
+            logger.info('Success (DELETE)/api/pvt/digital-queues-users');
 
             return {
                 status: 200,
@@ -43,7 +44,7 @@ export default async function(req) {
         }
 
 
-        logger.info('No actions');
+        logger.info('No actions (DELETE)/api/pvt/digital-queues-users');
 
         return {
             status: 200,
@@ -58,7 +59,7 @@ export default async function(req) {
         };
     }
     catch (error) {
-        logger.error('Error in (DELETE)/api/pub/digital-queues-users');
+        logger.error('Error in (DELETE)/api/pvt/digital-queues-users');
         logger.info(error);
 
         return {

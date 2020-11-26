@@ -25,6 +25,8 @@ const requiredFields = [
 
 export default async function(req) {
     try {
+        logger.info('Starting (PUT)/api/pub/digital-queues-users');
+
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
@@ -100,13 +102,13 @@ export default async function(req) {
                 '${reqBody.document.replace(DOCUMENTS_OPTIONS[reqBody.documentType].replaceRegex, '')}',
                 '${reqBody.name}', '${reqBody.email}', '${reqBody.telephone}', '${reqBody.documentType}',
                 '${reqBody.nationality}', '${moment().tz(SERVER_TIMEZONE()).format(DATETIME_FORMAT_MYSQL)}',
-                ${reqBody.transportId}, '${reqBody.appointment}'
+                ${reqBody.transportId}, '${reqBody.appointment}', 0
             )
         `;
 
         await mysql(insertQuery);
 
-        logger.info('Success');
+        logger.info('Success (PUT)/api/pub/digital-queues-users');
 
         return {
             status: 200,

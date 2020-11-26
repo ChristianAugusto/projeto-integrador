@@ -98,7 +98,7 @@ export function SELECT_USERS_QUERY_BUILDER(fields='*', conditions='', limit='') 
 
 export const INSERT_DIGITAL_QUEUE_QUERY = 'INSERT INTO `digital_queues` (`id`, `name`, `creation`, `isActive`, `isClosed`, `day`, `start`, `end`, `userTimeMinutes`)';
 
-export const INSERT_DIGITAL_QUEUE_USERS_QUERY = 'INSERT INTO `digital_queues_users` (`digitalQueueId`, `document`, `name`, `email`, `telephone`, `documentType`, `nationality`, `register`, `transportId`, `appointment`)';
+export const INSERT_DIGITAL_QUEUE_USERS_QUERY = 'INSERT INTO `digital_queues_users` (`digitalQueueId`, `document`, `name`, `email`, `telephone`, `documentType`, `nationality`, `register`, `transportId`, `appointment`, `attended`)';
 
 export const INSERT_DIGITAL_QUEUE_TRANSPORTS_QUERY = 'INSERT INTO `digital_queues_transports` (`digitalQueueId`, `transportId`)';
 
@@ -108,6 +108,10 @@ export const INSERT_USER_QUERY_QUERY = 'INSERT INTO `users` (`name`, `email`, `p
 
 export function UPDATE_DIGITAL_QUEUE_QUERY_BUILDER(sets, conditions) {
     return `UPDATE \`digital_queues\` ${sets} WHERE ${conditions}`;
+}
+
+export function UPDATE_DIGITAL_QUEUE_USER_QUERY_BUILDER(sets, conditions) {
+    return `UPDATE \`digital_queues_users\` ${sets} WHERE ${conditions}`;
 }
 
 export function DELETE_DIGITAL_QUEUE_QUERY(conditions) {

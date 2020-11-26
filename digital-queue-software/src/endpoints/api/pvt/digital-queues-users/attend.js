@@ -1,17 +1,15 @@
 import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
-import { validateMysqlInteger } from '@ServerModules/validate-mysql-types';
 import validateReqBodyFields from '@ServerModules/validate-required-fields';
 import {
-    DIGITAL_QUEUE_LIMIT,
-    SELECT_DIGITAL_QUEUES_QUERY_BUILDER
+    UPDATE_DIGITAL_QUEUE_USER_QUERY_BUILDER
 } from '@ServerConstants';
 
 
 
 export default async function(req) {
     try {
-        logger.info('Starting (POST)/api/pvt/digital-queues');
+        logger.info('Starting (PATCH)/api/pvt/digital-queues-users/attend');
 
 
         const { body:reqBody } = req;
@@ -19,29 +17,33 @@ export default async function(req) {
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
 
 
-        if (validateReqBodyFields(['id'], reqBody)) {
-            logger.info('Success (POST)/api/pvt/digital-queues');
+        if (!validateReqBodyFields(['digitalQueueId', 'appointment', 'attended'], reqBody)) {
+            logger.info('Error in body fields, please check again');
 
             return {
-                status: 200,
+                status: 400,
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    data: await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('*', `WHERE \`id\` = '${reqBody.id}'`)),
-                    message: 'Success'
+                    data: null,
+                    updated: false,
+                    message: 'Error in body fields, please check again'
                 })
             };
         }
 
+        const updateQuery = UPDATE_DIGITAL_QUEUE_USER_QUERY_BUILDER(
+            `SET \`attended\` = ${reqBody.attended ? 1 : 0}`,
+            `\`digitalQueueId\` = '${reqBody.digitalQueueId}' AND \`appointment\` = '${reqBody.appointment}'`
+        );
 
-        let startIndex = 0;
-        if (validateMysqlInteger(reqBody.startIndex)) {
-            startIndex = Number(reqBody.startIndex);
-        }
+        logger.info(`updateQuery = ${updateQuery}`);
+
+        await mysql(updateQuery);
 
 
-        logger.info('Success (POST)/api/pvt/digital-queues');
+        logger.info('Success (PATCH)/api/pvt/digital-queues-users/attend');
 
         return {
             status: 200,
@@ -49,14 +51,14 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                results: (await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('COUNT(*)')))[0]['COUNT(*)'],
-                data: await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('*', '', `LIMIT ${startIndex},${DIGITAL_QUEUE_LIMIT}`)),
+                data: null,
+                updated: true,
                 message: 'Success'
             })
         };
     }
     catch (error) {
-        logger.error('Error in (POST)/api/pvt/digital-queues');
+        logger.error('Error in (PATCH)/api/pvt/digital-queues-users/attend');
         logger.info(error);
 
         return {
@@ -65,8 +67,8 @@ export default async function(req) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                results: 0,
                 data: null,
+                updated: false,
                 message: 'Internal server error'
             })
         };

@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `digital-queue-software`.`digital_queues_users` (
     `register` VARCHAR(20) NOT NULL,
     `transportId` TINYINT(1) UNSIGNED NOT NULL,
     `appointment` TIME NOT NULL,
-    `attended` VARCHAR(20),
+    `attended` TINYINT(1) UNSIGNED NOT NULL,
 
     PRIMARY KEY (`digitalQueueId`, `document`, `documentType`),
     FOREIGN KEY (`digitalQueueId`) REFERENCES `digital_queues` (`id`),

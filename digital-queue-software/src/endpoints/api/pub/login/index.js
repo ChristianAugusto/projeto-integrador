@@ -18,6 +18,9 @@ const requiredFields = ['email', 'password'];
 
 export default async function(req) {
     try {
+        logger.info('Starting (POST)/api/pub/login');
+
+
         const { body:reqBody } = req;
 
         logger.info(`reqBody = ${JSON.stringify(reqBody)}`);
@@ -95,7 +98,7 @@ export default async function(req) {
 
         logger.info(`sessionToken = ${sessionToken}`);
 
-        logger.info('Success');
+        logger.info('Success (POST)/api/pub/login');
 
         return {
             status: 200,
