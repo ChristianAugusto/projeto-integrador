@@ -89,6 +89,11 @@ function buildJsFiles(_jsFiles) {
 gulp.task('build-js', async function(done) {
     await buildJsFiles(jsFiles);
 
+    done();
+});
+gulp.task('build-js-watch', async function(done) {
+    await buildJsFiles(jsFiles);
+
     jsFiles.forEach(function(file) {
         gulp.watch(file, function(_done) {
             buildJsFiles([file]);
@@ -157,4 +162,4 @@ gulp.task('watch-files', () => {
 
 
 gulp.task('build', gulp.series('clean-public', 'clean-templates', 'build-scss', 'build-html', 'build-js', 'copy-images'));
-gulp.task('development', gulp.series('build', 'watch-files'));
+gulp.task('development', gulp.series('build', 'build-js-watch', 'watch-files'));
