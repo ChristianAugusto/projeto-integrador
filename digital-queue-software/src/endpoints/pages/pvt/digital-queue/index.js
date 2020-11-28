@@ -12,23 +12,38 @@ export default async function(req) {
     try {
         logger.error(`Starting (GET)/admin/filas/${digitalQueueId}`);
 
-        const queryResult = await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER('`name`,`isActive`,`isClosed`', `WHERE \`id\` = '${digitalQueueId}'`));
+        const queryResult = await mysql(SELECT_DIGITAL_QUEUES_QUERY_BUILDER(
+            '`name`,`isActive`,`isClosed`,`day`', `WHERE \`id\` = '${digitalQueueId}'`
+        ));
 
         logger.info(`Query result = ${JSON.stringify(queryResult)}`);
 
 
-        if (queryResult[0].isClosed) {
-            throw new Error('Queue is closed');
+        if (queryResult.length === 0) {
+            throw new Error('There is no queue for this id');
         }
 
-        if (!queryResult[0].isActive) {
+
+        const digitalQueue = queryResult[0];
+
+        if (digitalQueue.isClosed) {
+            const csvPath = `${PUBLIC_PATH}/csvs/${digitalQueue.day}-${digitalQueueId}.csv`;
+
+            return {
+                status: 200,
+                file: true,
+                path: csvPath
+            };
+        }
+
+        if (!digitalQueue.isActive) {
             throw new Error('Queue is not active');
         }
 
 
         const template = fs.readFileSync(`${PUBLIC_PATH}/templates/pvt-digital-queue.html`, {encoding: 'utf8'})
             .replace(/<server\.digitalQueueId ?\/?>/gm, digitalQueueId)
-            .replace(/<server\.digitalQueueName ?\/?>/gm, queryResult[0].name);
+            .replace(/<server\.digitalQueueName ?\/?>/gm, digitalQueue.name);
 
         logger.error(`Ending (GET)/admin/filas/${digitalQueueId}`);
 

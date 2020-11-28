@@ -1,4 +1,9 @@
 export default function(_respObj, res) {
+    if (_respObj.file) {
+        res.download(_respObj.path);
+        return;
+    }
+
     if (_respObj.status) {
         res.status(_respObj.status);
     }
