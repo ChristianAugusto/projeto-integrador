@@ -5,6 +5,7 @@ import {
     validateAdminApi, validateMasterApi
 } from '@ServerGlobals/sessions';
 import users from '@ServerEndpoints/api/pvt/users';
+import logout from '@ServerEndpoints/api/pvt/logout';
 import transports from '@ServerEndpoints/api/pvt/transports';
 import digitalQueues from '@ServerEndpoints/api/pvt/digital-queues';
 import digitalQueuesUsers from '@ServerEndpoints/api/pvt/digital-queues-users';
@@ -128,5 +129,11 @@ export default function(app) {
         else {
             res.redirect('/admin/login');
         }
+    });
+
+
+
+    app.post('/api/pvt/logout', jsonParser, async function(req, res) {
+        writeResponse(await logout(req), res);
     });
 }

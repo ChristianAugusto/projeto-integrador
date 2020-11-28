@@ -1,7 +1,6 @@
-import mysql from '@ServerHandlers/mysql';
 import logger from '@ServerUtils/logger';
 import {
-    SESSION_SECONDS_LIMIT, API_KEY, SELECT_USERS_QUERY_BUILDER, SESSION_COOKIE_NAME
+    SESSION_SECONDS_LIMIT, API_KEY, SESSION_COOKIE_NAME
 } from '@ServerConstants';
 
 
@@ -75,7 +74,7 @@ export function validateAdminApi(req) {
 }
 
 
-export async function validateMasterApi(req) {
+export function validateMasterApi(req) {
     try {
         if (validateApiKey(req.header('API-KEY'))) {
             return true;
@@ -90,9 +89,9 @@ export async function validateMasterApi(req) {
 
         const session = JSON.parse(sessionStr);
 
-        const queryResult = await mysql(SELECT_USERS_QUERY_BUILDER('*', `WHERE \`id\` = ${Number(session.id)}`));
+        const serverSession = sessions[session.id];
 
-        if (queryResult[0].roleType != 'master') {
+        if (serverSession.roleType != 'master') {
             return false;
         }
 
@@ -106,7 +105,7 @@ export async function validateMasterApi(req) {
 }
 
 
-export async function validateMasterPage(req) {
+export function validateMasterPage(req) {
     try {
         const sessionStr = req.cookies[SESSION_COOKIE_NAME];
 
@@ -116,11 +115,33 @@ export async function validateMasterPage(req) {
 
         const session = JSON.parse(sessionStr);
 
-        const queryResult = await mysql(SELECT_USERS_QUERY_BUILDER('*', `WHERE \`id\` = ${Number(session.id)}`));
+        const serverSession = sessions[session.id];
 
-        if (queryResult[0].roleType != 'master') {
+        if (serverSession.roleType != 'master') {
             return false;
         }
+
+        return true;
+    }
+    catch (error) {
+        logger.info(error);
+
+        return false;
+    }
+}
+
+
+export function logout(req) {
+    try {
+        const sessionStr = req.cookies[SESSION_COOKIE_NAME];
+
+        if (!validateSession(sessionStr)) {
+            return false;
+        }
+
+        const session = JSON.parse(sessionStr);
+
+        delete sessions[session.id];
 
         return true;
     }

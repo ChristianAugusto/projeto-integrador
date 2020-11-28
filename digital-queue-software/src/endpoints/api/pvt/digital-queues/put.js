@@ -111,10 +111,6 @@ export default async function(req) {
             };
         }
 
-        /*
-            TODO (opcional): Validar datas de start e end para estarem no mesmo dia
-        */
-
 
 
         const query1 = `

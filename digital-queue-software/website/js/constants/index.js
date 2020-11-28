@@ -1,7 +1,6 @@
 export const ROUTES = {
     pages: {
         pub: {
-            home: '/',
             login: '/admin/login'
         },
         pvt: {
@@ -19,7 +18,8 @@ export const ROUTES = {
             digitalQueuesUsers: '/api/pvt/digital-queues-users',
             digitalQueues: '/api/pvt/digital-queues',
             transports: '/api/pvt/transports',
-            users: '/api/pvt/users'
+            users: '/api/pvt/users',
+            logout: '/api/pvt/logout'
         }
     }
 };

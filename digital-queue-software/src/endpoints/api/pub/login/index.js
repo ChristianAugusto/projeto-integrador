@@ -42,7 +42,9 @@ export default async function(req) {
         }
 
 
-        const usersObtained = await mysql(SELECT_USERS_QUERY_BUILDER('`id`,`password`', `WHERE \`email\` = '${reqBody.email}'`));
+        const usersObtained = await mysql(SELECT_USERS_QUERY_BUILDER(
+            '`id`,`password`,`roleType`', `WHERE \`email\` = '${reqBody.email}'`
+        ));
 
         if (!Array.isArray(usersObtained) || usersObtained.length == 0) {
             logger.info('Usuário não existente');
@@ -69,7 +71,7 @@ export default async function(req) {
         logger.info(`user.password = ${user.password}`);
 
 
-        if (!reqBody.password || generateHash(reqBody.password) != user.password) {
+        if (generateHash(reqBody.password) != user.password) {
             logger.info('Senha errada');
 
             return {
@@ -92,7 +94,8 @@ export default async function(req) {
 
         sessions[`${user.id}`] = {
             token: sessionToken,
-            start: new Date()
+            start: new Date(),
+            roleType: user.roleType
         };
 
 
@@ -108,7 +111,8 @@ export default async function(req) {
             body: JSON.stringify({
                 data: {
                     id: `${user.id}`,
-                    token: sessionToken
+                    token: sessionToken,
+                    roleType: user.roleType
                 },
                 message: 'Sucesso'
             })
