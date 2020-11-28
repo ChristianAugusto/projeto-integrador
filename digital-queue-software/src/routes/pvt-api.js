@@ -92,6 +92,15 @@ export default function(app) {
         }
     });
 
+    app.post('/api/pvt/digital-queues/finish', jsonParser, async function(req, res) {
+        if (validateAdminApi(req)) {
+            writeResponse(await digitalQueues.finish(req), res);
+        }
+        else {
+            res.redirect('/admin/login');
+        }
+    });
+
 
 
     app.post('/api/pvt/digital-queues-users', jsonParser, async function(req, res) {
