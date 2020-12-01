@@ -12,7 +12,7 @@
         "dev-server": "nodemon --exec npx babel-node src/index.js",
         "dev-website": "npx eslint website/js/** && npx gulp development",
         "dev-start": "node ./build/index.js",
-        "start": "environment=dev node ./build/index.js"
+        "start": "environment=prod node ./build/index.js"
     },
     "authors": [
         "115149 - Amanda Magari do Nascimento",
