@@ -12,6 +12,43 @@
 					"name": "pub",
 					"item": [
 						{
+							"name": "digital-queue-page",
+							"item": [
+								{
+									"name": "obtain",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"digitalQueueId\": \"digital-queue-1\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/pub/digital-queue-page",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"pub",
+												"digital-queue-page"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
 							"name": "digital-queues-users",
 							"item": [
 								{
@@ -21,7 +58,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"digitalQueueId\": \"digital-queue-1\",\n    \"document\": \"508.569.378-78\",\n    \"documentType\": \"cpf\"\n}",
+											"raw": "{\n    \"digitalQueueId\": \"digital-queue-1\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -78,43 +115,6 @@
 							"_postman_isSubFolder": true
 						},
 						{
-							"name": "digital-queue-page",
-							"item": [
-								{
-									"name": "obtain",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"digitalQueueId\": \"digital-queue-1\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "http://localhost:3000/api/pub/digital-queue-page",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "3000",
-											"path": [
-												"api",
-												"pub",
-												"digital-queue-page"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						},
-						{
 							"name": "login",
 							"item": [
 								{
@@ -150,34 +150,6 @@
 							],
 							"protocolProfileBehavior": {},
 							"_postman_isSubFolder": true
-						},
-						{
-							"name": "validate-session",
-							"item": [
-								{
-									"name": "obtain Copy",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "http://localhost:3000/api/pub/validate-session",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "3000",
-											"path": [
-												"api",
-												"pub",
-												"validate-session"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -202,7 +174,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"id\": \"digital-queue-0\"\n}",
+											"raw": "{\n    \"startIndex\": 0\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -260,6 +232,106 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "update",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "api-key",
+												"type": "text",
+												"value": "mey9ht1t5wklvt9pyresetbfwy1nc7cj"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"digital-queue-1\",\n    \"isActive\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/pvt/digital-queues",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"pvt",
+												"digital-queues"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "api-key",
+												"type": "text",
+												"value": "mey9ht1t5wklvt9pyresetbfwy1nc7cj"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"digital-queue-105\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/pvt/digital-queues",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"pvt",
+												"digital-queues"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "finish",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "api-key",
+												"type": "text",
+												"value": "mey9ht1t5wklvt9pyresetbfwy1nc7cj"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:3000/api/pvt/digital-queues/finish",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"pvt",
+												"digital-queues",
+												"finish"
+											]
+										}
+									},
+									"response": []
 								}
 							],
 							"protocolProfileBehavior": {},
@@ -281,7 +353,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"document\": \"508.569.378-78\"\n}",
+											"raw": "",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -305,19 +377,92 @@
 									"response": []
 								},
 								{
-									"name": "register",
+									"name": "udpate",
 									"request": {
-										"method": "PUT",
+										"method": "PATCH",
 										"header": [
 											{
 												"key": "api-key",
-												"value": "mey9ht1t5wklvt9pyresetbfwy1nc7cj",
-												"type": "text"
+												"type": "text",
+												"value": "mey9ht1t5wklvt9pyresetbfwy1nc7cj"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"digitalQueueId\": \"digital-queue-1\",\n    \"document\": \"508.569.378-78\",\n    \"name\": \"Christian Augusto Martins dos Santos Barros\",\n    \"email\": \"christianbetta@gmail.com\",\n    \"telephone\": \"(11) 99311-8482\",\n    \"documentType\": \"cpf\",\n    \"nationality\": \"Brasil\",\n    \"transportId\": 1,\n    \"appointment\": \"09:10:00\"\n}",
+											"raw": "{\n    \"digitalQueueId\": \"digital-queue-1\",\n    \"appointment\": \"09:00\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/pvt/digital-queues-users",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"pvt",
+												"digital-queues-users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "attend",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "api-key",
+												"type": "text",
+												"value": "mey9ht1t5wklvt9pyresetbfwy1nc7cj"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"digitalQueueId\": \"digital-queue-1\",\n    \"appointment\": \"09:00\",\n    \"attended\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/pvt/digital-queues-users/attend",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"pvt",
+												"digital-queues-users",
+												"attend"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "api-key",
+												"type": "text",
+												"value": "mey9ht1t5wklvt9pyresetbfwy1nc7cj"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"digitalQueueId\": \"digital-queue-1\",\n    \"appointment\": \"09:00\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -466,7 +611,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"name\": \"Christian Augusto Martins dos Santos Barros\",\n    \"email\": \"christianbetta@gmail.com\",\n    \"password\": \"12345678\",\n    \"telephone\": \"(11) 99311-8482\",\n    \"document\": \"508.569.378-78\",\n    \"documentType\": \"cpf\",\n    \"nationality\": \"Brasil\",\n    \"register\": \"2020-09-30T11:00:00.000Z\"\n}",
+											"raw": "{\n    \"name\": \"Christian Augusto Martins dos Santos Barros\",\n    \"email\": \"christianbetta@gmail.com\",\n    \"password\": \"12345678\",\n    \"telephone\": \"(11) 99311-8482\",\n    \"document\": \"508.569.378-78\",\n    \"documentType\": \"cpf\",\n    \"nationality\": \"Brasil\",\n    \"register\": \"2020-09-30T11:00:00.000Z\",\n    \"roleType\": \"master\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
